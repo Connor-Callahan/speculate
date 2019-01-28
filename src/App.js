@@ -8,7 +8,11 @@ class App extends Component {
   state = {
     stockSymbols: [],
     stockFilter: '',
-    selectedStock: null
+    sortBy: '',
+    stockCategory: null,
+    selectedCategory: null,
+    selectedStock: null,
+    selectedStockProfile: null
   }
 
   componentDidMount(){
@@ -28,13 +32,40 @@ class App extends Component {
     })
   }
 
-  handleSelectStock = (e) => {
-    fetch(`https://api.iextrading.com/1.0/stock/${e.target.id}/batch?types=quote,news,chart&range=1m&last=10`)
-    .then(r => r.json())
-    .then(data => {
+  handleSort = (e) => {
+    this.setState({
+      sortBy: e.target.value
+    })
+    this.sortStockList()
+  }
+
+  sortStockList = () => {
+    let sortedStocks = this.state.stockSymbols.slice()
+    if(this.state.sortBy === 'Z-A') {
       this.setState({
-        selectedStock: data
+        stockSymbols: sortedStocks.reverse()
       })
+    }
+    else if(this.state.sortBy === 'A-Z') {
+      console.log('do nothing')
+    }
+  }
+
+
+  handleSelectStock = async ({target}) => {
+    const selectedStock = await fetch(`https://api.iextrading.com/1.0/stock/${target.id}/batch?types=quote,news,chart&range=1m&last=10`)
+    .then(r => r.json())
+    const selectedStockProfile = await fetch(`https://api.iextrading.com/1.0/stock/${target.id}/company`)
+    .then(r => r.json())
+    this.setState({
+      selectedStock,
+      selectedStockProfile
+    })
+  }
+
+  toggleStockDisplay = () => {
+    this.setState({
+      selectedStock: null
     })
   }
 
@@ -42,11 +73,28 @@ class App extends Component {
   return this.state.stockSymbols.filter(stock => stock.symbol.toLowerCase().includes(this.state.stockFilter.toLowerCase()) || stock.name.toLowerCase().includes(this.state.stockFilter.toLowerCase()))
   }
 
+  handleStockCategory = (e) => {
+    this.setState({
+      stockCategory: e.target.value
+    },() => this.toggleStockCategory())
+  }
+
+  toggleStockCategory = async () => {
+    const selectedCategory = await fetch(`https://api.iextrading.com/1.0/stock/market/collection/sector?collectionName=${this.state.stockCategory}`)
+    .then(r => r.json())
+    this.setState({
+      selectedCategory
+    })
+  }
+
 
   render() {
+    console.log(this.state.stockSymbols)
     return (
       <div className="App">
       <SearchStocks
+      handleSort={this.handleSort}
+      handleStockCategory={this.handleStockCategory}
       handleStockFilter={this.handleStockFilter}
       stockSymbols={this.state.stockSymbols}
       />
@@ -56,6 +104,8 @@ class App extends Component {
       stockSymbols={this.filterStockSearch()}
       />
       <ProfileCard
+      toggleStockDisplay={this.toggleStockDisplay}
+      selectedStockProfile={this.state.selectedStockProfile}
       selectedStock={this.state.selectedStock}
       />
       </div>

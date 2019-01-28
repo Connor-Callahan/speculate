@@ -2,10 +2,10 @@ import React from 'react';
 import CompanyProfile from '../components/CompanyProfile'
 
 const ProfileList = (props) => {
-
-  return <div>
+  let refinedStockList = props.stockSymbols.slice(0, 7)
+  return <div id="stock-list">
           {
-            props.stockSymbols.map( stock => {
+            refinedStockList.map( stock => {
             return <CompanyProfile handleSelectStock={props.handleSelectStock}
                     symbol={stock.symbol}
                     name={stock.name}

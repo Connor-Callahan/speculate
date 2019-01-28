@@ -4,10 +4,31 @@
   margin-right: 50%;
 }
 
+/* search bar input, search through all stocks */
 #search-input {
   outline:none;
   height: 30px;
   width: 200px;
   font-size: 18px;
   border:none;
+}
+
+.select-input {
+  outline:none;
+  height: 30px;
+  width: 200px;
+  font-size: 15px;
+  border:none;
+}
+
+#select-sector {
+  outline:none;
+  height: 30px;
+  width: 200px;
+  font-size: 15px;
+  border:none;
+}
+
+#stock-list {
+  border: 1px solid grey;
 }
