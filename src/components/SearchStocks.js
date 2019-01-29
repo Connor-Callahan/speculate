@@ -10,10 +10,10 @@ const SearchStocks = (props) => {
         placeholder='Type to Search Stocks'
       />
       <select className="select-input" onChange={props.handleSort}>
-        <option  value="A-Z">Alphabetical(A-Z)</option>
+        <option value="A-Z">Alphabetical(A-Z)</option>
         <option value="Z-A">Alphabetical(Z-A)</option>
       </select>
-      <select className="select-input" onChange={props.handleStockCategory}>
+      <select className="select-input" onChange={props.handleStockSector}>
         <option  value="Communication%20Services">Communication Services</option>
         <option  value="Consumer%20Discretionary">Consumer Discretionary</option>
         <option  value="Consumer%20Staples">Consumer Staples</option>

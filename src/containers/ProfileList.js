@@ -2,7 +2,10 @@ import React from 'react';
 import CompanyProfile from '../components/CompanyProfile'
 
 const ProfileList = (props) => {
-  let refinedStockList = props.stockSymbols.slice(0, 7)
+  let refinedStockList = props.stockSymbols
+  if(!props.stockCategory) {
+    refinedStockList = refinedStockList.slice(0, 7)
+  }
   return <div id="stock-list">
           {
             refinedStockList.map( stock => {

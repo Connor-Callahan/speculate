@@ -13,15 +13,8 @@
   border:none;
 }
 
+/* class for all sorting select(!!!change so filter and sort are different) */
 .select-input {
-  outline:none;
-  height: 30px;
-  width: 200px;
-  font-size: 15px;
-  border:none;
-}
-
-#select-sector {
   outline:none;
   height: 30px;
   width: 200px;

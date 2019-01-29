@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
+import './ProfileCard.css';
+
 import ProfileList from './containers/ProfileList'
 import ProfileCard from './containers/ProfileCard'
 import SearchStocks from './components/SearchStocks'
@@ -10,9 +12,9 @@ class App extends Component {
     stockFilter: '',
     sortBy: '',
     stockCategory: null,
-    selectedCategory: null,
     selectedStock: null,
-    selectedStockProfile: null
+    selectedStockProfile: null,
+    selectedChart: null
   }
 
   componentDidMount(){
@@ -51,16 +53,23 @@ class App extends Component {
     }
   }
 
-
   handleSelectStock = async ({target}) => {
     const selectedStock = await fetch(`https://api.iextrading.com/1.0/stock/${target.id}/batch?types=quote,news,chart&range=1m&last=10`)
     .then(r => r.json())
     const selectedStockProfile = await fetch(`https://api.iextrading.com/1.0/stock/${target.id}/company`)
     .then(r => r.json())
+    const selectedChart = await fetch(`https://api.iextrading.com/1.0/stock/${target.id}/chart/`)
+    .then(r => r.json())
     this.setState({
       selectedStock,
-      selectedStockProfile
+      selectedStockProfile,
+      selectedChart
+
     })
+  }
+
+  handleSelectChart = (e) => {
+    console.log(e.target)
   }
 
   toggleStockDisplay = () => {
@@ -70,35 +79,38 @@ class App extends Component {
   }
 
   filterStockSearch = () => {
-  return this.state.stockSymbols.filter(stock => stock.symbol.toLowerCase().includes(this.state.stockFilter.toLowerCase()) || stock.name.toLowerCase().includes(this.state.stockFilter.toLowerCase()))
+    return this.state.stockSymbols.filter(stock => stock.symbol.toLowerCase().includes(this.state.stockFilter.toLowerCase()) || stock.name.toLowerCase().includes(this.state.stockFilter.toLowerCase()))
   }
 
-  handleStockCategory = (e) => {
+  handleStockSector = (e) => {
     this.setState({
       stockCategory: e.target.value
     },() => this.toggleStockCategory())
   }
 
   toggleStockCategory = async () => {
-    const selectedCategory = await fetch(`https://api.iextrading.com/1.0/stock/market/collection/sector?collectionName=${this.state.stockCategory}`)
-    .then(r => r.json())
+    const selectedSector = await fetch(`https://api.iextrading.com/1.0/stock/market/collection/sector?collectionName=${this.state.stockCategory}`)
+      .then(r => r.json())
+    for(let i = 0; i < selectedSector.length; i++) {
+      selectedSector[i].name = selectedSector[i].companyName
+    }
     this.setState({
-      selectedCategory
+      stockSymbols: selectedSector
     })
   }
 
-
   render() {
-    console.log(this.state.stockSymbols)
+    console.log(this.state.selectedChart)
     return (
       <div className="App">
       <SearchStocks
       handleSort={this.handleSort}
-      handleStockCategory={this.handleStockCategory}
+      handleStockSector={this.handleStockSector}
       handleStockFilter={this.handleStockFilter}
       stockSymbols={this.state.stockSymbols}
       />
       <ProfileList
+      stockCategory={this.state.stockCategory}
       selectedStock={this.state.selectedStock}
       handleSelectStock={this.handleSelectStock}
       stockSymbols={this.filterStockSearch()}
@@ -107,6 +119,8 @@ class App extends Component {
       toggleStockDisplay={this.toggleStockDisplay}
       selectedStockProfile={this.state.selectedStockProfile}
       selectedStock={this.state.selectedStock}
+      handleSelectChart={this.handleSelectChart}
+      selectedChart={this.state.selectedChart}
       />
       </div>
     );
