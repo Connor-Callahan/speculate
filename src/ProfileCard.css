@@ -14,7 +14,9 @@
 }
 
 .profile-icon {
-  width: 50px;
+  position: relative;
+  display: inline;
+  width: 15%;
   height: auto;
 }
 
@@ -32,7 +34,7 @@
 
 .close-button {
   position: relative;
-  left: 80%;
+  left: 70%;
   border:1px solid lightgrey;
   border-radius: 12px;
   outline: none;
@@ -41,7 +43,6 @@
   text-align: center;
   margin: 2px;
   text-decoration: none;
-  display: inline-block;
   font-size: 12px;
   transition-duration: 0.4s;
   font-family: 'Poppins', sans-serif;
