@@ -1,10 +1,81 @@
+/* click listener on the ProfileList, individual stock div */
+.profile-card {
+  border:1px solid grey;
+  margin-top: 1%;
+  margin-right: 50%;
+  padding: 2%;
+  margin-left: 2%;
+}
+
 .company-name {
   font-size: 24px;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+}
+
+.profile-icon {
+  width: 50px;
+  height: auto;
 }
 
 .symbol {
-  margin-top: 5%;
+  margin-top: 1%;
   font-size: 12px;
   font-family: 'Nunito Sans', sans-serif;
+}
+
+.profile-description {
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+}
+
+.close-button {
+  position: relative;
+  left: 80%;
+  border:1px solid lightgrey;
+  border-radius: 12px;
+  outline: none;
+  color: grey;
+  padding: 5px 10px;
+  text-align: center;
+  margin: 2px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  transition-duration: 0.4s;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 200;
+}
+
+.close-button:hover {
+  background-color: grey;
+  color: white;
+}
+
+.profile-header {
+  font-size: 12px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 200;
+}
+
+.chart-button {
+  border:1px solid lightgrey;
+  border-radius: 12px;
+  outline: none;
+  color: grey;
+  padding: 5px 10px;
+  text-align: center;
+  margin: 2px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+  transition-duration: 0.4s;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+}
+
+.chart-button:hover {
+  background-color: grey;
+  color: white;
 }

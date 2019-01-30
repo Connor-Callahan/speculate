@@ -14,7 +14,9 @@ class App extends Component {
     stockCategory: null,
     selectedStock: null,
     selectedStockProfile: null,
-    selectedChart: null
+    selectedChartRange: '1m',
+    selectedChart: null,
+    stockIcon: ''
   }
 
   componentDidMount(){
@@ -60,16 +62,29 @@ class App extends Component {
     .then(r => r.json())
     const selectedChart = await fetch(`https://api.iextrading.com/1.0/stock/${target.id}/chart/`)
     .then(r => r.json())
+    const stockIcon = await fetch(`https://api.iextrading.com/1.0/stock/${target.id}/logo`)
+    .then(r => r.json())
     this.setState({
       selectedStock,
       selectedStockProfile,
-      selectedChart
-
+      selectedChart,
+      stockIcon: stockIcon.url
     })
   }
 
   handleSelectChart = (e) => {
-    console.log(e.target)
+    this.setState({
+      selectedChartRange: e.target.id
+    }, this.toggleSelectedChart)
+
+  }
+
+  toggleSelectedChart = async () => {
+    const selectedChart = await fetch(`https://api.iextrading.com/1.0/stock/${this.state.selectedStock.quote.symbol}/chart/${this.state.selectedChartRange}`)
+    .then(r => r.json())
+    this.setState({
+      selectedChart: selectedChart
+    })
   }
 
   toggleStockDisplay = () => {
@@ -94,13 +109,14 @@ class App extends Component {
     for(let i = 0; i < selectedSector.length; i++) {
       selectedSector[i].name = selectedSector[i].companyName
     }
+    const sectorFilter = selectedSector.filter(sector => sector.marketCap > 17000000000)
     this.setState({
-      stockSymbols: selectedSector
+      stockSymbols: sectorFilter
     })
   }
 
   render() {
-    console.log(this.state.selectedChart)
+    console.log('here', this.state.stockIcon)
     return (
       <div className="App">
       <SearchStocks
@@ -121,6 +137,7 @@ class App extends Component {
       selectedStock={this.state.selectedStock}
       handleSelectChart={this.handleSelectChart}
       selectedChart={this.state.selectedChart}
+      stockIcon={this.state.stockIcon}
       />
       </div>
     );

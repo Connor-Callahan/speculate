@@ -7,7 +7,6 @@ class CompanyProfile extends Component {
     if(this.props.filterSize <= 8700 && this.props.selectedStock == null) {
       value = this.props.name
     }
-
     return (
       <div
       id={this.props.symbol}
