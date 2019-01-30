@@ -3,7 +3,7 @@ import React from 'react'
 const SearchStocks = (props) => {
 
   return (
-    <div>
+    <div id="search-filter-bar">
       <input id="search-input"
         type="text"
         onChange={props.handleStockFilter}

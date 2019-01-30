@@ -8,6 +8,8 @@
 }
 
 .company-name {
+  position: relative;
+  margin-top: -1%;
   font-size: 24px;
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
@@ -16,7 +18,7 @@
 .profile-icon {
   position: relative;
   display: inline;
-  width: 15%;
+  width: 100px;
   height: auto;
 }
 
@@ -39,7 +41,7 @@
   border-radius: 12px;
   outline: none;
   color: grey;
-  padding: 5px 10px;
+  padding: 3px 10px;
   text-align: center;
   margin: 2px;
   text-decoration: none;
@@ -54,6 +56,16 @@
   color: white;
 }
 
+.header-container {
+  display: grid;
+  width: 50%;
+  height: auto;
+  margin-bottom: 15px;
+  grid-template-columns: auto auto;
+  padding: 15px;
+  border: 2px solid lightgrey;
+}
+
 .profile-header {
   font-size: 12px;
   font-family: 'Poppins', sans-serif;
@@ -65,7 +77,7 @@
   border-radius: 12px;
   outline: none;
   color: grey;
-  padding: 5px 10px;
+  padding: 3px 10px;
   text-align: center;
   margin: 2px;
   text-decoration: none;
@@ -79,4 +91,8 @@
 .chart-button:hover {
   background-color: grey;
   color: white;
+}
+
+.stock-chart {
+  position: relative;
 }

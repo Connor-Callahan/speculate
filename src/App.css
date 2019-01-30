@@ -8,6 +8,17 @@
   border:none;
 }
 
+#search-filter-bar {
+  position: relative;
+  height: 45px;
+  width: 100%;
+  background: white;
+  border: 2px solid grey;
+  margin-top: 5%;
+  padding-left: 2%;
+
+}
+
 /* class for all sorting select(!!!change so filter and sort are different) */
 .select-input {
   outline:none;
@@ -18,7 +29,9 @@
 }
 
 #stock-list {
-  border: 0.5px solid grey;
+  position: relative;
+  width: 35%;
+  margin-left: 2%;
   font-family: 'Poppins', sans-serif;
   font-weight: 100;
 }

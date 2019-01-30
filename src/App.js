@@ -16,7 +16,7 @@ class App extends Component {
     selectedStockProfile: null,
     selectedChartRange: '1m',
     selectedChart: null,
-    stockIcon: ''
+    stockIcon: null
   }
 
   componentDidMount(){
@@ -125,12 +125,6 @@ class App extends Component {
       handleStockFilter={this.handleStockFilter}
       stockSymbols={this.state.stockSymbols}
       />
-      <ProfileList
-      stockCategory={this.state.stockCategory}
-      selectedStock={this.state.selectedStock}
-      handleSelectStock={this.handleSelectStock}
-      stockSymbols={this.filterStockSearch()}
-      />
       <ProfileCard
       toggleStockDisplay={this.toggleStockDisplay}
       selectedStockProfile={this.state.selectedStockProfile}
@@ -138,6 +132,12 @@ class App extends Component {
       handleSelectChart={this.handleSelectChart}
       selectedChart={this.state.selectedChart}
       stockIcon={this.state.stockIcon}
+      />
+      <ProfileList
+      stockCategory={this.state.stockCategory}
+      selectedStock={this.state.selectedStock}
+      handleSelectStock={this.handleSelectStock}
+      stockSymbols={this.filterStockSearch()}
       />
       </div>
     );
