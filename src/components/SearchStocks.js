@@ -3,17 +3,22 @@ import React from 'react'
 const SearchStocks = (props) => {
 
   return (
-    <div id="search-filter-bar">
+    <div id="app-header">
+    <button id="login-button" onClick={props.toggleLoginDisplay}>Login/Create Account</button>
       <input id="search-input"
+        autocomplete="off"
         type="text"
         onChange={props.handleStockFilter}
         placeholder='Type to Search Stocks'
       />
-      <select className="select-input" onChange={props.handleSort}>
+      Sort By :
+      <select id="sort-input" onChange={props.handleSort}>
         <option value="A-Z">Alphabetical(A-Z)</option>
         <option value="Z-A">Alphabetical(Z-A)</option>
       </select>
-      <select className="select-input" onChange={props.handleStockSector}>
+      Filter By :
+      <select id="select-input" onChange={props.handleStockSector}>
+        <option  value="All">All</option>
         <option  value="Communication%20Services">Communication Services</option>
         <option  value="Consumer%20Discretionary">Consumer Discretionary</option>
         <option  value="Consumer%20Staples">Consumer Staples</option>
@@ -23,7 +28,7 @@ const SearchStocks = (props) => {
         <option  value="Materials">Materials</option>
         <option  value="Technology">Technology</option>
       </select>
-
+      <img id="logo" src={ require("../similis.png") } />
     </div>
 
   )

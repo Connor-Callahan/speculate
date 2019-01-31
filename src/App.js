@@ -4,7 +4,10 @@ import './ProfileCard.css';
 
 import ProfileList from './containers/ProfileList'
 import ProfileCard from './containers/ProfileCard'
+
 import SearchStocks from './components/SearchStocks'
+import LoginForm from './components/LoginForm'
+
 class App extends Component {
 
   state = {
@@ -16,7 +19,10 @@ class App extends Component {
     selectedStockProfile: null,
     selectedChartRange: '1m',
     selectedChart: null,
-    stockIcon: null
+    stockIcon: null,
+    loginContainer: false,
+    username: null,
+    password: null
   }
 
   componentDidMount(){
@@ -98,9 +104,13 @@ class App extends Component {
   }
 
   handleStockSector = (e) => {
-    this.setState({
-      stockCategory: e.target.value
-    },() => this.toggleStockCategory())
+    if(e.target.value === "All") {
+      console.log("handle all")
+    } else {
+      this.setState({
+        stockCategory: e.target.value
+      },() => this.toggleStockCategory())
+    }
   }
 
   toggleStockCategory = async () => {
@@ -115,11 +125,29 @@ class App extends Component {
     })
   }
 
+  toggleLoginDisplay = () => {
+    if(this.state.loginContainer === false) {
+      this.setState({
+        loginContainer: true
+      })
+    } else {
+      this.setState({
+        loginContainer: false
+      })
+    }
+  }
+
+  handleFormInput = (e) => {
+    this.setState({
+      [e.target.id]: e.target.value
+    })
+  }
+
   render() {
-    console.log('here', this.state.stockIcon)
     return (
       <div className="App">
       <SearchStocks
+      toggleLoginDisplay={this.toggleLoginDisplay}
       handleSort={this.handleSort}
       handleStockSector={this.handleStockSector}
       handleStockFilter={this.handleStockFilter}
@@ -132,6 +160,11 @@ class App extends Component {
       handleSelectChart={this.handleSelectChart}
       selectedChart={this.state.selectedChart}
       stockIcon={this.state.stockIcon}
+      />
+      <LoginForm
+      handleFormInput={this.handleFormInput}
+      loginContainer={this.state.loginContainer}
+      toggleLoginDisplay={this.toggleLoginDisplay}
       />
       <ProfileList
       stockCategory={this.state.stockCategory}

@@ -1,6 +1,6 @@
 /* click listener on the ProfileList, individual stock div */
 .profile-card {
-  border:1px solid grey;
+  border:1px solid #0095ff;
   margin-top: 1%;
   margin-right: 50%;
   padding: 2%;
@@ -37,10 +37,10 @@
 .close-button {
   position: relative;
   left: 70%;
-  border:1px solid lightgrey;
+  border:1px solid #0095ff;
   border-radius: 12px;
   outline: none;
-  color: grey;
+  color: #0095ff;
   padding: 3px 10px;
   text-align: center;
   margin: 2px;
@@ -52,18 +52,18 @@
 }
 
 .close-button:hover {
-  background-color: grey;
+  background-color: #0095ff;
   color: white;
 }
 
 .header-container {
   display: grid;
-  width: 50%;
+  width: 60%;
   height: auto;
   margin-bottom: 15px;
   grid-template-columns: auto auto;
   padding: 15px;
-  border: 2px solid lightgrey;
+  border: 1px solid #0095ff;
 }
 
 .profile-header {
@@ -72,11 +72,16 @@
   font-weight: 200;
 }
 
+#chart-container {
+  position: relative;
+  margin-left: 50%;
+}
+
 .chart-button {
-  border:1px solid lightgrey;
+  border:1px solid #0095ff;
   border-radius: 12px;
   outline: none;
-  color: grey;
+  color: #0095ff;
   padding: 3px 10px;
   text-align: center;
   margin: 2px;
@@ -89,7 +94,7 @@
 }
 
 .chart-button:hover {
-  background-color: grey;
+  background-color: #0095ff;
   color: white;
 }
 

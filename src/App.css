@@ -1,31 +1,91 @@
 
-/* search bar input, search through all stocks */
-#search-input {
-  outline:none;
-  height: 30px;
-  width: 200px;
-  font-size: 18px;
-  border:none;
-}
-
-#search-filter-bar {
+#app-header {
   position: relative;
-  height: 45px;
+  height: 85px;
   width: 100%;
-  background: white;
-  border: 2px solid grey;
+  color: white;
+  background: #ff6a00;
   margin-top: 5%;
   padding-left: 2%;
+}
 
+#login-button {
+  position: absolute;
+  width: 200px;
+  height: auto;
+  margin-left: 77%;
+  margin-top: -3%;
+  border:1px solid #0095ff;
+  border-radius: 12px;
+  outline: none;
+  background: transparent;
+  font-size: 15px;
+  font-family: 'Poppins', sans-serif;
+  transition-duration: 0.4s;
+}
+
+#login-button:hover {
+  background-color: #0095ff;
+  color: white;
+}
+
+#login-container {
+  position: absolute;
+  margin: auto;
+  top: 100px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 500px;
+  height: 300px;
+  border: 2px solid #0095ff;
+}
+
+#logo {
+  position: relative;
+  margin-top: 40px;
+  width: 150px;
+  margin-left: 12%;
+}
+/* search bar input, search through all stocks */
+#search-input {
+  outline: none;
+  position: relative;
+  display: inline;
+  background: transparent;
+  height: 35px;
+  width: 220px;
+  color: grey;
+  margin-left: 0.5%;
+  font-size: 22px;
+  border:none;
 }
 
 /* class for all sorting select(!!!change so filter and sort are different) */
-.select-input {
-  outline:none;
-  height: 30px;
-  width: 200px;
+#sort-input {
+  position: relative;
+  outline: transparent;
+  background-color: transparent;
+  margin-right: 15px;
+  width: 165px;
+  height: auto;
   font-size: 15px;
-  border:none;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  border: none;
+}
+
+#select-input {
+  position: relative;
+  margin-right: 15px;
+  outline: transparent;
+  background-color: transparent;
+  width: 220px;
+  height: auto;
+  font-size: 15px;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  border: none;
 }
 
 #stock-list {
