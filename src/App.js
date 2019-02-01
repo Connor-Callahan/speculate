@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
 import './ProfileCard.css';
+import './UserAccount.css';
 
 import ProfileList from './containers/ProfileList'
 import ProfileCard from './containers/ProfileCard'
+import UserAccount from './containers/UserAccount'
 
 import SearchStocks from './components/SearchStocks'
 import LoginForm from './components/LoginForm'
@@ -21,8 +23,14 @@ class App extends Component {
     selectedChart: null,
     stockIcon: null,
     loginContainer: false,
-    username: null,
-    password: null
+    firstname: null,
+    lastname: null,
+    username: 4,
+    password: null,
+    age: null,
+    income: null,
+    job: null,
+    balance: null
   }
 
   componentDidMount(){
@@ -137,13 +145,41 @@ class App extends Component {
     }
   }
 
+  loginAccount = (e) => {
+    e.preventDefault()
+
+  }
+
   handleFormInput = (e) => {
     this.setState({
       [e.target.id]: e.target.value
     })
   }
 
+  createAccount = (e) => {
+    e.preventDefault()
+    fetch('http://localhost:3000/api/v1/users/', {
+      method: 'POST',
+      headers: {
+        'Content-Type' : 'application/json',
+        'Accept' : 'application/json'
+      },
+      body: JSON.stringify({
+        first_name: this.state.firstname,
+        last_name: this.state.lastname,
+        username: this.state.username,
+        password: this.state.password,
+        age: this.state.age,
+        income: this.state.income,
+        job: this.state.job,
+        balance: this.state.balance
+      })
+    })
+  }
+
   render() {
+    console.log(this.state.username)
+    console.log(this.state.password)
     return (
       <div className="App">
       <SearchStocks
@@ -152,6 +188,8 @@ class App extends Component {
       handleStockSector={this.handleStockSector}
       handleStockFilter={this.handleStockFilter}
       stockSymbols={this.state.stockSymbols}
+      />
+      <UserAccount
       />
       <ProfileCard
       toggleStockDisplay={this.toggleStockDisplay}
@@ -162,6 +200,8 @@ class App extends Component {
       stockIcon={this.state.stockIcon}
       />
       <LoginForm
+      loginAccount={this.loginAccount}
+      createAccount={this.createAccount}
       handleFormInput={this.handleFormInput}
       loginContainer={this.state.loginContainer}
       toggleLoginDisplay={this.toggleLoginDisplay}

@@ -1,6 +1,7 @@
 /* click listener on the ProfileList, individual stock div */
 .profile-card {
   border:1px solid #0095ff;
+  background-color: white;
   margin-top: 1%;
   margin-right: 50%;
   padding: 2%;

@@ -31,15 +31,89 @@
 
 #login-container {
   position: absolute;
+  background: white;
+  z-index: 1000;
   margin: auto;
-  top: 100px;
+  margin-top: 20px;
   right: 0;
-  bottom: 0;
   left: 0;
   width: 500px;
-  height: 300px;
+  height: auto;
+  padding: 1%;
   border: 2px solid #0095ff;
+  font-family: poppins;
 }
+
+#close-login {
+  position: relative;
+  left: 0;
+  border:1px solid #0095ff;
+  border-radius: 12px;
+  outline: none;
+  color: #0095ff;
+  padding: 3px 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 12px;
+  transition-duration: 0.4s;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 200;
+}
+
+.form-button {
+  position: relative;
+  margin-left: 20%;
+  margin-top: 2%;
+  margin-bottom: 4%;
+  width: 15%;
+  border:1px solid #0095ff;
+  color: #0095ff;
+  background: transparent;
+  border-radius: 12px;
+  outline: none;
+  font-size: 12px;
+  font-family: 'Poppins', sans-serif;
+  transition-duration: 0.4s;
+  font-weight: 200;
+
+}
+
+.form-button:hover {
+  background-color: #0095ff;
+  color: white;
+}
+
+/* all inputs on the login/create form */
+.login-input {
+  background-color: transparent;
+  border: 1px solid #0095ff;
+  border-radius: 12px;
+  width: 100px;
+  margin-bottom: 1%;
+  height: 20px;
+  outline: none;
+}
+
+.create-input {
+  width: 100px;
+  height: 20px;
+  margin-bottom: 1%;
+  background-color: transparent;
+  border: 1px solid #0095ff;
+  border-radius: 12px;
+  outline: none;
+}
+
+#login-form {
+  margin-left: 25%;
+  margin-bottom: 2%;
+}
+
+#create-login-form {
+  margin-left: 25%;
+  margin-bottom: 2%;
+}
+
 
 #logo {
   position: relative;

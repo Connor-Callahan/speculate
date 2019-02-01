@@ -1,0 +1,8 @@
+#user-account{
+  position:absolute;
+  height: 65%;
+  width: 50%;
+  top: 160px;
+  margin-left: 45%;
+  border: 1px solid blue;
+}
