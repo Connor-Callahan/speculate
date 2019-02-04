@@ -46,3 +46,24 @@ a:hover {
 h4 {
   font-size: 12px;
 }
+
+/* styling for portfolio table */
+
+.user-portfolio {
+  table-layout: fixed;
+  width: 500px;
+}
+
+td, th {
+border: solid 1px #0095ff;
+padding-left: 5px;
+padding-right: 5px;
+width: 50px;
+height: auto;
+}
+
+h2 {
+  font-size: 14px;
+  font-family: poppins;
+  text-align: left;
+}

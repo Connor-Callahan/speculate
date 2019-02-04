@@ -229,12 +229,41 @@ class App extends Component {
         order_type: 'buy',
         date_time: price.quote.latestTime
       })
+    }, this.fetchTransactions())
+  }
+
+  sortPortfolio = (e) => {
+    let sortedTransactions = this.state.transactions.slice()
+    switch (e.target.id) {
+      case 'symbol':
+      console.log(e.target.id)
+      sortedTransactions = sortedTransactions.sort(function(a, b) {
+        return a.stock_symbol.localeCompare(b.stock_symbol)
+      })
+        break;
+      case 'price':
+      sortedTransactions = sortedTransactions.sort(function(a, b) {
+        return b.price - a.price
+      })
+        break;
+      case 'num_shares':
+      console.log('sorting')
+      sortedTransactions = sortedTransactions.sort(function(a, b) {
+        return b.num_shares - a.num_shares
+      })
+        break;
+      case 'cost':
+      sortedTransactions = sortedTransactions.sort(function(a, b) {
+        return b.cost - a.cost
+      })
+        break;
+      default:
+    } this.setState({
+      transactions: sortedTransactions
     })
   }
 
   render() {
-    console.log(this.state.transactions)
-    console.log(this.state.isLoggedIn)
     return (
       <div className="App">
       <SearchStocks
@@ -245,6 +274,7 @@ class App extends Component {
       stockSymbols={this.state.stockSymbols}
       />
       <UserAccount
+      sortPortfolio={this.sortPortfolio}
       newsFeed={this.state.newsFeed}
       isLoggedIn={this.state.isLoggedIn}
       transactions={this.state.transactions}
