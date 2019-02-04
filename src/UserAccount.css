@@ -1,8 +1,41 @@
-#user-account{
-  position:absolute;
+#user-container{
+  position: absolute;
+  overflow: scroll;
+  padding: 2%;
   height: 65%;
   width: 50%;
-  top: 160px;
-  margin-left: 45%;
+  margin-top: 1%;
+  margin-left: 46%;
   border: 1px solid blue;
+}
+
+/* newsfeed component for alternate div content  */
+
+.article {
+  width: 95%;
+  margin-bottom: 80px;
+}
+
+.article-header {
+  font-family: poppins;
+  font-size: 20px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  color: #0095ff;
+}
+
+.article-image {
+  position: relative;
+  border: 1px solid black;
+  padding: 1%;
+  width: 110px;
+  margin-top: -2%;
+  margin-right: -2%;
+  float: right;
 }

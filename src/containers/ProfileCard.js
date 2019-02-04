@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import CreateTransaction from '../components/CreateTransaction'
 import ReactChartkick, { LineChart } from 'react-chartkick'
 import Chart from 'chart.js'
 
 ReactChartkick.addAdapter(Chart)
+
 
 class ProfileCard extends Component {
   render() {
@@ -16,6 +18,7 @@ class ProfileCard extends Component {
             <button className="close-button" onClick={this.props.toggleStockDisplay}>Close</button>
             <h3 className="symbol">Ticker : {this.props.selectedStock.quote.symbol}</h3>
             <p className="profile-description">{this.props.selectedStockProfile.description}</p>
+            <CreateTransaction handleFormInput={this.props.handleFormInput} handleTransaction={this.props.handleTransaction}/>
             <div className="header-container">
             <h3 className="profile-header">Sector : {this.props.selectedStock.quote.sector}</h3>
             <h3 className="profile-header">Price : {this.props.selectedStock.quote.latestPrice}</h3>
@@ -37,6 +40,11 @@ class ProfileCard extends Component {
                 return collector
             } ,{})} />
           </div>
+      }
+      {
+        this.props.username &&
+        <div classname="create-transaction">
+        </div>
       }
       </div>
 

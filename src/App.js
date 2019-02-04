@@ -23,16 +23,23 @@ class App extends Component {
     selectedChart: null,
     stockIcon: null,
     loginContainer: false,
-    firstname: null,
+    isLoggedIn: false,
+    user_id: 4,
+    firstname: 'joe',
     lastname: null,
-    username: 4,
+    username: null,
     password: null,
     age: null,
     income: null,
     job: null,
-    balance: null
+    balance: null,
+    buyOrder: null,
+    sellOrder: null,
+    transactions: [],
+    newsFeed: []
   }
 
+// initial retrieval of all stocks, --object with name and ticker symbol
   componentDidMount(){
     fetch('https://api.iextrading.com/1.0/ref-data/symbols')
     .then(r => r.json())
@@ -40,6 +47,13 @@ class App extends Component {
         this.setState({
           stockSymbols: data
         })
+    })
+    fetch('https://api.nytimes.com/svc/topstories/v2/business.json?api-key=v7lE9QjGViDovQFmJUTfCbfD1vUaeA4w')
+    .then(r => r.json())
+    .then(data => {
+      this.setState({
+        newsFeed: data.results
+      })
     })
   }
 
@@ -69,6 +83,7 @@ class App extends Component {
     }
   }
 
+// retrieving individual stock info (few different endpoints for headerinfo/description,graph/chart,logo)
   handleSelectStock = async ({target}) => {
     const selectedStock = await fetch(`https://api.iextrading.com/1.0/stock/${target.id}/batch?types=quote,news,chart&range=1m&last=10`)
     .then(r => r.json())
@@ -86,11 +101,11 @@ class App extends Component {
     })
   }
 
+// for changing YTD, 1yr, 2yr chart etc. (set by id in ProfileCard button)
   handleSelectChart = (e) => {
     this.setState({
       selectedChartRange: e.target.id
     }, this.toggleSelectedChart)
-
   }
 
   toggleSelectedChart = async () => {
@@ -154,6 +169,7 @@ class App extends Component {
     this.setState({
       [e.target.id]: e.target.value
     })
+
   }
 
   createAccount = (e) => {
@@ -177,9 +193,42 @@ class App extends Component {
     })
   }
 
+  handleTransaction = async (e) => {
+    e.preventDefault()
+    console.log('transact')
+    let price = await fetch(`https://api.iextrading.com/1.0/stock/${this.state.selectedStock.quote.symbol}/batch?types=quote,news`)
+    .then(r => r.json())
+
+    let totalCost = (price.quote.latestPrice * this.state.buyOrder).toFixed(2)
+
+    console.log(totalCost)
+    fetch('http://localhost:3000/api/v1/transactions/', {
+      method: 'POST',
+      headers: {
+        'Content-Type' : 'application/json',
+        'Accept' : 'application/json'
+      },
+      body: JSON.stringify({
+        user_id: this.state.username,
+        num_shares: this.state.buyOrder,
+        price: price.quote.latestPrice,
+        cost: totalCost,
+        commission: 7,
+        order_type: 'buy',
+        date_time: price.quote.latestTime
+      })
+    })
+  }
+
+// retrieve top business articles from nytimes api ---passed down to NewsFeed component in UserAccount container
+
+    // retrieve top business articles from nytimes api ---passed down to NewsFeed component in UserAccount container
+
+
+
+
+
   render() {
-    console.log(this.state.username)
-    console.log(this.state.password)
     return (
       <div className="App">
       <SearchStocks
@@ -190,11 +239,16 @@ class App extends Component {
       stockSymbols={this.state.stockSymbols}
       />
       <UserAccount
+      newsFeed={this.state.newsFeed}
+      isLoggedIn={this.state.isLoggedIn}
+      transactions={this.state.transactions}
       />
       <ProfileCard
       toggleStockDisplay={this.toggleStockDisplay}
       selectedStockProfile={this.state.selectedStockProfile}
       selectedStock={this.state.selectedStock}
+      handleFormInput={this.handleFormInput}
+      handleTransaction={this.handleTransaction}
       handleSelectChart={this.handleSelectChart}
       selectedChart={this.state.selectedChart}
       stockIcon={this.state.stockIcon}

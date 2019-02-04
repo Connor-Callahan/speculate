@@ -2,10 +2,12 @@
 .profile-card {
   border:1px solid #0095ff;
   background-color: white;
+  width: 38%;
   margin-top: 1%;
   margin-right: 50%;
   padding: 2%;
   margin-left: 2%;
+  z-index: 0;
 }
 
 .company-name {

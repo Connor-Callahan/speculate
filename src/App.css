@@ -32,7 +32,7 @@
 #login-container {
   position: absolute;
   background: white;
-  z-index: 1000;
+  z-index: 5000;
   margin: auto;
   margin-top: 20px;
   right: 0;
@@ -116,16 +116,16 @@
 
 
 #logo {
-  position: relative;
-  margin-top: 40px;
-  width: 150px;
-  margin-left: 12%;
+  position: absolute;
+  margin-top: 2%;
+  width: 170px;
+  margin-right: 0%;
 }
 /* search bar input, search through all stocks */
 #search-input {
   outline: none;
   position: relative;
-  display: inline;
+  margin-top: 3%;
   background: transparent;
   height: 35px;
   width: 220px;
