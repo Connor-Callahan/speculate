@@ -6,7 +6,7 @@ const SearchStocks = (props) => {
     <div id="app-header">
     <button id="login-button" onClick={props.toggleLoginDisplay}>Login/Create Account</button>
       <input id="search-input"
-        autocomplete="off"
+        autoComplete="off"
         type="text"
         onChange={props.handleStockFilter}
         placeholder='Type to Search Stocks'

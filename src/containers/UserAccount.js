@@ -9,8 +9,13 @@ class UserAccount extends Component {
     return (
       <div id="user-container">
       {
-        this.props.isLoggedIn ?
-        <h1>hello</h1>
+        this.props.isLoggedIn  ?
+        
+        this.props.transactions.map(transaction => {
+          return <tr>
+          <td>{transaction.stock_symbol}</td>
+          </tr>
+        })
         :
         <NewsFeed newsFeed={this.props.newsFeed}/>
       }

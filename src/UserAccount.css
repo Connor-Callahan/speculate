@@ -21,6 +21,7 @@
   font-size: 20px;
 }
 
+/* styling for links (attached to header) */
 a {
   text-decoration: none;
   color: black;
@@ -38,4 +39,10 @@ a:hover {
   margin-top: -2%;
   margin-right: -2%;
   float: right;
+}
+
+/* article date */
+
+h4 {
+  font-size: 12px;
 }

@@ -24,3 +24,7 @@ const NewsFeed = (props) => {
   }
 
 export default NewsFeed;
+
+
+// code to display dates
+//<h4>{article.created_date.substring(0, Math.min(article.created_date.length, 10))}</h4>

@@ -24,7 +24,7 @@ class App extends Component {
     stockIcon: null,
     loginContainer: false,
     isLoggedIn: false,
-    user_id: 4,
+    user_id: 2,
     firstname: 'joe',
     lastname: null,
     username: null,
@@ -190,18 +190,29 @@ class App extends Component {
         job: this.state.job,
         balance: this.state.balance
       })
-    })
+    }, this.setState({
+      isLoggedIn: true
+    }, this.fetchTransactions()))
+  }
+
+  fetchTransactions = () => {
+      fetch('http://localhost:3000/api/v1/transactions/')
+      .then(r => r.json())
+      .then(data => {
+        let userTransactions = data.filter(transaction => transaction.user_id === this.state.user_id)
+        this.setState({
+          transactions: userTransactions
+        })
+      })
   }
 
   handleTransaction = async (e) => {
     e.preventDefault()
-    console.log('transact')
     let price = await fetch(`https://api.iextrading.com/1.0/stock/${this.state.selectedStock.quote.symbol}/batch?types=quote,news`)
     .then(r => r.json())
 
     let totalCost = (price.quote.latestPrice * this.state.buyOrder).toFixed(2)
 
-    console.log(totalCost)
     fetch('http://localhost:3000/api/v1/transactions/', {
       method: 'POST',
       headers: {
@@ -209,7 +220,8 @@ class App extends Component {
         'Accept' : 'application/json'
       },
       body: JSON.stringify({
-        user_id: this.state.username,
+        user_id: this.state.user_id,
+        stock_symbol: this.state.selectedStock.quote.symbol,
         num_shares: this.state.buyOrder,
         price: price.quote.latestPrice,
         cost: totalCost,
@@ -220,15 +232,9 @@ class App extends Component {
     })
   }
 
-// retrieve top business articles from nytimes api ---passed down to NewsFeed component in UserAccount container
-
-    // retrieve top business articles from nytimes api ---passed down to NewsFeed component in UserAccount container
-
-
-
-
-
   render() {
+    console.log(this.state.transactions)
+    console.log(this.state.isLoggedIn)
     return (
       <div className="App">
       <SearchStocks
