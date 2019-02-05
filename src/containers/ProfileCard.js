@@ -15,7 +15,7 @@ class ProfileCard extends Component {
           <div className="profile-card">
             <h1 className="company-name">{this.props.selectedStock.quote.companyName}</h1>
             <img className="profile-icon" src={this.props.stockIcon} alt="" width="100" height="120"/>
-            <button className="close-button" onClick={this.props.toggleStockDisplay}>Close</button>
+            <button className="close-button" onClick={this.props.toggleStockDisplay}>𝖷</button>
             <h3 className="symbol">Ticker : {this.props.selectedStock.quote.symbol}</h3>
             <p className="profile-description">{this.props.selectedStockProfile.description}</p>
             <CreateTransaction handleFormInput={this.props.handleFormInput} handleTransaction={this.props.handleTransaction}/>

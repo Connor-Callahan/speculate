@@ -24,7 +24,7 @@ class App extends Component {
     stockIcon: null,
     loginContainer: false,
     isLoggedIn: false,
-    user_id: 2,
+    user_id: 1,
     firstname: 'joe',
     lastname: null,
     username: null,
@@ -32,7 +32,7 @@ class App extends Component {
     age: null,
     income: null,
     job: null,
-    balance: null,
+    balance: 12,
     buyOrder: null,
     sellOrder: null,
     transactions: [],
@@ -169,7 +169,6 @@ class App extends Component {
     this.setState({
       [e.target.id]: e.target.value
     })
-
   }
 
   createAccount = (e) => {
@@ -191,8 +190,9 @@ class App extends Component {
         balance: this.state.balance
       })
     }, this.setState({
-      isLoggedIn: true
-    }, this.fetchTransactions()))
+      isLoggedIn: true,
+      loginContainer: false
+    }))
   }
 
   fetchTransactions = () => {
@@ -208,29 +208,35 @@ class App extends Component {
 
   handleTransaction = async (e) => {
     e.preventDefault()
+    e.persist()
+
     let price = await fetch(`https://api.iextrading.com/1.0/stock/${this.state.selectedStock.quote.symbol}/batch?types=quote,news`)
     .then(r => r.json())
 
     let totalCost = (price.quote.latestPrice * this.state.buyOrder).toFixed(2)
 
-    fetch('http://localhost:3000/api/v1/transactions/', {
-      method: 'POST',
-      headers: {
-        'Content-Type' : 'application/json',
-        'Accept' : 'application/json'
-      },
-      body: JSON.stringify({
-        user_id: this.state.user_id,
-        stock_symbol: this.state.selectedStock.quote.symbol,
-        num_shares: this.state.buyOrder,
-        price: price.quote.latestPrice,
-        cost: totalCost,
-        commission: 7,
-        order_type: 'buy',
-        date_time: price.quote.latestTime
-      })
-    }, this.fetchTransactions())
-  }
+    e.target.id === 'buy' && this.state.balance < totalCost ?
+      console.log('out of moneyy')
+    :
+      fetch('http://localhost:3000/api/v1/transactions/', {
+        method: 'POST',
+        headers: {
+          'Content-Type' : 'application/json',
+          'Accept' : 'application/json'
+        },
+        body: JSON.stringify({
+          user_id: this.state.user_id,
+          stock_symbol: this.state.selectedStock.quote.symbol,
+          num_shares: this.state.buyOrder,
+          price: price.quote.latestPrice,
+          cost: totalCost,
+          commission: 7,
+          order_type: e.target.value,
+          date_time: price.quote.latestTime
+        })
+      }, this.fetchTransactions())
+    }
+
 
   sortPortfolio = (e) => {
     let sortedTransactions = this.state.transactions.slice()

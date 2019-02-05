@@ -11,6 +11,7 @@ class UserAccount extends Component {
 
 
   render() {
+
     return (
       <div id="user-container">
       {
@@ -49,8 +50,9 @@ class UserAccount extends Component {
           })}
           </tbody>
           <PieChart
+          className='pie-chart'
           donut={true}
-          width="800px" height="auto"
+          width="225%"
           prefix="$"
           data={this.props.transactions.map(transaction => [transaction.stock_symbol, transaction.cost])}/>
         </table>

@@ -39,14 +39,13 @@
 
 .close-button {
   position: relative;
-  left: 70%;
   border:1px solid #0095ff;
-  border-radius: 12px;
   outline: none;
   color: #0095ff;
-  padding: 3px 10px;
+  padding: 4px 8px;
   text-align: center;
   margin: 2px;
+  margin-left: 50%;
   text-decoration: none;
   font-size: 12px;
   transition-duration: 0.4s;
