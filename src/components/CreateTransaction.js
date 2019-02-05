@@ -5,12 +5,12 @@ const CreateTransaction = (props) => (
   <div>
   {
     <form>
-    <label htmlFor="Amount">Amount : </label>
-    <input onChange={props.handleFormInput} type="number" id="buyOrder"/>
+    <label htmlFor="Amount"></label>
+    <input onChange={props.handleFormInput} type="number" id="orderSize" placeholder="number of shares"/>
     <button id="buy" onClick={props.handleTransaction}>Buy : </button>
-
-    <label htmlFor="Amount">Amount : </label>
-    <input onChange={props.handleFormInput} type="number" id="sellOrder"/>
+    <br></br>
+    <label htmlFor="Amount"></label>
+    <input onChange={props.handleFormInput} type="number" id="orderSize" placeholder="number of shares"/>
     <button id="sell" onClick={props.handleTransaction}>Sell : </button>
     </form>
   }

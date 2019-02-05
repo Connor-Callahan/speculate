@@ -9,8 +9,39 @@ ReactChartkick.addAdapter(Chart)
 
 class UserAccount extends Component {
 
+  state = {
+    currentBuyValue: []
+  }
 
   render() {
+
+    let sold = this.props.transactions.filter(transaction => {
+      return transaction.order_type == 'sell'
+    })
+
+    let bought = this.props.transactions.filter(transaction => {
+      return transaction.order_type == 'buy'
+    })
+
+    let totalBuy = bought.reduce(function(prev, cur) {
+      return prev + cur.cost;
+    }, 0);
+
+    let totalSell = sold.reduce(function(prev, cur) {
+      return prev + cur.cost;
+    }, 0);
+
+    let currentPortfolio = bought.map(transaction => {
+      return transaction.stock_symbol
+    })
+
+    for(let i = 0; i < currentPortfolio.length; i++) {
+      fetch(`https://api.iextrading.com/1.0/stock/market/batch?symbols=${currentPortfolio[i]}&types=quote,news,chart&range=1m&last=5`)
+      .then(r => r.json())
+      .then(data => {
+        console.log(data.quote.symbol, data.quote.latestPrice)
+      })
+    }
 
     return (
       <div id="user-container">
@@ -40,7 +71,7 @@ class UserAccount extends Component {
               </h2>
             </th>
             </tr>
-          {this.props.transactions.map(transaction => {
+          {bought.map(transaction => {
             return <tr>
             <td>{transaction.stock_symbol}</td>
             <td>${transaction.price}</td>

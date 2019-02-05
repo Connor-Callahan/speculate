@@ -32,9 +32,8 @@ class App extends Component {
     age: null,
     income: null,
     job: null,
-    balance: 12,
-    buyOrder: null,
-    sellOrder: null,
+    balance: 15000,
+    orderSize: null,
     transactions: [],
     newsFeed: []
   }
@@ -192,7 +191,7 @@ class App extends Component {
     }, this.setState({
       isLoggedIn: true,
       loginContainer: false
-    }))
+    }), this.fetchTransactions())
   }
 
   fetchTransactions = () => {
@@ -204,16 +203,16 @@ class App extends Component {
           transactions: userTransactions
         })
       })
+
   }
 
   handleTransaction = async (e) => {
     e.preventDefault()
     e.persist()
-
     let price = await fetch(`https://api.iextrading.com/1.0/stock/${this.state.selectedStock.quote.symbol}/batch?types=quote,news`)
     .then(r => r.json())
 
-    let totalCost = (price.quote.latestPrice * this.state.buyOrder).toFixed(2)
+    let totalCost = (price.quote.latestPrice * this.state.orderSize).toFixed(2)
 
     e.target.id === 'buy' && this.state.balance < totalCost ?
       console.log('out of moneyy')
@@ -227,11 +226,11 @@ class App extends Component {
         body: JSON.stringify({
           user_id: this.state.user_id,
           stock_symbol: this.state.selectedStock.quote.symbol,
-          num_shares: this.state.buyOrder,
+          num_shares: this.state.orderSize,
           price: price.quote.latestPrice,
           cost: totalCost,
           commission: 7,
-          order_type: e.target.value,
+          order_type: e.target.id,
           date_time: price.quote.latestTime
         })
       }, this.fetchTransactions())
