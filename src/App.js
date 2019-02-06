@@ -65,22 +65,19 @@ class App extends Component {
     })
   }
 
+// sorting stocks alphabetically
   handleSort = (e) => {
-    this.setState({
-      sortBy: e.target.value
-    })
-    this.sortStockList()
-  }
-
-  sortStockList = () => {
+    e.persist()
     let sortedStocks = this.state.stockSymbols.slice()
-    if(this.state.sortBy === 'Z-A') {
+    if(e.target.value === 'Z-A') {
       this.setState({
         stockSymbols: sortedStocks.reverse()
       })
     }
-    else if(this.state.sortBy === 'A-Z') {
-      console.log('do nothing')
+    else if(e.target.value === 'A-Z') {
+      this.setState({
+        stockSymbols: sortedStocks.reverse()
+      })
     }
   }
 
@@ -150,15 +147,10 @@ class App extends Component {
   }
 
   toggleLoginDisplay = () => {
-    if(this.state.loginContainer === false) {
+    console.log('here')
       this.setState({
         loginContainer: true
       })
-    } else {
-      this.setState({
-        loginContainer: false
-      })
-    }
   }
 
   loginAccount = (e) => {
@@ -166,6 +158,13 @@ class App extends Component {
 
   }
 
+  handleLogout = () => {
+    this.setState({
+      isLoggedIn: false
+    })
+  }
+
+// sets state for all form inputs **user login and buy/sell transactions
   handleFormInput = (e) => {
     this.setState({
       [e.target.id]: e.target.value
@@ -195,6 +194,7 @@ class App extends Component {
       loginContainer: false
     }), this.fetchTransactions())
   }
+
 
   handleTransaction = async (e) => {
     e.preventDefault()
@@ -239,11 +239,9 @@ class App extends Component {
 
   sortPortfolio = (e) => {
     let sortedTransactions = this.state.transactions.slice()
-    console.log(sortedTransactions)
     switch (e.target.id) {
       case 'symbol':
       sortedTransactions = sortedTransactions.sort(function(a, b) {
-        console.log('sorting')
         return a.stock_symbol.localeCompare(b.stock_symbol)
       })
         break;
@@ -263,7 +261,7 @@ class App extends Component {
       })
         break;
       default:
-    } console.log(this.sortedTransactions)
+    }
   }
 
   handleCurrentVal = () => {
@@ -271,7 +269,30 @@ class App extends Component {
       return transaction.order_type === 'buy'
     })
 
-    let currentPort = bought.map(transaction => {
+    let duplicate = null
+
+    for(let i = 0; i < bought.length; i++) {
+      if(duplicate == null) {
+        duplicate = bought[i].stock_symbol
+      } else if (duplicate == bought[i].stock_symbol)
+        duplicate = bought[i]
+    }
+
+    let nonDuplicates = bought.filter(transaction => {
+      return transaction != duplicate
+    })
+
+    nonDuplicates.map(transaction => {
+      if(transaction.stock_symbol === duplicate.stock_symbol){
+        transaction.num_shares = transaction.num_shares + duplicate.num_shares
+        transaction.cost = transaction.cost + duplicate.cost
+      }
+    })
+
+    console.log('here', nonDuplicates)
+
+
+    let currentPort = nonDuplicates.map(transaction => {
       return transaction.stock_symbol
     })
     fetch(`https://api.iextrading.com/1.0/stock/market/batch?symbols=${currentPort}&types=quote&range=1m&last=5`)
@@ -279,7 +300,7 @@ class App extends Component {
     .then(data => {
       this.setState({
         currentVal: data,
-        bought: bought
+        bought: nonDuplicates
       })
     })
   }
@@ -289,10 +310,12 @@ class App extends Component {
       <div className="App">
       <SearchStocks
       toggleLoginDisplay={this.toggleLoginDisplay}
+      handleLogout={this.toggleLoginDisplay}
       handleSort={this.handleSort}
       handleStockSector={this.handleStockSector}
       handleStockFilter={this.handleStockFilter}
       stockSymbols={this.state.stockSymbols}
+      isLoggedIn={this.state.isLoggedIn}
       />
       <UserAccount
       bought={this.state.bought}
@@ -305,6 +328,7 @@ class App extends Component {
       />
       <ProfileCard
       toggleStockDisplay={this.toggleStockDisplay}
+      isLoggedIn={this.state.isLoggedIn}
       selectedStockProfile={this.state.selectedStockProfile}
       selectedStock={this.state.selectedStock}
       handleFormInput={this.handleFormInput}

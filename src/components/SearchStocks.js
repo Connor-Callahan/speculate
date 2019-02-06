@@ -4,7 +4,12 @@ const SearchStocks = (props) => {
 
   return (
     <div id="app-header">
-    <button id="login-button" onClick={props.toggleLoginDisplay}>Login/Create Account</button>
+    {
+      props.isLoggedIn?
+      <button id="login-button" onClick={props.handleLogout}>Logout</button>
+      :
+      <button id="login-button" onClick={props.toggleLoginDisplay}>Login/Create Account</button>
+    }
       <input id="search-input"
         autoComplete="off"
         type="text"
@@ -29,10 +34,12 @@ const SearchStocks = (props) => {
         <option  value="Materials">Materials</option>
         <option  value="Technology">Technology</option>
       </select>
-      <img id="logo" src={ require("../similis.png") } />
     </div>
 
   )
 }
 
 export default SearchStocks
+
+
+//       <img id="logo" src={ require("../similis.png") } />

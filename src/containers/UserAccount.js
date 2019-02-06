@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NewsFeed from '../components/NewsFeed'
-import UserTable from '../components/UserTable'
+import CurrentPortfolio from '../components/CurrentPortfolio'
+import AllTransactions from '../components/AllTransactions'
 import ReactChartkick, { PieChart } from 'react-chartkick'
 import Chart from 'chart.js'
 
@@ -33,52 +34,43 @@ class UserAccount extends Component {
       this.props.bought[i].currentStockVal = (currentStockVal[i].quote.latestPrice * this.props.bought[i].num_shares).toFixed(2)
     }
 
-    console.log(this.props.currentVal)
-
     return (
       <div id="user-container">
       {
-        this.props.isLoggedIn  ? (
-        <table className="user-portfolio">
-         <tbody>
-          <tr>
-            <th>
-              <h2 id="symbol" onClick={this.props.sortPortfolio}>
-                Symbol
-              </h2>
-            </th>
-            <th>
-              <h2 id="price" onClick={this.props.sortPortfolio}>
-                Price
-              </h2>
-            </th>
-            <th>
-              <h2 id="num_shares" onClick={this.props.sortPortfolio}>
-                # of Shares
-              </h2>
-            </th>
-            <th>
-              <h2 id="cost" onClick={this.props.sortPortfolio}>
-                Cost
-              </h2>
-            </th>
-            <th>
-              <h2 id="current-value" onClick={this.props.sortPortfolio}>
-                Current Value
-              </h2>
-            </th>
-            </tr>
-          <UserTable bought={this.props.bought}
-          handleCurrentVal={this.props.handleCurrentVal}
-          currentVal={this.props.currentVal} />
-          </tbody>
-          <PieChart
-          className='pie-chart'
-          donut={true}
-          width="225%"
-          prefix="$"
-          data={this.props.bought.map(transaction => [transaction.stock_symbol, transaction.cost])}/>
-        </table>
+        this.props.isLoggedIn ? (
+          <div>
+            {
+              this.props.currentVal?
+              <div>
+              <CurrentPortfolio bought={this.props.bought}
+              handleCurrentVal={this.props.handleCurrentVal}
+              currentVal={this.props.currentVal} />
+              <PieChart
+              legend={false}
+              className='pie-chart'
+              donut={true}
+              width="450px"
+              prefix="$"
+              data={this.props.bought.map(transaction => [transaction.stock_symbol, transaction.cost])}/>
+              </div>
+              :
+              <div>
+              <AllTransactions bought={this.props.transactions}
+              handleCurrentVal={this.props.handleCurrentVal}
+              currentVal={this.props.currentVal} />
+              <PieChart
+              legend={false}
+              className='pie-chart'
+              donut={true}
+              width="450px"
+              prefix="$"
+              data={this.props.transactions.map(transaction => [transaction.stock_symbol, transaction.cost])}/>
+              </div>
+
+            }
+            </div>
+
+
 
       ) : <NewsFeed newsFeed={this.props.newsFeed}/>
       }

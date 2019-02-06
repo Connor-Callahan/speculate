@@ -18,13 +18,23 @@ class ProfileCard extends Component {
             <button className="close-button" onClick={this.props.toggleStockDisplay}>𝖷</button>
             <h3 className="symbol">Ticker : {this.props.selectedStock.quote.symbol}</h3>
             <p className="profile-description">{this.props.selectedStockProfile.description}</p>
-            <CreateTransaction handleFormInput={this.props.handleFormInput} handleTransaction={this.props.handleTransaction}/>
+            {
+              this.props.isLoggedIn?
+              <CreateTransaction handleFormInput={this.props.handleFormInput} handleTransaction={this.props.handleTransaction}/>
+              :
+              <p></p>
+            }
             <div className="header-container">
             <h3 className="profile-header">Sector : {this.props.selectedStock.quote.sector}</h3>
             <h3 className="profile-header">Price : {this.props.selectedStock.quote.latestPrice}</h3>
             <h3 className="profile-header">Time : {this.props.selectedStock.quote.latestTime}</h3>
             <h3 className="profile-header">P/E Ratio : {this.props.selectedStock.quote.peRatio}</h3>
-            <h3 className="profile-header">MarketCap :﹩{this.props.selectedStock.quote.marketCap.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
+            {
+              this.props.selectedStock.quote.marketCap?
+              <h3 className="profile-header">MarketCap :﹩{this.props.selectedStock.quote.marketCap.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
+              :
+              <h3 className="profile-header">MarketCap : N/A</h3>
+            }
             <h3 className="profile-header">52-Week-High : {this.props.selectedStock.quote.week52High}</h3>
             <h3 className="profile-header">52-Week-low : {this.props.selectedStock.quote.week52Low}</h3>
             </div>
