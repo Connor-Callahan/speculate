@@ -8,7 +8,7 @@ const LoginForm = (props) => {
         <div id="login-container">
 
           <form id="login-form"
-          autocomplete="off"
+          autoComplete="off"
           onChange={props.handleFormInput}>
             <label htmlFor="user_name">username : </label>
             <input className="create-input" onChange={props.handleFormInput} type="text" id="username"/>
@@ -20,7 +20,7 @@ const LoginForm = (props) => {
           </form>
 
           <form id="create-login-form"
-          autocomplete="off"
+          autoComplete="off"
           onChange={props.handleFormInput} >
             <label htmlFor="firstname">first name : </label>
             <input className="login-input" onChange={props.handleFormInput} type="text" id="firstname"/>

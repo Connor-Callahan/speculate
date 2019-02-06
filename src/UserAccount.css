@@ -58,12 +58,17 @@ td, th {
 border: solid 1px #0095ff;
 padding-left: 5px;
 padding-right: 5px;
-width: 50px;
-height: auto;
+width: 85px;
+height: 20px;
 }
 
 h2 {
-  font-size: 14px;
+  font-size: 12px;
   font-family: poppins;
   text-align: left;
+  height: 20px;
+}
+
+.table-data {
+  width: 900px;
 }

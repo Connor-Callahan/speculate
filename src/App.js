@@ -35,6 +35,8 @@ class App extends Component {
     balance: 15000,
     orderSize: null,
     transactions: [],
+    bought: [],
+    currentVal: null,
     newsFeed: []
   }
 
@@ -194,18 +196,6 @@ class App extends Component {
     }), this.fetchTransactions())
   }
 
-  fetchTransactions = () => {
-      fetch('http://localhost:3000/api/v1/transactions/')
-      .then(r => r.json())
-      .then(data => {
-        let userTransactions = data.filter(transaction => transaction.user_id === this.state.user_id)
-        this.setState({
-          transactions: userTransactions
-        })
-      })
-
-  }
-
   handleTransaction = async (e) => {
     e.preventDefault()
     e.persist()
@@ -236,13 +226,24 @@ class App extends Component {
       }, this.fetchTransactions())
     }
 
+    fetchTransactions = () => {
+        fetch('http://localhost:3000/api/v1/transactions/')
+        .then(r => r.json())
+        .then(data => {
+          let userTransactions = data.filter(transaction => transaction.user_id === this.state.user_id)
+          this.setState({
+            transactions: userTransactions
+          })
+        })
+      }
 
   sortPortfolio = (e) => {
     let sortedTransactions = this.state.transactions.slice()
+    console.log(sortedTransactions)
     switch (e.target.id) {
       case 'symbol':
-      console.log(e.target.id)
       sortedTransactions = sortedTransactions.sort(function(a, b) {
+        console.log('sorting')
         return a.stock_symbol.localeCompare(b.stock_symbol)
       })
         break;
@@ -252,7 +253,6 @@ class App extends Component {
       })
         break;
       case 'num_shares':
-      console.log('sorting')
       sortedTransactions = sortedTransactions.sort(function(a, b) {
         return b.num_shares - a.num_shares
       })
@@ -263,8 +263,24 @@ class App extends Component {
       })
         break;
       default:
-    } this.setState({
-      transactions: sortedTransactions
+    } console.log(this.sortedTransactions)
+  }
+
+  handleCurrentVal = () => {
+    let bought = this.state.transactions.filter(transaction => {
+      return transaction.order_type === 'buy'
+    })
+
+    let currentPort = bought.map(transaction => {
+      return transaction.stock_symbol
+    })
+    fetch(`https://api.iextrading.com/1.0/stock/market/batch?symbols=${currentPort}&types=quote&range=1m&last=5`)
+    .then(r => r.json())
+    .then(data => {
+      this.setState({
+        currentVal: data,
+        bought: bought
+      })
     })
   }
 
@@ -279,10 +295,13 @@ class App extends Component {
       stockSymbols={this.state.stockSymbols}
       />
       <UserAccount
+      bought={this.state.bought}
       sortPortfolio={this.sortPortfolio}
       newsFeed={this.state.newsFeed}
       isLoggedIn={this.state.isLoggedIn}
       transactions={this.state.transactions}
+      handleCurrentVal={this.handleCurrentVal}
+      currentVal={this.state.currentVal}
       />
       <ProfileCard
       toggleStockDisplay={this.toggleStockDisplay}
