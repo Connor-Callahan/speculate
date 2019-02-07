@@ -125,8 +125,12 @@ class App extends Component {
   }
 
   handleStockSector = (e) => {
+    console.log('yay')
     if(e.target.value === "All") {
-      console.log("handle all")
+      this.componentDidMount()
+      this.setState({
+        stockCategory: e.target.value
+      })
     } else {
       this.setState({
         stockCategory: e.target.value
@@ -193,6 +197,12 @@ class App extends Component {
       isLoggedIn: true,
       loginContainer: false
     }), this.fetchTransactions())
+    .then(r => r.json())
+    .then(data => {
+      this.setState({
+        user_id: data.id
+      })
+    }, this.fetchTransactions())
   }
 
 
@@ -226,13 +236,16 @@ class App extends Component {
       }, this.fetchTransactions())
     }
 
+
+
     fetchTransactions = () => {
         fetch('http://localhost:3000/api/v1/transactions/')
         .then(r => r.json())
         .then(data => {
           let userTransactions = data.filter(transaction => transaction.user_id === this.state.user_id)
           this.setState({
-            transactions: userTransactions
+            transactions: userTransactions,
+            currentVal: null
           })
         })
       }
@@ -306,6 +319,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.state.user_id)
     return (
       <div className="App">
       <SearchStocks
@@ -325,6 +339,7 @@ class App extends Component {
       transactions={this.state.transactions}
       handleCurrentVal={this.handleCurrentVal}
       currentVal={this.state.currentVal}
+      fetchTransactions={this.fetchTransactions}
       />
       <ProfileCard
       toggleStockDisplay={this.toggleStockDisplay}

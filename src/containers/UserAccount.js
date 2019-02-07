@@ -43,6 +43,7 @@ class UserAccount extends Component {
               this.props.currentVal?
               <div>
               <CurrentPortfolio bought={this.props.bought}
+              fetchTransactions={this.props.fetchTransactions}
               handleCurrentVal={this.props.handleCurrentVal}
               currentVal={this.props.currentVal} />
               <PieChart

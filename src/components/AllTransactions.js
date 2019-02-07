@@ -62,7 +62,7 @@ class AllTransactions extends Component {
       </tbody>
 
     </table>
-      <button onClick={this.props.handleCurrentVal}>refresh</button>
+      <button className="portfolio-button" onClick={this.props.handleCurrentVal}>Portfolio</button>
       </div>
     );
   }

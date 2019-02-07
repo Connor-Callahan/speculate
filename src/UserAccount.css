@@ -72,3 +72,25 @@ h2 {
 .table-data {
   width: 900px;
 }
+
+.portfolio-button {
+  position: relative;
+  border:1px solid #0095ff;
+  outline: none;
+  color: #0095ff;
+  padding: 4px 8px;
+  text-align: center;
+  margin: 2px;
+  margin-left: 0;
+  margin-top: 2;
+  text-decoration: none;
+  font-size: 12px;
+  transition-duration: 0.4s;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 200;
+}
+
+.portfolio-button:hover {
+  background-color: #0095ff;
+  color: white;
+}
