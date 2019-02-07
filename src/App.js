@@ -125,7 +125,6 @@ class App extends Component {
   }
 
   handleStockSector = (e) => {
-    console.log('yay')
     if(e.target.value === "All") {
       this.componentDidMount()
       this.setState({
@@ -161,7 +160,6 @@ class App extends Component {
   }
 
   handleLogout = () => {
-    console.log(this.state.loginContainer)
     this.setState({
       isLoggedIn: false,
       loginContainer: false,
@@ -227,9 +225,7 @@ class App extends Component {
 
     let totalCost = (price.quote.latestPrice * this.state.orderSize).toFixed(2)
 
-    console.log('we are here', e.target.id === 'buy' && this.state.balance < totalCost)
-    if(e.target.id === 'buy' && this.state.balance < totalCost) {
-      console.log(this.state.balance)
+    if(e.target.id === 'buy' && Number(this.state.balance) < totalCost) {
       console.log('out of moneyy')
     } else {
       fetch('http://localhost:3000/api/v1/transactions/', {
@@ -255,12 +251,14 @@ class App extends Component {
           transactions: [...this.state.transactions, data]
         })
       })
+      let adjustedBalance = this.state.balance - totalCost
+      this.setState({
+        balance: adjustedBalance
+      })
     }
-
-    }
+  }
 
     fetchTransactions = () => {
-      console.log('poop',this.state.user_id)
         fetch('http://localhost:3000/api/v1/transactions/')
         .then(r => r.json())
         .then(data => {
@@ -276,22 +274,22 @@ class App extends Component {
     let sortedTransactions = this.state.transactions.slice()
     switch (e.target.id) {
       case 'symbol':
-      sortedTransactions = sortedTransactions.sort(function(a, b) {
+      sortedTransactions.sort(function(a, b) {
         return a.stock_symbol.localeCompare(b.stock_symbol)
       })
         break;
       case 'price':
-      sortedTransactions = sortedTransactions.sort(function(a, b) {
+      sortedTransactions.sort(function(a, b) {
         return b.price - a.price
       })
         break;
       case 'num_shares':
-      sortedTransactions = sortedTransactions.sort(function(a, b) {
+      sortedTransactions.sort(function(a, b) {
         return b.num_shares - a.num_shares
       })
         break;
       case 'cost':
-      sortedTransactions = sortedTransactions.sort(function(a, b) {
+      sortedTransactions.sort(function(a, b) {
         return b.cost - a.cost
       })
         break;
@@ -313,6 +311,18 @@ class App extends Component {
         duplicate = bought[i]
     }
 
+    let portfolio = {}
+
+    bought.forEach(transaction => {
+      if(portfolio.transaction.stock_symbol) {
+        portfolio.transaction.stock_symbol = portfolio.transaction.num_shares
+      } else {
+        portfolio.stock_symbol = transaction.num_shares
+      }
+    })
+
+    console.log('here dummy', bought)
+
     let nonDuplicates = bought.filter(transaction => {
       return transaction != duplicate
     })
@@ -320,16 +330,15 @@ class App extends Component {
     nonDuplicates.map(transaction => {
       if(transaction.stock_symbol === duplicate.stock_symbol){
         transaction.num_shares = transaction.num_shares + duplicate.num_shares
-        transaction.cost = transaction.cost + duplicate.cost
+        transaction.cost = (transaction.cost + duplicate.cost).toFixed(2)
       }
     })
-
-    console.log('here', nonDuplicates)
-
 
     let currentPort = nonDuplicates.map(transaction => {
       return transaction.stock_symbol
     })
+
+    console.log(currentPort)
     fetch(`https://api.iextrading.com/1.0/stock/market/batch?symbols=${currentPort}&types=quote&range=1m&last=5`)
     .then(r => r.json())
     .then(data => {
@@ -338,10 +347,11 @@ class App extends Component {
         bought: nonDuplicates
       })
     })
+    console.log(bought)
+    this.fetchTransactions()
   }
 
   render() {
-    console.log('at render', this.state.balance)
     return (
       <div className="App">
       <SearchStocks
@@ -356,6 +366,7 @@ class App extends Component {
       <UserAccount
       firstname={this.state.firstname}
       lastname={this.state.lastname}
+      balance={this.state.balance}
       bought={this.state.bought}
       sortPortfolio={this.sortPortfolio}
       newsFeed={this.state.newsFeed}

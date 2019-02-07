@@ -11,13 +11,16 @@ const NewsFeed = (props) => {
         :
         props.newsFeed.map( article => {
           if(article.multimedia.length > 2 ) {
-            return <div className="article">
+            return <div  key={Math.random()} className="article">
             <h3 className="article-header"><a target="_blank" rel="noopener noreferrer" href={article.short_url}>{article.title}</a></h3>
-            <img className="article-image" src={article.multimedia[1].url}/>
+            <img className="article-image" alt="" src={article.multimedia[1].url}/>
             <p> {article.abstract}</p>
             </div>
           }
+          return null
+
         })
+
       }
       </div>
     );

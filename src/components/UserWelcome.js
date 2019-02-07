@@ -6,6 +6,7 @@ const UserWelcome = (props) => {
   return (
     <div>
     <h1>Welcome, {props.firstname}</h1>
+    <h1>balance : {props.balance}</h1>,
     {
       props.transactions.length > 0 ?
         <div>

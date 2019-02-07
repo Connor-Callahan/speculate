@@ -9,7 +9,9 @@ const ProfileList = (props) => {
   return <div id="stock-list">
           {
             refinedStockList.map( stock => {
-            return <CompanyProfile handleSelectStock={props.handleSelectStock}
+            return <CompanyProfile
+                    key={Math.random()}
+                    handleSelectStock={props.handleSelectStock}
                     symbol={stock.symbol}
                     name={stock.name}
                     selectedStock={props.selectedStock}

@@ -38,7 +38,6 @@ class UserAccount extends Component {
     return (
       <div id="user-container">
       {
-
         <div>
         {
           this.props.isLoggedIn ? (
@@ -79,6 +78,7 @@ class UserAccount extends Component {
             ) : <UserWelcome
             firstname={this.props.firstname}
             lastname={this.props.lastname}
+            balance={this.props.balance}
             transactions={this.props.transactions}
             handleCurrentVal={this.props.handleCurrentVal}
             fetchTransactions={this.props.fetchTransactions}

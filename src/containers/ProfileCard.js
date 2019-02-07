@@ -44,11 +44,20 @@ class ProfileCard extends Component {
             <button className="chart-button" id="1y" onClick={this.props.handleSelectChart}>1 Year</button>
             <button className="chart-button" id="5y" onClick={this.props.handleSelectChart}>5 Year</button>
             </div>
-            <LineChart className="stock-chart" id="stock-chart" points="false" width="auto" height="250px" prefix="$" points={false} curve={false}
+            <LineChart
+              className="stock-chart"
+              id="stock-chart"
+              width="auto"
+              height="250px"
+              prefix="$"
+              points={false}
+              curve={false}
               data={this.props.selectedChart.reduce(function(collector,value){
                 collector[value.date] = value.close
                 return collector
-            } ,{})} />
+                } ,{})
+              }
+            />
           </div>
       }
       {
