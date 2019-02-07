@@ -24,7 +24,7 @@ class App extends Component {
     stockIcon: null,
     loginContainer: false,
     isLoggedIn: false,
-    user_id: 1,
+    user_id: null,
     firstname: 'joe',
     lastname: null,
     username: null,
@@ -32,7 +32,7 @@ class App extends Component {
     age: null,
     income: null,
     job: null,
-    balance: 15000,
+    balance: null,
     orderSize: null,
     transactions: [],
     bought: [],
@@ -151,7 +151,6 @@ class App extends Component {
   }
 
   toggleLoginDisplay = () => {
-    console.log('here')
       this.setState({
         loginContainer: true
       })
@@ -159,12 +158,26 @@ class App extends Component {
 
   loginAccount = (e) => {
     e.preventDefault()
-
   }
 
   handleLogout = () => {
+    console.log(this.state.loginContainer)
     this.setState({
-      isLoggedIn: false
+      isLoggedIn: false,
+      loginContainer: false,
+      user_id: null,
+      firstname: 'joe',
+      lastname: null,
+      username: null,
+      password: null,
+      age: null,
+      income: null,
+      job: null,
+      balance: null,
+      orderSize: null,
+      transactions: [],
+      bought: [],
+      currentVal: null,
     })
   }
 
@@ -196,13 +209,13 @@ class App extends Component {
     }, this.setState({
       isLoggedIn: true,
       loginContainer: false
-    }), this.fetchTransactions())
+    }))
     .then(r => r.json())
     .then(data => {
       this.setState({
         user_id: data.id
       })
-    }, this.fetchTransactions())
+    })
   }
 
 
@@ -214,9 +227,11 @@ class App extends Component {
 
     let totalCost = (price.quote.latestPrice * this.state.orderSize).toFixed(2)
 
-    e.target.id === 'buy' && this.state.balance < totalCost ?
+    console.log('we are here', e.target.id === 'buy' && this.state.balance < totalCost)
+    if(e.target.id === 'buy' && this.state.balance < totalCost) {
+      console.log(this.state.balance)
       console.log('out of moneyy')
-    :
+    } else {
       fetch('http://localhost:3000/api/v1/transactions/', {
         method: 'POST',
         headers: {
@@ -233,12 +248,19 @@ class App extends Component {
           order_type: e.target.id,
           date_time: price.quote.latestTime
         })
-      }, this.fetchTransactions())
+      })
+      .then(r => r.json())
+      .then(data => {
+        this.setState({
+          transactions: [...this.state.transactions, data]
+        })
+      })
     }
 
-
+    }
 
     fetchTransactions = () => {
+      console.log('poop',this.state.user_id)
         fetch('http://localhost:3000/api/v1/transactions/')
         .then(r => r.json())
         .then(data => {
@@ -319,12 +341,12 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.user_id)
+    console.log('at render', this.state.balance)
     return (
       <div className="App">
       <SearchStocks
       toggleLoginDisplay={this.toggleLoginDisplay}
-      handleLogout={this.toggleLoginDisplay}
+      handleLogout={this.handleLogout}
       handleSort={this.handleSort}
       handleStockSector={this.handleStockSector}
       handleStockFilter={this.handleStockFilter}
@@ -332,6 +354,8 @@ class App extends Component {
       isLoggedIn={this.state.isLoggedIn}
       />
       <UserAccount
+      firstname={this.state.firstname}
+      lastname={this.state.lastname}
       bought={this.state.bought}
       sortPortfolio={this.sortPortfolio}
       newsFeed={this.state.newsFeed}

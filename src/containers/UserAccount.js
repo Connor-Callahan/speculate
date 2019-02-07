@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NewsFeed from '../components/NewsFeed'
+import UserWelcome from '../components/UserWelcome'
 import CurrentPortfolio from '../components/CurrentPortfolio'
 import AllTransactions from '../components/AllTransactions'
 import ReactChartkick, { PieChart } from 'react-chartkick'
@@ -37,43 +38,56 @@ class UserAccount extends Component {
     return (
       <div id="user-container">
       {
-        this.props.isLoggedIn ? (
-          <div>
-            {
-              this.props.currentVal?
+
+        <div>
+        {
+          this.props.isLoggedIn ? (
+            this.props.transactions.length > 0 ? (
               <div>
-              <CurrentPortfolio bought={this.props.bought}
-              fetchTransactions={this.props.fetchTransactions}
-              handleCurrentVal={this.props.handleCurrentVal}
-              currentVal={this.props.currentVal} />
-              <PieChart
-              legend={false}
-              className='pie-chart'
-              donut={true}
-              width="450px"
-              prefix="$"
-              data={this.props.bought.map(transaction => [transaction.stock_symbol, transaction.cost])}/>
+              {
+                this.props.currentVal?
+                <div>
+                <CurrentPortfolio bought={this.props.bought}
+                fetchTransactions={this.props.fetchTransactions}
+                handleCurrentVal={this.props.handleCurrentVal}
+                currentVal={this.props.currentVal} />
+                <PieChart
+                legend={false}
+                className='pie-chart'
+                donut={true}
+                width="450px"
+                prefix="$"
+                data={this.props.bought.map(transaction => [transaction.stock_symbol, transaction.cost])}/>
+                </div>
+                :
+                <div>
+                <AllTransactions bought={this.props.transactions}
+                handleCurrentVal={this.props.handleCurrentVal}
+                currentVal={this.props.currentVal} />
+                <PieChart
+                legend={false}
+                className='pie-chart'
+                donut={true}
+                width="450px"
+                prefix="$"
+                data={this.props.transactions.map(transaction => [transaction.stock_symbol, transaction.cost])}/>
+                </div>
+
+              }
               </div>
-              :
-              <div>
-              <AllTransactions bought={this.props.transactions}
-              handleCurrentVal={this.props.handleCurrentVal}
-              currentVal={this.props.currentVal} />
-              <PieChart
-              legend={false}
-              className='pie-chart'
-              donut={true}
-              width="450px"
-              prefix="$"
-              data={this.props.transactions.map(transaction => [transaction.stock_symbol, transaction.cost])}/>
-              </div>
 
-            }
-            </div>
+            ) : <UserWelcome
+            firstname={this.props.firstname}
+            lastname={this.props.lastname}
+            transactions={this.props.transactions}
+            handleCurrentVal={this.props.handleCurrentVal}
+            fetchTransactions={this.props.fetchTransactions}
+            />
 
+          ) : <NewsFeed newsFeed={this.props.newsFeed}/>
+        }
+</div>
 
-
-      ) : <NewsFeed newsFeed={this.props.newsFeed}/>
       }
       </div>
     );
