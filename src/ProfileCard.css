@@ -45,7 +45,7 @@
   padding: 4px 8px;
   text-align: center;
   margin: 2px;
-  margin-left: 50%;
+  margin-left: 60%;
   text-decoration: none;
   font-size: 12px;
   transition-duration: 0.4s;
@@ -60,11 +60,11 @@
 
 .header-container {
   display: grid;
-  width: 60%;
+  width: 65%;
   height: auto;
   margin-bottom: 15px;
   grid-template-columns: auto auto;
-  padding: 15px;
+  padding: 5px;
   border: 1px solid #0095ff;
 }
 
@@ -72,6 +72,45 @@
   font-size: 12px;
   font-family: 'Poppins', sans-serif;
   font-weight: 200;
+}
+
+.create-transaction {
+  margin-left: 70%;
+  margin-bottom: -14%;
+}
+
+.purchase-button {
+  position: relative;
+  border:1px solid #0095ff;
+  border-radius: 12px;
+  outline: none;
+  color: #0095ff;
+  text-align: center;
+  margin: 2px;
+  text-decoration: none;
+  font-size: 12px;
+  transition-duration: 0.4s;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+}
+
+.purchase-button:hover {
+  background-color: #0095ff;
+  color: white;
+}
+
+.input-field {
+  outline: none;
+  position: relative;
+  border:1px solid #0095ff;
+  margin-top: 3%;
+  background: transparent;
+  height: 35px;
+  width: 100px;
+  color: grey;
+  margin-left: 0.5%;
+  font-size: 12px;
+  border:none;
 }
 
 #chart-container {

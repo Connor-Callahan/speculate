@@ -8,7 +8,7 @@ class CurrentPortfolio extends Component {
     return (
       <div className="table-data">
       <h1>Portfolio</h1>
-      <h2>{this.props.balance}</h2>
+      <h2>Balance : ﹩{this.props.balance}</h2>
       {
         this.props.currentVal?
         <p>great</p>

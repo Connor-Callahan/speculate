@@ -36,6 +36,7 @@ class App extends Component {
     orderSize: null,
     transactions: [],
     bought: [],
+    sold: [],
     currentVal: null,
     newsFeed: [],
     portDisplay: false
@@ -236,6 +237,23 @@ class App extends Component {
 
     let totalCost = (price.quote.latestPrice * this.state.orderSize).toFixed(2)
 
+    let numSold = []
+    let numBought = []
+
+    this.state.bought.forEach(transaction => {
+      numBought.push(transaction.num_shares)
+    })
+
+    this.state.sold.forEach(transaction => {
+      numSold.push(transaction.num_shares)
+    })
+
+    const soldSum = numSold.reduce((a,b) => a + b, 0)
+
+    const boughtSum = numBought.reduce((a,b) => a + b, 0)
+
+    console.log(boughtSum)
+    console.log(soldSum)
     if(e.target.id === 'buy' && Number(this.state.balance) < totalCost) {
       console.log('out of moneyy')
     } else if (e.target.id === 'buy') {
@@ -259,18 +277,43 @@ class App extends Component {
       .then(r => r.json())
       .then(data => {
         this.setState({
-          transactions: [...this.state.transactions, data]
+          transactions: [...this.state.transactions, data],
+          bought: [...this.state.bought, data]
         })
       })
       let adjustedBalance = this.state.balance - parseInt(totalCost)
       this.setState({
         balance: adjustedBalance
       })
-    } else if (e.target.id === 'sell') {
+    } else if (e.target.id === 'sell' && boughtSum > soldSum && boughtSum > parseInt(this.state.orderSize)) {
       let adjustedBalance = this.state.balance + parseInt(totalCost)
-      this.setState({
-        balance: adjustedBalance
+      fetch('http://localhost:3000/api/v1/transactions/', {
+        method: 'POST',
+        headers: {
+          'Content-Type' : 'application/json',
+          'Accept' : 'application/json'
+        },
+        body: JSON.stringify({
+          user_id: this.state.user_id,
+          stock_symbol: this.state.selectedStock.quote.symbol,
+          num_shares: this.state.orderSize,
+          price: price.quote.latestPrice,
+          cost: totalCost,
+          commission: 7,
+          order_type: e.target.id,
+          date_time: price.quote.latestTime
+        })
       })
+      .then(r => r.json())
+      .then(data => {
+        this.setState({
+          transactions: [...this.state.transactions, data],
+          sold: [...this.state.sold, data],
+          balance: adjustedBalance
+        })
+      })
+    } else {
+      alert('No shares available to trade!')
     }
   }
 
@@ -290,7 +333,7 @@ class App extends Component {
 // for user account (sorts the tables --click event on the header) ****work to fix so the pie chart does not change color
   sortPortfolio = (e) => {
     let sortedTransactions = []
-    
+
     if(this.state.portDisplay === true) {
        sortedTransactions = this.state.bought.slice()
     } else {
@@ -368,7 +411,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.balance)
     return (
       <div className="App">
       <SearchStocks
