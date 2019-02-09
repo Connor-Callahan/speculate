@@ -32,7 +32,7 @@ class App extends Component {
     age: null,
     income: null,
     job: null,
-    balance: null,
+    balance: 150,
     orderSize: null,
     transactions: [],
     bought: [],
@@ -58,6 +58,7 @@ class App extends Component {
     })
   }
 
+// select dropdown to filter stocks by category they represent ****determine method for ALL stocks(too many, too slow)
   handleStockFilter = (e) => {
     this.setState({
       stockFilter: e.target.value,
@@ -106,6 +107,7 @@ class App extends Component {
     }, this.toggleSelectedChart)
   }
 
+// toggle chart between YTD, 5Yr, 3yr, 1yr
   toggleSelectedChart = async () => {
     const selectedChart = await fetch(`https://api.iextrading.com/1.0/stock/${this.state.selectedStock.quote.symbol}/chart/${this.state.selectedChartRange}`)
     .then(r => r.json())
@@ -114,6 +116,7 @@ class App extends Component {
     })
   }
 
+// closes stock display sets selectedStock to null
   toggleStockDisplay = () => {
     this.setState({
       selectedStock: null
@@ -149,10 +152,18 @@ class App extends Component {
     })
   }
 
-  toggleLoginDisplay = () => {
+  toggleLoginDisplay = (e) => {
+    e.preventDefault()
+    if(this.state.loginContainer === false) {
       this.setState({
-        loginContainer: true
+        loginContainer: true,
+        selectedStock: null
       })
+    } else {
+      this.setState({
+        loginContainer: false
+      })
+    }
   }
 
   loginAccount = (e) => {
@@ -216,7 +227,6 @@ class App extends Component {
     })
   }
 
-
   handleTransaction = async (e) => {
     e.preventDefault()
     e.persist()
@@ -227,7 +237,7 @@ class App extends Component {
 
     if(e.target.id === 'buy' && Number(this.state.balance) < totalCost) {
       console.log('out of moneyy')
-    } else {
+    } else if (e.target.id === 'buy') {
       fetch('http://localhost:3000/api/v1/transactions/', {
         method: 'POST',
         headers: {
@@ -252,6 +262,11 @@ class App extends Component {
         })
       })
       let adjustedBalance = this.state.balance - totalCost
+      this.setState({
+        balance: adjustedBalance
+      })
+    } else if (e.target.id === 'sell') {
+      let adjustedBalance = this.state.balance + parseInt(totalCost)
       this.setState({
         balance: adjustedBalance
       })
@@ -297,61 +312,48 @@ class App extends Component {
     }
   }
 
+// return the users portfolio (calculated on current purchased shares)
   handleCurrentVal = () => {
     let bought = this.state.transactions.filter(transaction => {
       return transaction.order_type === 'buy'
     })
 
-    let duplicate = null
-
-    for(let i = 0; i < bought.length; i++) {
-      if(duplicate == null) {
-        duplicate = bought[i].stock_symbol
-      } else if (duplicate == bought[i].stock_symbol)
-        duplicate = bought[i]
-    }
-
-    let portfolio = {}
+    let newArr = []
 
     bought.forEach(transaction => {
-      if(portfolio.transaction.stock_symbol) {
-        portfolio.transaction.stock_symbol = portfolio.transaction.num_shares
-      } else {
-        portfolio.stock_symbol = transaction.num_shares
-      }
+      let stock_symbol = transaction.stock_symbol
+      let num_shares = transaction.num_shares
+      let price = transaction.price
+      let cost = transaction.cost
+      let foundTransaction = newArr.find(transaction => {
+        return transaction.stock_symbol === stock_symbol
+      })
+        if(foundTransaction) {
+          foundTransaction.cost += cost
+          foundTransaction.price = price
+          foundTransaction.num_shares += num_shares
+        } else {
+          newArr.push(transaction)
+        }
+      return newArr
     })
 
-    console.log('here dummy', bought)
-
-    let nonDuplicates = bought.filter(transaction => {
-      return transaction != duplicate
-    })
-
-    nonDuplicates.map(transaction => {
-      if(transaction.stock_symbol === duplicate.stock_symbol){
-        transaction.num_shares = transaction.num_shares + duplicate.num_shares
-        transaction.cost = (transaction.cost + duplicate.cost).toFixed(2)
-      }
-    })
-
-    let currentPort = nonDuplicates.map(transaction => {
+    let currentPort = newArr.map(transaction => {
       return transaction.stock_symbol
     })
 
-    console.log(currentPort)
     fetch(`https://api.iextrading.com/1.0/stock/market/batch?symbols=${currentPort}&types=quote&range=1m&last=5`)
     .then(r => r.json())
     .then(data => {
       this.setState({
         currentVal: data,
-        bought: nonDuplicates
+        bought: newArr
       })
     })
-    console.log(bought)
-    this.fetchTransactions()
   }
 
   render() {
+    console.log(this.state.balance)
     return (
       <div className="App">
       <SearchStocks

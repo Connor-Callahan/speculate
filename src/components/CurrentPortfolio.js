@@ -24,11 +24,6 @@ class CurrentPortfolio extends Component {
             </h2>
           </th>
           <th>
-            <h2 id="price" onClick={this.props.sortPortfolio}>
-              Price
-            </h2>
-          </th>
-          <th>
             <h2 id="num_shares" onClick={this.props.sortPortfolio}>
               # of Shares
             </h2>
@@ -46,12 +41,13 @@ class CurrentPortfolio extends Component {
           </tr>
 
       {this.props.bought.map(transaction => {
+        let totalVal = (transaction.currentStockVal * transaction.num_shares).toFixed(2)
+        let totalCost = (transaction.cost).toFixed(2)
         return <tr>
         <td>{transaction.stock_symbol}</td>
-        <td>${transaction.price}</td>
         <td>{transaction.num_shares}</td>
-        <td>${transaction.cost}</td>
-        <td>${transaction.currentStockVal}</td>
+        <td>${totalCost}</td>
+        <td>${totalVal}</td>
         </tr>
       })}
       </tbody>
