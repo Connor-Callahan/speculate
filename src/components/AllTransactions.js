@@ -8,6 +8,7 @@ class AllTransactions extends Component {
     return (
       <div className="table-data">
       <h1>All Transactions</h1>
+      <h2>{this.props.balance}</h2>
       {
         this.props.currentVal?
         <p>true</p>

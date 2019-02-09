@@ -37,7 +37,8 @@ class App extends Component {
     transactions: [],
     bought: [],
     currentVal: null,
-    newsFeed: []
+    newsFeed: [],
+    portDisplay: false
   }
 
 // initial retrieval of all stocks, --object with name and ticker symbol
@@ -261,7 +262,7 @@ class App extends Component {
           transactions: [...this.state.transactions, data]
         })
       })
-      let adjustedBalance = this.state.balance - totalCost
+      let adjustedBalance = this.state.balance - parseInt(totalCost)
       this.setState({
         balance: adjustedBalance
       })
@@ -280,15 +281,24 @@ class App extends Component {
           let userTransactions = data.filter(transaction => transaction.user_id === this.state.user_id)
           this.setState({
             transactions: userTransactions,
-            currentVal: null
+            currentVal: null,
+            portDisplay: false
           })
         })
       }
 
+// for user account (sorts the tables --click event on the header) ****work to fix so the pie chart does not change color
   sortPortfolio = (e) => {
-    let sortedTransactions = this.state.transactions.slice()
+    let sortedTransactions = []
+    
+    if(this.state.portDisplay === true) {
+       sortedTransactions = this.state.bought.slice()
+    } else {
+       sortedTransactions = this.state.transactions.slice()
+    }
     switch (e.target.id) {
       case 'symbol':
+      console.log(sortedTransactions)
       sortedTransactions.sort(function(a, b) {
         return a.stock_symbol.localeCompare(b.stock_symbol)
       })
@@ -310,6 +320,10 @@ class App extends Component {
         break;
       default:
     }
+    this.setState({
+      transactions: sortedTransactions,
+      bought: sortedTransactions
+    })
   }
 
 // return the users portfolio (calculated on current purchased shares)
@@ -347,7 +361,8 @@ class App extends Component {
     .then(data => {
       this.setState({
         currentVal: data,
-        bought: newArr
+        bought: newArr,
+        portDisplay: true
       })
     })
   }

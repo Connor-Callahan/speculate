@@ -46,7 +46,10 @@ class UserAccount extends Component {
               {
                 this.props.currentVal?
                 <div>
-                <CurrentPortfolio bought={this.props.bought}
+                <CurrentPortfolio
+                balance={this.props.balance}
+                bought={this.props.bought}
+                sortPortfolio={this.props.sortPortfolio}
                 fetchTransactions={this.props.fetchTransactions}
                 handleCurrentVal={this.props.handleCurrentVal}
                 currentVal={this.props.currentVal} />
@@ -60,7 +63,10 @@ class UserAccount extends Component {
                 </div>
                 :
                 <div>
-                <AllTransactions bought={this.props.transactions}
+                <AllTransactions
+                balance={this.props.balance}
+                bought={this.props.transactions}
+                sortPortfolio={this.props.sortPortfolio}
                 handleCurrentVal={this.props.handleCurrentVal}
                 currentVal={this.props.currentVal} />
                 <PieChart
