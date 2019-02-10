@@ -9,6 +9,7 @@ class AllTransactions extends Component {
       <div className="table-data">
       <h1>All Transactions</h1>
       <h2>Balance : ﹩{this.props.balance}</h2>
+      <button className="portfolio-button" onClick={this.props.handleCurrentVal}>Portfolio</button>
       {
         this.props.currentVal?
         <p>true</p>
@@ -63,7 +64,6 @@ class AllTransactions extends Component {
       </tbody>
 
     </table>
-      <button className="portfolio-button" onClick={this.props.handleCurrentVal}>Portfolio</button>
       </div>
     );
   }

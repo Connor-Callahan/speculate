@@ -60,6 +60,11 @@
   font-weight: 200;
 }
 
+#close-login:hover {
+  background-color: #0095ff;
+  color: white;
+}
+
 .form-button {
   position: relative;
   margin-left: 20%;
@@ -85,6 +90,7 @@
 
 /* all inputs on the login/create form */
 .login-input {
+  text-align: center;
   background-color: transparent;
   border: 1px solid #0095ff;
   border-radius: 12px;

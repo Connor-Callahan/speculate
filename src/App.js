@@ -168,8 +168,20 @@ class App extends Component {
     }
   }
 
-  loginAccount = (e) => {
+  loginAccount = async (e) => {
     e.preventDefault()
+    const allUsernames = await fetch(`http://localhost:3000/api/v1/users/`)
+    .then(r => r.json())
+
+    const currentUser = allUsernames.find(user => {
+      return user.username === this.state.username
+    })
+
+    if(currentUser) {
+      console.log(currentUser)
+    } else {
+      alert('Username /or login incorrect, please try again.')
+    }
   }
 
   handleLogout = () => {
@@ -255,7 +267,7 @@ class App extends Component {
     console.log(boughtSum)
     console.log(soldSum)
     if(e.target.id === 'buy' && Number(this.state.balance) < totalCost) {
-      console.log('out of moneyy')
+      alert('Insufficient funds! Please check your current balance.')
     } else if (e.target.id === 'buy') {
       fetch('http://localhost:3000/api/v1/transactions/', {
         method: 'POST',

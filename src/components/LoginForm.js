@@ -11,10 +11,10 @@ const LoginForm = (props) => {
           autoComplete="off"
           onChange={props.handleFormInput}>
             <label htmlFor="user_name">username : </label>
-            <input className="create-input" onChange={props.handleFormInput} type="text" id="username"/>
+            <input className="login-input" onChange={props.handleFormInput} type="text" id="username"/>
               <br></br>
             <label htmlFor="password">password : </label>
-            <input className="create-input" onChange={props.handleFormInput} type="password" id="password"/>
+            <input className="login-input" onChange={props.handleFormInput} type="password" id="password"/>
               <br></br>
             <button className="form-button" onClick={props.loginAccount}>Login</button>
           </form>
