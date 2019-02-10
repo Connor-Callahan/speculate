@@ -63,19 +63,20 @@ class UserAccount extends Component {
                 </div>
                 :
                 <div>
+                <PieChart
+                width="200px"
+                legend={false}
+                donut={true}
+                prefix="$"
+                data={this.props.transactions.map(transaction => [transaction.stock_symbol, transaction.cost])}/>
                 <AllTransactions
                 balance={this.props.balance}
                 bought={this.props.transactions}
                 sortPortfolio={this.props.sortPortfolio}
                 handleCurrentVal={this.props.handleCurrentVal}
                 currentVal={this.props.currentVal} />
-                <PieChart
-                legend={false}
-                className='pie-chart'
-                donut={true}
-                width="450px"
-                prefix="$"
-                data={this.props.transactions.map(transaction => [transaction.stock_symbol, transaction.cost])}/>
+                <div className="pie-chart">
+                </div>
                 </div>
 
               }

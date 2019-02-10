@@ -94,3 +94,9 @@ h2 {
   background-color: #0095ff;
   color: white;
 }
+
+.pie-chart {
+  position:relative;
+  margin-left: 40%;
+  width: 200px;
+}

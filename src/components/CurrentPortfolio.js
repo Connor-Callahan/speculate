@@ -8,14 +8,8 @@ class CurrentPortfolio extends Component {
     return (
       <div className="table-data">
       <h1>Portfolio</h1>
-      <button className="portfolio-button" onClick={this.props.fetchTransactions}>All Transactions</button>
       <h2>Balance : ﹩{this.props.balance}</h2>
-      {
-        this.props.currentVal?
-        <p>great</p>
-        :
-        <p>poop</p>
-      }
+      <button className="portfolio-button" onClick={this.props.fetchTransactions}>All Transactions</button>
       <table className="user-portfolio">
        <tbody>
         <tr>
@@ -54,7 +48,6 @@ class CurrentPortfolio extends Component {
       </tbody>
 
     </table>
-      <button className="portfolio-button" onClick={this.props.fetchTransactions}>All Transactions</button>
       </div>
     );
   }
