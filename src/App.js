@@ -179,9 +179,19 @@ class App extends Component {
 
     if(currentUser) {
       console.log(currentUser)
+      this.setState({
+        isLoggedIn: true,
+        firstname: currentUser.first_name,
+        lastname: currentUser.last_name,
+        username: currentUser.username,
+        balance: currentUser.balance,
+        user_id: currentUser.id,
+        loginContainer: false,
+      })
     } else {
       alert('Username /or login incorrect, please try again.')
     }
+    this.fetchTransactions()
   }
 
   handleLogout = () => {
