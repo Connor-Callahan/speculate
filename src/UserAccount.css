@@ -76,13 +76,15 @@ h2 {
 .portfolio-button {
   position: relative;
   border:1px solid #0095ff;
+  border-radius: 14px;
+  width: 90px;
   outline: none;
   color: #0095ff;
   padding: 4px 8px;
   text-align: center;
-  margin: 2px;
-  margin-left: 0;
-  margin-top: 2;
+  margin: 3px;
+  margin-left: 1px;
+  margin-bottom: 15px;
   text-decoration: none;
   font-size: 12px;
   transition-duration: 0.4s;

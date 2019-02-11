@@ -10,6 +10,8 @@ class AllTransactions extends Component {
       <h1>All Transactions</h1>
       <h2>Balance : ﹩{this.props.balance}</h2>
       <button className="portfolio-button" onClick={this.props.handleCurrentVal}>Portfolio</button>
+      <button className="portfolio-button" onClick={this.props.handleCurrentVal}>Bought</button>
+      <button className="portfolio-button" onClick={this.props.handleCurrentVal}>Sold</button>
       <table className="user-portfolio">
        <tbody>
         <tr>

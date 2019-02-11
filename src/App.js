@@ -23,15 +23,13 @@ class App extends Component {
     selectedChart: null,
     stockIcon: null,
     loginContainer: false,
+    blurOn: false,
     isLoggedIn: false,
     user_id: null,
     firstname: 'joe',
     lastname: null,
     username: null,
     password: null,
-    age: null,
-    income: null,
-    job: null,
     balance: 150,
     orderSize: null,
     transactions: [],
@@ -159,11 +157,13 @@ class App extends Component {
     if(this.state.loginContainer === false) {
       this.setState({
         loginContainer: true,
-        selectedStock: null
+        selectedStock: null,
+        blurOn: true
       })
     } else {
       this.setState({
-        loginContainer: false
+        loginContainer: false,
+        blurOn: false
       })
     }
   }
@@ -178,7 +178,6 @@ class App extends Component {
     })
 
     if(currentUser) {
-      console.log(currentUser)
       this.setState({
         isLoggedIn: true,
         firstname: currentUser.first_name,
@@ -195,6 +194,16 @@ class App extends Component {
   }
 
   handleLogout = () => {
+    fetch(`http://localhost:3000/api/v1/users/${this.state.user_id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type' : 'application/json',
+        'Accept' : 'application/json'
+      },
+      body: JSON.stringify({
+        balance: this.state.balance
+      })
+    })
     this.setState({
       isLoggedIn: false,
       loginContainer: false,
@@ -203,9 +212,6 @@ class App extends Component {
       lastname: null,
       username: null,
       password: null,
-      age: null,
-      income: null,
-      job: null,
       balance: null,
       orderSize: null,
       transactions: [],
@@ -234,9 +240,6 @@ class App extends Component {
         last_name: this.state.lastname,
         username: this.state.username,
         password: this.state.password,
-        age: this.state.age,
-        income: this.state.income,
-        job: this.state.job,
         balance: this.state.balance
       })
     }, this.setState({
@@ -259,23 +262,63 @@ class App extends Component {
 
     let totalCost = (price.quote.latestPrice * this.state.orderSize).toFixed(2)
 
+    let currentStock = null
+    currentStock = this.state.transactions.find(transaction => {
+      return transaction.stock_symbol === this.state.selectedStock.quote.symbol
+    })
+
+
     let numSold = []
     let numBought = []
+    let curStockShare = null
 
-    this.state.bought.forEach(transaction => {
-      numBought.push(transaction.num_shares)
-    })
+    if(currentStock) {
+      this.state.transactions.forEach(transaction => {
+        if(transaction.order_type === 'sell') {
+          let stock_symbol = transaction.stock_symbol
+          let num_shares = transaction.num_shares
+          let foundTransaction = numSold.find(transaction => {
+            return transaction.stock_symbol === stock_symbol
+          })
+          if(foundTransaction) {
+            foundTransaction.num_shares += num_shares
+          } else {
+            numSold.push(transaction)
+          }
+        } else {
+          let stock_symbol = transaction.stock_symbol
+          let num_shares = transaction.num_shares
+          let foundTransaction = numBought.find(transaction => {
+            return transaction.stock_symbol === stock_symbol
+          })
+          if(foundTransaction) {
+            foundTransaction.num_shares += num_shares
+          } else {
+            numBought.push(transaction)
+          }
+        }
+        return numSold, numBought
+      })
 
-    this.state.sold.forEach(transaction => {
-      numSold.push(transaction.num_shares)
-    })
+      console.log('Sold', numSold, 'Bought', numBought)
 
-    const soldSum = numSold.reduce((a,b) => a + b, 0)
+      console.log('here dumbug', numSold.length)
 
-    const boughtSum = numBought.reduce((a,b) => a + b, 0)
+      if(numSold.length > 0) {
+        if(e.target.id === 'sell' && numSold[0].num_shares > 0) {
+          console.log('first if')
+          curStockShare = numBought[0].num_shares - numSold[0].num_shares
+        }
+        } else {
+            curStockShare = numBought[0].num_shares - 0
+            console.log('second else')
+          }
+        }
 
-    console.log(boughtSum)
-    console.log(soldSum)
+
+
+    console.log('curStockShare',curStockShare, 'orderSize',this.state.orderSize)
+
     if(e.target.id === 'buy' && Number(this.state.balance) < totalCost) {
       alert('Insufficient funds! Please check your current balance.')
     } else if (e.target.id === 'buy') {
@@ -300,15 +343,15 @@ class App extends Component {
       .then(data => {
         this.setState({
           transactions: [...this.state.transactions, data],
-          bought: [...this.state.bought, data]
         })
       })
       let adjustedBalance = this.state.balance - parseInt(totalCost)
       this.setState({
         balance: adjustedBalance
       })
-    } else if (e.target.id === 'sell' && boughtSum > soldSum && boughtSum > parseInt(this.state.orderSize)) {
-      let adjustedBalance = this.state.balance + parseInt(totalCost)
+    } else if (e.target.id === 'sell' && parseInt(this.state.orderSize, 10) <= curStockShare) {
+      console.log('here', parseInt(this.state.orderSize, 10), curStockShare)
+      let adjustedBalance = this.state.balance + parseInt(totalCost, 10)
       fetch('http://localhost:3000/api/v1/transactions/', {
         method: 'POST',
         headers: {
@@ -328,15 +371,20 @@ class App extends Component {
       })
       .then(r => r.json())
       .then(data => {
+        console.log(data)
         this.setState({
           transactions: [...this.state.transactions, data],
-          sold: [...this.state.sold, data],
           balance: adjustedBalance
         })
       })
     } else {
       alert('No shares available to trade!')
     }
+    numSold = null
+    numBought = 0
+    curStockShare = null
+    console.log(numSold, numBought, curStockShare)
+    this.fetchTransactions()
   }
 
     fetchTransactions = () => {
@@ -363,7 +411,6 @@ class App extends Component {
     }
     switch (e.target.id) {
       case 'symbol':
-      console.log(sortedTransactions)
       sortedTransactions.sort(function(a, b) {
         return a.stock_symbol.localeCompare(b.stock_symbol)
       })
@@ -396,15 +443,20 @@ class App extends Component {
     let bought = this.state.transactions.filter(transaction => {
       return transaction.order_type === 'buy'
     })
+    let sold = this.state.transactions.filter(transaction => {
+      return transaction.order_type === 'sell'
+    })
 
-    let newArr = []
+    let newBoughtArr = []
+
+    let newSoldArr = []
 
     bought.forEach(transaction => {
       let stock_symbol = transaction.stock_symbol
       let num_shares = transaction.num_shares
       let price = transaction.price
       let cost = transaction.cost
-      let foundTransaction = newArr.find(transaction => {
+      let foundTransaction = newBoughtArr.find(transaction => {
         return transaction.stock_symbol === stock_symbol
       })
         if(foundTransaction) {
@@ -412,12 +464,56 @@ class App extends Component {
           foundTransaction.price = price
           foundTransaction.num_shares += num_shares
         } else {
-          newArr.push(transaction)
+          newBoughtArr.push(transaction)
         }
-      return newArr
+      return newBoughtArr
     })
 
-    let currentPort = newArr.map(transaction => {
+    sold.forEach(transaction => {
+      let stock_symbol = transaction.stock_symbol
+      let num_shares = transaction.num_shares
+      let price = transaction.price
+      let cost = transaction.cost
+      let foundTransaction = newSoldArr.find(transaction => {
+        return transaction.stock_symbol === stock_symbol
+      })
+        if(foundTransaction) {
+          foundTransaction.cost += cost
+          foundTransaction.price = price
+          foundTransaction.num_shares += num_shares
+        } else {
+          newSoldArr.push(transaction)
+        }
+      return newSoldArr
+    })
+
+    let totalCurPort = []
+
+    newBoughtArr.forEach(transaction => {
+      let stock_symbol = transaction.stock_symbol
+      let num_shares = transaction.num_shares
+      let price = transaction.price
+      let cost = transaction.cost
+      // console.log('current', transaction)
+      let foundTransaction = newSoldArr.find(transaction => {
+        return transaction.stock_symbol === stock_symbol
+      })
+      if(foundTransaction) {
+        // console.log('found', foundTransaction.cost, cost)
+        foundTransaction.cost = cost - foundTransaction.cost
+        foundTransaction.price = cost - foundTransaction.price
+        foundTransaction.num_share = num_shares - foundTransaction.num_shares
+        // console.log(foundTransaction)
+        totalCurPort.push(foundTransaction)
+      } else {
+        // console.log('else statement', transaction)
+        totalCurPort.push(transaction)
+      }
+    })
+
+    // console.log(totalCurPort)
+
+    let currentPort = newBoughtArr.map(transaction => {
       return transaction.stock_symbol
     })
 
@@ -426,13 +522,14 @@ class App extends Component {
     .then(data => {
       this.setState({
         currentVal: data,
-        bought: newArr,
+        bought: newBoughtArr,
         portDisplay: true
       })
     })
   }
 
   render() {
+    console.log(this.state.transactions)
     return (
       <div className="App">
       <SearchStocks
@@ -468,6 +565,12 @@ class App extends Component {
       selectedChart={this.state.selectedChart}
       stockIcon={this.state.stockIcon}
       />
+      <ProfileList
+      stockCategory={this.state.stockCategory}
+      selectedStock={this.state.selectedStock}
+      handleSelectStock={this.handleSelectStock}
+      stockSymbols={this.filterStockSearch()}
+      />
       <LoginForm
       loginAccount={this.loginAccount}
       createAccount={this.createAccount}
@@ -475,13 +578,7 @@ class App extends Component {
       loginContainer={this.state.loginContainer}
       toggleLoginDisplay={this.toggleLoginDisplay}
       />
-      <ProfileList
-      stockCategory={this.state.stockCategory}
-      selectedStock={this.state.selectedStock}
-      handleSelectStock={this.handleSelectStock}
-      stockSymbols={this.filterStockSearch()}
-      />
-      </div>
+    </div>
     );
   }
 }

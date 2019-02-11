@@ -6,7 +6,7 @@ const LoginForm = (props) => {
       {
         props.loginContainer &&
         <div id="login-container">
-
+        <button id="close-login" onClick={props.toggleLoginDisplay}>𝖷</button>
           <form id="login-form"
           autoComplete="off"
           onChange={props.handleFormInput}>
@@ -34,19 +34,9 @@ const LoginForm = (props) => {
             <label htmlFor="password">password : </label>
             <input className="login-input" onChange={props.handleFormInput} type="password" id="password"/>
               <br></br>
-            <label htmlFor="age">age : </label>
-            <input className="login-input" onChange={props.handleFormInput} type="number" id="age"/>
-              <br></br>
-            <label htmlFor="income">income : </label>
-            <input className="login-input" onChange={props.handleFormInput} type="number" id="income"/>
-              <br></br>
-            <label htmlFor="job">job : </label>
-            <input className="login-input" onChange={props.handleFormInput} type="text" id="job"/>
-              <br></br>
             <label htmlFor="balance">balance : </label>
             <input className="login-input" onChange={props.handleFormInput} type="number" id="balance"/>
               <br></br>
-            <button id="close-login" onClick={props.toggleLoginDisplay}>Close</button>
           <button className="form-button" onClick={props.createAccount}>Submit</button>
           </form>
         </div>

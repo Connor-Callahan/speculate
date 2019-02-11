@@ -1,7 +1,6 @@
 import React from 'react'
 
 const SearchStocks = (props) => {
-
   return (
     <div id="app-header">
     {
