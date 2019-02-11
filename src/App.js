@@ -270,7 +270,10 @@ class App extends Component {
 
     let numSold = []
     let numBought = []
+    let boughtStock = null
+    let soldStock = null
     let curStockShare = null
+
 
     if(currentStock) {
       this.state.transactions.forEach(transaction => {
@@ -300,24 +303,24 @@ class App extends Component {
         return numSold, numBought
       })
 
-      console.log('Sold', numSold, 'Bought', numBought)
-
-      console.log('here dumbug', numSold.length)
-
       if(numSold.length > 0) {
         if(e.target.id === 'sell' && numSold[0].num_shares > 0) {
+           soldStock = numSold.find(transaction => {
+            return transaction.stock_symbol == this.state.selectedStock.quote.symbol
+          })
+
+           boughtStock = numBought.find(transaction => {
+            return transaction.stock_symbol == this.state.selectedStock.quote.symbol
+          })
           console.log('first if')
-          curStockShare = numBought[0].num_shares - numSold[0].num_shares
+          console.log(soldStock)
+          curStockShare = boughtStock.num_shares - soldStock.num_shares
         }
         } else {
             curStockShare = numBought[0].num_shares - 0
             console.log('second else')
           }
         }
-
-
-
-    console.log('curStockShare',curStockShare, 'orderSize',this.state.orderSize)
 
     if(e.target.id === 'buy' && Number(this.state.balance) < totalCost) {
       alert('Insufficient funds! Please check your current balance.')
@@ -529,7 +532,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.transactions)
     return (
       <div className="App">
       <SearchStocks
