@@ -13,18 +13,6 @@ class UserAccount extends Component {
 
   render() {
 
-    let sold = this.props.transactions.filter(transaction => {
-      return transaction.order_type === 'sell'
-    })
-
-    let totalBuy = this.props.bought.reduce(function(prev, cur) {
-      return prev + cur.cost;
-    }, 0);
-
-    let totalSell = sold.reduce(function(prev, cur) {
-      return prev + cur.cost;
-    }, 0);
-
     let currentStockVal = []
 
     if(this.props.currentVal != null) {
@@ -46,13 +34,6 @@ class UserAccount extends Component {
               {
                 this.props.currentVal?
                 <div>
-                <CurrentPortfolio
-                balance={this.props.balance}
-                bought={this.props.bought}
-                sortPortfolio={this.props.sortPortfolio}
-                fetchTransactions={this.props.fetchTransactions}
-                handleCurrentVal={this.props.handleCurrentVal}
-                currentVal={this.props.currentVal} />
                 <PieChart
                 legend={false}
                 className='pie-chart'
@@ -60,6 +41,13 @@ class UserAccount extends Component {
                 width="450px"
                 prefix="$"
                 data={this.props.bought.map(transaction => [transaction.stock_symbol, transaction.cost])}/>
+                <CurrentPortfolio
+                balance={this.props.balance}
+                bought={this.props.bought}
+                sortPortfolio={this.props.sortPortfolio}
+                fetchTransactions={this.props.fetchTransactions}
+                handleCurrentVal={this.props.handleCurrentVal}
+                currentVal={this.props.currentVal} />
                 </div>
                 :
                 <div>

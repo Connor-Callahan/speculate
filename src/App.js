@@ -23,7 +23,6 @@ class App extends Component {
     selectedChart: null,
     stockIcon: null,
     loginContainer: false,
-    blurOn: false,
     isLoggedIn: false,
     user_id: null,
     firstname: 'joe',
@@ -299,7 +298,6 @@ class App extends Component {
             numBought.push(transaction)
           }
         }
-        return numSold, numBought
       })
 
       soldStock = numSold.find(transaction => {
@@ -311,8 +309,8 @@ class App extends Component {
      })
       if(soldStock) {
         if(e.target.id === 'sell' && soldStock) {
-          console.log('first if')
-          console.log(soldStock)
+          // console.log('first if')
+          // console.log(soldStock)
           curStockShare = boughtStock.num_shares - soldStock.num_shares
         }
         } else {
@@ -320,7 +318,7 @@ class App extends Component {
             console.log('second else')
           }
         }
-        // console.log(boughtStock.num_shares)
+    // console.log(boughtStock.num_shares)
     // console.log('here', parseInt(this.state.orderSize, 10), curStockShare)
 
     if(e.target.id === 'buy' && Number(this.state.balance) < totalCost) {
@@ -387,7 +385,11 @@ class App extends Component {
     this.fetchTransactions()
   }
 
-    fetchTransactions = () => {
+  portValue = () => {
+
+  }
+
+  fetchTransactions = () => {
         fetch('http://localhost:3000/api/v1/transactions/')
         .then(r => r.json())
         .then(data => {
@@ -452,6 +454,10 @@ class App extends Component {
 
     let newSoldArr = []
 
+    console.log(this.state.transactions)
+    console.log('bought', bought)
+    console.log('sold', sold)
+
     bought.forEach(transaction => {
       let stock_symbol = transaction.stock_symbol
       let num_shares = transaction.num_shares
@@ -488,6 +494,9 @@ class App extends Component {
       return newSoldArr
     })
 
+    console.log('bought no duplicates', newBoughtArr)
+    console.log('sold no duplicates', newSoldArr)
+
     let totalCurPort = []
 
     newBoughtArr.forEach(transaction => {
@@ -501,9 +510,9 @@ class App extends Component {
       })
       if(foundTransaction) {
         // console.log('found', foundTransaction.cost, cost)
-        foundTransaction.cost = cost - foundTransaction.cost
-        foundTransaction.price = cost - foundTransaction.price
-        foundTransaction.num_share = num_shares - foundTransaction.num_shares
+        foundTransaction.cost =+ (cost - foundTransaction.cost).toFixed(2)
+        foundTransaction.price = price
+        foundTransaction.num_shares = num_shares - foundTransaction.num_shares
         // console.log(foundTransaction)
         totalCurPort.push(foundTransaction)
       } else {
@@ -512,24 +521,29 @@ class App extends Component {
       }
     })
 
-    // console.log(totalCurPort)
 
-    let currentPort = newBoughtArr.map(transaction => {
+    let portVal = totalCurPort.filter(transaction => {
+      return transaction.num_shares > 0
+    })
+
+    let curPortVal = portVal.map(transaction => {
       return transaction.stock_symbol
     })
 
-    fetch(`https://api.iextrading.com/1.0/stock/market/batch?symbols=${currentPort}&types=quote&range=1m&last=5`)
+    fetch(`https://api.iextrading.com/1.0/stock/market/batch?symbols=${curPortVal}&types=quote&range=1m&last=5`)
     .then(r => r.json())
     .then(data => {
       this.setState({
         currentVal: data,
-        bought: newBoughtArr,
+        bought: portVal,
         portDisplay: true
       })
     })
   }
 
   render() {
+    console.log(this.state.transactions)
+
     return (
       <div className="App">
       <SearchStocks
