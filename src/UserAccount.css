@@ -6,11 +6,16 @@
   width: 50%;
   margin-top: 1%;
   margin-left: 46%;
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
+}
+
+/* NYTIMES logo  */
+#nytimes {
+  width: 35%;
+  margin-bottom: 20px;
 }
 
 /* newsfeed component for alternate div content  */
-
 .article {
   width: 95%;
   margin-bottom: 80px;
@@ -18,12 +23,15 @@
 
 .article-header {
   font-family: poppins;
-  font-size: 20px;
+  width: 70%;
+  font-weight: 300;
+  font-size: 18px;
 }
 
 /* styling for links (attached to header) */
 a {
   text-decoration: none;
+  width: 70%;
   color: black;
 }
 
@@ -37,8 +45,13 @@ a:hover {
   padding: 1%;
   width: 110px;
   margin-top: -2%;
+  margin-left: 2%;
   margin-right: -2%;
   float: right;
+}
+
+.article {
+  width: 90%;
 }
 
 /* article date */

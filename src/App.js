@@ -385,6 +385,7 @@ class App extends Component {
   }
 
   fetchTransactions = () => {
+    console.log('here')
         fetch('http://localhost:3000/api/v1/transactions/')
         .then(r => r.json())
         .then(data => {
@@ -476,14 +477,12 @@ class App extends Component {
     let curPortVal = portVal.map(transaction => {
       return transaction.stock_symbol
     })
-
     fetch(`https://api.iextrading.com/1.0/stock/market/batch?symbols=${curPortVal}&types=quote&range=1m&last=5`)
     .then(r => r.json())
     .then(data => {
       curPortVal.forEach(symbol => {
         cumVal += data[symbol].quote.latestPrice
       })
-      console.log(data)
       this.setState({
         currentVal: data,
         cumVal: (cumVal).toFixed(2),
@@ -535,7 +534,8 @@ class App extends Component {
       this.fetchTransactions()
     }
 
-    filterBought = () => {
+// filter bought and sold transactions on user portfolio (conditional rendering of buttons)
+    filterBought = async () => {
       let bought = this.state.transactions.filter(transaction => {
         return transaction.order_type === 'buy'
       })
@@ -547,14 +547,13 @@ class App extends Component {
 
     filterSold = () => {
       let sold = this.state.transactions.filter(transaction => {
-        return transaction.order_type === 'sold'
+        return transaction.order_type === 'sell'
       })
       this.setState({
         transactions: sold,
         filterToggle: 'sold'
       })
     }
-
 
 
   render() {
@@ -576,7 +575,7 @@ class App extends Component {
       bought={this.state.bought}
       sortPortfolio={this.sortPortfolio}
       filterBought={this.filterBought}
-      filterSold={this.filterBought}
+      filterSold={this.filterSold}
       filterToggle={this.state.filterToggle}
       AllTransactions={this.AllTransactions}
       newsFeed={this.state.newsFeed}
