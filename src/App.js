@@ -325,7 +325,7 @@ class App extends Component {
           }
         }
 
-        console.log(boughtStock.num_shares)
+        // console.log(boughtStock.num_shares)
         console.log('here', parseInt(this.state.orderSize, 10), curStockShare)
 
 
