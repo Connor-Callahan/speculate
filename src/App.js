@@ -263,16 +263,19 @@ class App extends Component {
     let totalCost = (price.quote.latestPrice * this.state.orderSize).toFixed(2)
 
     let currentStock = null
+
     currentStock = this.state.transactions.find(transaction => {
       return transaction.stock_symbol === this.state.selectedStock.quote.symbol
     })
 
 
+    console.log(currentStock)
     let numSold = []
     let numBought = []
     let boughtStock = null
     let soldStock = null
-    let curStockShare = null
+    let curStockShare = 0
+
 
 
     if(currentStock) {
@@ -303,24 +306,28 @@ class App extends Component {
         return numSold, numBought
       })
 
-      if(numSold.length > 0) {
-        if(e.target.id === 'sell' && numSold[0].num_shares > 0) {
-           soldStock = numSold.find(transaction => {
-            return transaction.stock_symbol == this.state.selectedStock.quote.symbol
-          })
+      soldStock = numSold.find(transaction => {
+        return transaction.stock_symbol == this.state.selectedStock.quote.symbol
+      })
 
-           boughtStock = numBought.find(transaction => {
-            return transaction.stock_symbol == this.state.selectedStock.quote.symbol
-          })
+      boughtStock = numBought.find(transaction => {
+       return transaction.stock_symbol == this.state.selectedStock.quote.symbol
+     })
+      if(soldStock) {
+        if(e.target.id === 'sell' && soldStock) {
           console.log('first if')
           console.log(soldStock)
           curStockShare = boughtStock.num_shares - soldStock.num_shares
         }
         } else {
-            curStockShare = numBought[0].num_shares - 0
+            curStockShare = boughtStock.num_shares - 0
             console.log('second else')
           }
         }
+
+        console.log(boughtStock.num_shares)
+        console.log('here', parseInt(this.state.orderSize, 10), curStockShare)
+
 
     if(e.target.id === 'buy' && Number(this.state.balance) < totalCost) {
       alert('Insufficient funds! Please check your current balance.')
@@ -383,10 +390,6 @@ class App extends Component {
     } else {
       alert('No shares available to trade!')
     }
-    numSold = null
-    numBought = 0
-    curStockShare = null
-    console.log(numSold, numBought, curStockShare)
     this.fetchTransactions()
   }
 
@@ -406,7 +409,7 @@ class App extends Component {
 // for user account (sorts the tables --click event on the header) ****work to fix so the pie chart does not change color
   sortPortfolio = (e) => {
     let sortedTransactions = []
-
+    console.log('hello')
     if(this.state.portDisplay === true) {
        sortedTransactions = this.state.bought.slice()
     } else {
@@ -435,6 +438,7 @@ class App extends Component {
         break;
       default:
     }
+    console.log(sortedTransactions)
     this.setState({
       transactions: sortedTransactions,
       bought: sortedTransactions
