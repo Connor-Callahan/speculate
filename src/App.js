@@ -34,6 +34,7 @@ class App extends Component {
     transactions: [],
     bought: [],
     sold: [],
+    filterToggle: null,
     currentVal: null,
     cumVal: null,
     newsFeed: [],
@@ -302,11 +303,11 @@ class App extends Component {
       })
 
       soldStock = numSold.find(transaction => {
-        return transaction.stock_symbol == this.state.selectedStock.quote.symbol
+        return transaction.stock_symbol === this.state.selectedStock.quote.symbol
       })
 
       boughtStock = numBought.find(transaction => {
-       return transaction.stock_symbol == this.state.selectedStock.quote.symbol
+       return transaction.stock_symbol === this.state.selectedStock.quote.symbol
      })
       if(soldStock) {
         if(e.target.id === 'sell' && soldStock) {
@@ -391,50 +392,15 @@ class App extends Component {
           this.setState({
             transactions: userTransactions,
             currentVal: null,
-            portDisplay: false
+            portDisplay: false,
+            filterToggle: null
           })
         })
       }
 
-// for user account (sorts the tables --click event on the header) ****work to fix so the pie chart does not change color
-  sortPortfolio = (e) => {
-    let sortedTransactions = []
-    if(this.state.portDisplay === true) {
-       sortedTransactions = this.state.bought.slice()
-    } else {
-       sortedTransactions = this.state.transactions.slice()
-    }
-    switch (e.target.id) {
-      case 'symbol':
-      sortedTransactions.sort(function(a, b) {
-        return a.stock_symbol.localeCompare(b.stock_symbol)
-      })
-        break;
-      case 'price':
-      sortedTransactions.sort(function(a, b) {
-        return b.price - a.price
-      })
-        break;
-      case 'num_shares':
-      sortedTransactions.sort(function(a, b) {
-        return b.num_shares - a.num_shares
-      })
-        break;
-      case 'cost':
-      sortedTransactions.sort(function(a, b) {
-        return b.cost - a.cost
-      })
-        break;
-      default:
-    }
-    this.setState({
-      transactions: sortedTransactions,
-      bought: sortedTransactions
-    })
-  }
-
 // return the users portfolio (calculated on current purchased shares)
   handleCurrentVal = () => {
+    this.fetchTransactions()
     let bought = this.state.transactions.filter(transaction => {
       return transaction.order_type === 'buy'
     })
@@ -517,16 +483,79 @@ class App extends Component {
       curPortVal.forEach(symbol => {
         cumVal += data[symbol].quote.latestPrice
       })
-
-      console.log(cumVal)
+      console.log(data)
       this.setState({
         currentVal: data,
         cumVal: (cumVal).toFixed(2),
         bought: portVal,
-        portDisplay: true
+        portDisplay: true,
+        filterToggle: null
       })
     })
   }
+
+  // for user account (sorts the tables --click event on the header) ****work to fix so the pie chart does not change color
+    sortPortfolio = (e) => {
+      let sortedTransactions = []
+      if(this.state.portDisplay === true) {
+         sortedTransactions = this.state.bought.slice()
+      } else {
+         sortedTransactions = this.state.transactions.slice()
+      }
+      switch (e.target.id) {
+        case 'symbol':
+        sortedTransactions.sort(function(a, b) {
+          return a.stock_symbol.localeCompare(b.stock_symbol)
+        })
+          break;
+        case 'price':
+        sortedTransactions.sort(function(a, b) {
+          return b.price - a.price
+        })
+          break;
+        case 'num_shares':
+        sortedTransactions.sort(function(a, b) {
+          return b.num_shares - a.num_shares
+        })
+          break;
+        case 'cost':
+        sortedTransactions.sort(function(a, b) {
+          return b.cost - a.cost
+        })
+          break;
+        default:
+      }
+      this.setState({
+        transactions: sortedTransactions,
+        bought: sortedTransactions
+      })
+    }
+
+    AllTransactions = () => {
+      this.fetchTransactions()
+    }
+
+    filterBought = () => {
+      let bought = this.state.transactions.filter(transaction => {
+        return transaction.order_type === 'buy'
+      })
+      this.setState({
+        transactions: bought,
+        filterToggle: 'bought'
+      })
+    }
+
+    filterSold = () => {
+      let sold = this.state.transactions.filter(transaction => {
+        return transaction.order_type === 'sold'
+      })
+      this.setState({
+        transactions: sold,
+        filterToggle: 'sold'
+      })
+    }
+
+
 
   render() {
     return (
@@ -546,6 +575,10 @@ class App extends Component {
       balance={this.state.balance}
       bought={this.state.bought}
       sortPortfolio={this.sortPortfolio}
+      filterBought={this.filterBought}
+      filterSold={this.filterBought}
+      filterToggle={this.state.filterToggle}
+      AllTransactions={this.AllTransactions}
       newsFeed={this.state.newsFeed}
       isLoggedIn={this.state.isLoggedIn}
       transactions={this.state.transactions}

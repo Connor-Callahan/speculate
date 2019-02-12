@@ -4,14 +4,23 @@ class AllTransactions extends Component {
 
   render() {
 
-
+    console.log(this.props.filterToggle)
     return (
       <div className="table-data">
       <h1>All Transactions</h1>
       <h2>Balance : ﹩{this.props.balance}</h2>
       <button className="portfolio-button" onClick={this.props.handleCurrentVal}>Portfolio</button>
-      <button className="portfolio-button" onClick={this.props.handleCurrentVal}>Bought</button>
-      <button className="portfolio-button" onClick={this.props.handleCurrentVal}>Sold</button>
+      <button className="portfolio-button" onClick={this.props.AllTransactions}>All</button>
+      {
+        this.props.filterToggle?
+        <div></div>
+        :
+        <div>
+        <button className="portfolio-button" id="buy" onClick={this.props.filterSold}>Bought</button>
+        <button className="portfolio-button" id="sell" onClick={this.props.filterBought}>Sold</button>
+        </div>
+
+      }
       <table className="user-portfolio">
        <tbody>
         <tr>

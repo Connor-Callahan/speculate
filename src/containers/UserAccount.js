@@ -38,7 +38,7 @@ class UserAccount extends Component {
                 legend={false}
                 className='pie-chart'
                 donut={true}
-                width="450px"
+                width="300px"
                 prefix="$"
                 data={this.props.bought.map(transaction => [transaction.stock_symbol, transaction.cost])}/>
                 <CurrentPortfolio
@@ -53,7 +53,7 @@ class UserAccount extends Component {
                 :
                 <div>
                 <PieChart
-                width="200px"
+                width="300px"
                 legend={false}
                 donut={true}
                 prefix="$"
@@ -63,7 +63,11 @@ class UserAccount extends Component {
                 bought={this.props.transactions}
                 sortPortfolio={this.props.sortPortfolio}
                 handleCurrentVal={this.props.handleCurrentVal}
-                currentVal={this.props.currentVal} />
+                currentVal={this.props.currentVal}
+                AllTransactions={this.props.AllTransactions}
+                filterSold={this.props.filterSold}
+                filterBought={this.props.filterBought}
+                filterToggle={this.props.filterToggle}/>
                 <div className="pie-chart">
                 </div>
                 </div>
