@@ -47,6 +47,7 @@ class UserAccount extends Component {
                 sortPortfolio={this.props.sortPortfolio}
                 fetchTransactions={this.props.fetchTransactions}
                 handleCurrentVal={this.props.handleCurrentVal}
+                cumVal={this.props.cumVal}
                 currentVal={this.props.currentVal} />
                 </div>
                 :

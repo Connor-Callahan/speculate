@@ -35,6 +35,7 @@ class App extends Component {
     bought: [],
     sold: [],
     currentVal: null,
+    cumVal: null,
     newsFeed: [],
     portDisplay: false
   }
@@ -309,17 +310,12 @@ class App extends Component {
      })
       if(soldStock) {
         if(e.target.id === 'sell' && soldStock) {
-          // console.log('first if')
-          // console.log(soldStock)
           curStockShare = boughtStock.num_shares - soldStock.num_shares
         }
         } else {
             curStockShare = boughtStock.num_shares - 0
-            console.log('second else')
           }
         }
-    // console.log(boughtStock.num_shares)
-    // console.log('here', parseInt(this.state.orderSize, 10), curStockShare)
 
     if(e.target.id === 'buy' && Number(this.state.balance) < totalCost) {
       alert('Insufficient funds! Please check your current balance.')
@@ -352,7 +348,6 @@ class App extends Component {
         balance: adjustedBalance
       })
     } else if (e.target.id === 'sell' && parseInt(this.state.orderSize, 10) <= curStockShare) {
-      console.log('here', parseInt(this.state.orderSize, 10), curStockShare)
       let adjustedBalance = this.state.balance + parseInt(totalCost, 10)
       fetch('http://localhost:3000/api/v1/transactions/', {
         method: 'POST',
@@ -373,7 +368,6 @@ class App extends Component {
       })
       .then(r => r.json())
       .then(data => {
-        console.log(data)
         this.setState({
           transactions: [...this.state.transactions, data],
           balance: adjustedBalance
@@ -405,7 +399,6 @@ class App extends Component {
 // for user account (sorts the tables --click event on the header) ****work to fix so the pie chart does not change color
   sortPortfolio = (e) => {
     let sortedTransactions = []
-    console.log('hello')
     if(this.state.portDisplay === true) {
        sortedTransactions = this.state.bought.slice()
     } else {
@@ -434,7 +427,6 @@ class App extends Component {
         break;
       default:
     }
-    console.log(sortedTransactions)
     this.setState({
       transactions: sortedTransactions,
       bought: sortedTransactions
@@ -451,12 +443,7 @@ class App extends Component {
     })
 
     let newBoughtArr = []
-
     let newSoldArr = []
-
-    console.log(this.state.transactions)
-    console.log('bought', bought)
-    console.log('sold', sold)
 
     bought.forEach(transaction => {
       let stock_symbol = transaction.stock_symbol
@@ -494,9 +481,6 @@ class App extends Component {
       return newSoldArr
     })
 
-    console.log('bought no duplicates', newBoughtArr)
-    console.log('sold no duplicates', newSoldArr)
-
     let totalCurPort = []
 
     newBoughtArr.forEach(transaction => {
@@ -504,23 +488,20 @@ class App extends Component {
       let num_shares = transaction.num_shares
       let price = transaction.price
       let cost = transaction.cost
-      // console.log('current', transaction)
       let foundTransaction = newSoldArr.find(transaction => {
         return transaction.stock_symbol === stock_symbol
       })
       if(foundTransaction) {
-        // console.log('found', foundTransaction.cost, cost)
         foundTransaction.cost =+ (cost - foundTransaction.cost).toFixed(2)
         foundTransaction.price = price
         foundTransaction.num_shares = num_shares - foundTransaction.num_shares
-        // console.log(foundTransaction)
         totalCurPort.push(foundTransaction)
       } else {
-        // console.log('else statement', transaction)
         totalCurPort.push(transaction)
       }
     })
 
+    let cumVal = null
 
     let portVal = totalCurPort.filter(transaction => {
       return transaction.num_shares > 0
@@ -533,8 +514,14 @@ class App extends Component {
     fetch(`https://api.iextrading.com/1.0/stock/market/batch?symbols=${curPortVal}&types=quote&range=1m&last=5`)
     .then(r => r.json())
     .then(data => {
+      curPortVal.forEach(symbol => {
+        cumVal += data[symbol].quote.latestPrice
+      })
+
+      console.log(cumVal)
       this.setState({
         currentVal: data,
+        cumVal: (cumVal).toFixed(2),
         bought: portVal,
         portDisplay: true
       })
@@ -542,8 +529,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.transactions)
-
     return (
       <div className="App">
       <SearchStocks
@@ -566,6 +551,7 @@ class App extends Component {
       transactions={this.state.transactions}
       handleCurrentVal={this.handleCurrentVal}
       currentVal={this.state.currentVal}
+      cumVal={this.state.cumVal}
       fetchTransactions={this.fetchTransactions}
       />
       <ProfileCard
