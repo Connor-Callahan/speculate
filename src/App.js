@@ -268,15 +268,11 @@ class App extends Component {
       return transaction.stock_symbol === this.state.selectedStock.quote.symbol
     })
 
-
-    console.log(currentStock)
     let numSold = []
     let numBought = []
     let boughtStock = null
     let soldStock = null
     let curStockShare = 0
-
-
 
     if(currentStock) {
       this.state.transactions.forEach(transaction => {
@@ -324,10 +320,8 @@ class App extends Component {
             console.log('second else')
           }
         }
-
         // console.log(boughtStock.num_shares)
-        console.log('here', parseInt(this.state.orderSize, 10), curStockShare)
-
+    // console.log('here', parseInt(this.state.orderSize, 10), curStockShare)
 
     if(e.target.id === 'buy' && Number(this.state.balance) < totalCost) {
       alert('Insufficient funds! Please check your current balance.')
