@@ -37,8 +37,7 @@ class CurrentPortfolio extends Component {
           </tr>
 
       {this.props.bought.map(transaction => {
-        let totalVal = (transaction.currentStockVal * transaction.num_shares).toFixed(2)
-        console.log('inside currentport', totalVal)
+        let totalVal = transaction.currentStockVal
         let totalCost = (transaction.cost).toFixed(2)
         return <tr>
         <td>{transaction.stock_symbol}</td>

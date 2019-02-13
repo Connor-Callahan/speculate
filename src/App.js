@@ -385,7 +385,6 @@ class App extends Component {
   }
 
   fetchTransactions = () => {
-    console.log('here')
         fetch('http://localhost:3000/api/v1/transactions/')
         .then(r => r.json())
         .then(data => {
@@ -474,23 +473,30 @@ class App extends Component {
       return transaction.num_shares > 0
     })
 
-    let curPortVal = portVal.map(transaction => {
-      return transaction.stock_symbol
-    })
-    fetch(`https://api.iextrading.com/1.0/stock/market/batch?symbols=${curPortVal}&types=quote&range=1m&last=5`)
-    .then(r => r.json())
-    .then(data => {
-      curPortVal.forEach(symbol => {
-        cumVal += data[symbol].quote.latestPrice
+    if(portVal.length > 0) {
+      let curPortVal = portVal.map(transaction => {
+        return transaction.stock_symbol
       })
-      this.setState({
-        currentVal: data,
-        cumVal: (cumVal).toFixed(2),
-        bought: portVal,
-        portDisplay: true,
-        filterToggle: null
+
+      let multiStock= null
+      fetch(`https://api.iextrading.com/1.0/stock/market/batch?symbols=${curPortVal}&types=quote&range=1m&last=5`)
+      .then(r => r.json())
+      .then(data => {
+        curPortVal.forEach(symbol => {
+          multiStock = portVal.find(transaction => transaction.stock_symbol === symbol)
+          cumVal += data[symbol].quote.latestPrice * multiStock.num_shares
+        })
+        this.setState({
+          currentVal: data,
+          cumVal: (cumVal).toFixed(2),
+          bought: portVal,
+          portDisplay: true,
+          filterToggle: null
+        })
       })
-    })
+    } else {
+      alert('No stocks currently in portfolio!')
+    }
   }
 
   // for user account (sorts the tables --click event on the header) ****work to fix so the pie chart does not change color
@@ -596,6 +602,7 @@ class App extends Component {
       handleSelectChart={this.handleSelectChart}
       selectedChart={this.state.selectedChart}
       stockIcon={this.state.stockIcon}
+      newsFeed={this.state.newsFeed}
       />
       <ProfileList
       stockCategory={this.state.stockCategory}
