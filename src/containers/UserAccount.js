@@ -35,10 +35,10 @@ class UserAccount extends Component {
                 this.props.currentVal?
                 <div>
                 <PieChart
-                legend={false}
+                legend={true}
                 className='pie-chart'
                 donut={true}
-                width="300px"
+                width="250px"
                 prefix="$"
                 data={this.props.bought.map(transaction => [transaction.stock_symbol, transaction.cost])}/>
                 <CurrentPortfolio
@@ -53,7 +53,7 @@ class UserAccount extends Component {
                 :
                 <div>
                 <PieChart
-                width="300px"
+                width="250px"
                 legend={false}
                 donut={true}
                 prefix="$"

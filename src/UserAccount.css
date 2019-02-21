@@ -1,12 +1,30 @@
 #user-container{
   position: absolute;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
   padding: 2%;
   height: 65%;
-  width: 50%;
+  max-width: 50%;
   margin-top: 1%;
   margin-left: 46%;
   /* border: 1px solid blue; */
+}
+
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 16px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    border: 1px solid #0095ff;
+    background-color: transparent;
+    box-shadow: 0 0 1px rgba(255,255,255,.5);
+    transition-duration: 0.4s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #0095ff;
 }
 
 /* NYTIMES logo  */
@@ -54,10 +72,17 @@ a:hover {
   width: 90%;
 }
 
-/* article date */
+/* Balance Values */
 
 h4 {
-  font-size: 12px;
+  font-size: 14px;
+  font-family: poppins;
+  font-weight: 400;
+  margin: 0;
+}
+
+.balance {
+  margin-bottom: 2%;
 }
 
 /* styling for portfolio table */

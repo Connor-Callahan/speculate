@@ -33,12 +33,10 @@ const SearchStocks = (props) => {
         <option  value="Materials">Materials</option>
         <option  value="Technology">Technology</option>
       </select>
+      <img id="logo" src={ require("../similis.png") } />
     </div>
 
   )
 }
 
 export default SearchStocks
-
-
-//       <img id="logo" src={ require("../similis.png") } />

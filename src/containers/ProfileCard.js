@@ -11,7 +11,7 @@ class ProfileCard extends Component {
     return (
       <div>
       {
-        this.props.selectedStock &&
+        this.props.selectedStock && 
           <div className="profile-card">
             <h1 className="company-name">{this.props.selectedStock.quote.companyName}</h1>
             <img className="profile-icon" src={this.props.stockIcon} alt="" width="100" height="120"/>

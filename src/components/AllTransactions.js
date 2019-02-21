@@ -7,7 +7,7 @@ class AllTransactions extends Component {
     return (
       <div className="table-data">
       <h1>All Transactions</h1>
-      <h2>Balance : ﹩{this.props.balance}</h2>
+      <h4 className='balance'>Balance : ﹩{this.props.balance}</h4>
       {
         this.props.filterToggle === 'sold'?
         <div></div>
