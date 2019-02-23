@@ -1,9 +1,16 @@
 import React from 'react';
+import {connect} from 'react-redux'
+
+const mapStateToProps = (state) => {
+  return {
+    newsFeed: state.newsFeed
+  }
+}
 
 const NewsFeed = (props) => {
 
     return (
-      <div id="news-feed">
+      <div id="user-container">
         <img id="nytimes" alt="nytimes" src={ require("../nytimes.png") } />
       {
         props.newsFeed.length < 2 ?
@@ -26,7 +33,7 @@ const NewsFeed = (props) => {
     );
   }
 
-export default NewsFeed;
+export default connect(mapStateToProps)(NewsFeed)
 
 
 // code to display dates

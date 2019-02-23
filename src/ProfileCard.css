@@ -60,18 +60,20 @@
 
 .header-container {
   display: grid;
-  width: 65%;
+  width: 95%;
   height: auto;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
+  margin-top: -15px;
   grid-template-columns: auto auto;
   padding: 5px;
-  border: 1px solid #0095ff;
+  /* border: 1px solid #0095ff; */
 }
 
+
 .profile-header {
-  font-size: 12px;
+  font-size: 13px;
   font-family: 'Poppins', sans-serif;
-  font-weight: 200;
+  font-weight: 300;
 }
 
 .create-transaction {

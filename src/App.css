@@ -1,3 +1,7 @@
+html, body {
+  overflow: hidden;
+}
+
 h1 {
   font-family: poppins;
   font-size: 28px;
@@ -186,7 +190,7 @@ h1 {
 }
 
 #stock-list {
-  position: relative;
+  position: absolute;
   width: 35%;
   margin-left: 2%;
   font-family: 'Poppins', sans-serif;

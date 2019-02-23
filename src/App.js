@@ -3,9 +3,11 @@ import './App.css';
 import './ProfileCard.css';
 import './UserAccount.css';
 import StockList from './containers/StockList'
+import Login from './components/Login'
+import UserAccount from './containers/UserAccount'
 import SearchStocks from './components/SearchStocks'
 import ProfileCard from './components/ProfileCard'
-
+import NewsFeed from './components/NewsFeed'
 import {connect} from 'react-redux'
 
 
@@ -19,6 +21,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     symbols: (data) => dispatch({type:'FETCH_SYMBOLS', payload:data}),
+    handleNewsFeed: (newsFeed) => dispatch( {type:'HANDLE_NEWS_FEED', payload:newsFeed})
   }
 }
 
@@ -32,6 +35,11 @@ class App extends Component {
     .then(data => {
       this.props.symbols(data)
     })
+    fetch('https://api.nytimes.com/svc/topstories/v2/business.json?api-key=v7lE9QjGViDovQFmJUTfCbfD1vUaeA4w')
+      .then(r => r.json())
+      .then(data => {
+        this.props.handleNewsFeed(data.results)
+    })
   }
 
 
@@ -40,6 +48,9 @@ class App extends Component {
       <div className="App">
       <SearchStocks />
       <StockList />
+      <NewsFeed />
+      <UserAccount />
+      <Login />
       </div>
     );
   }
