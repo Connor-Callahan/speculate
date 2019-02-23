@@ -16,7 +16,6 @@ const mapStateToProps = (state) => {
 
 class Login extends Component {
 
-
   handleLogin = (e) => {
     this.props.login ?
     this.props.handleLogin(false)

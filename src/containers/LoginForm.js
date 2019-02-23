@@ -11,7 +11,9 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    login: state.login
+    login: state.login,
+    username: state.username,
+    password: state.password
   }
 }
 
@@ -20,6 +22,24 @@ class LoginForm extends Component {
   handleLogin = (e) => {
     this.props.login ?
     this.props.handleLogin(false) : this.props.handleLogin(true)
+  }
+
+  submitLogin = async(e) => {
+    e.preventDefault()
+    let allUsernames = await fetch(`http://localhost:3000/api/v1/users/`)
+    .then(r => r.json())
+    console.log(allUsernames)
+
+    let currentUser = allUsernames.find(user => {
+      return user.username === this.props.username
+    })
+    if(currentUser) {
+      this.props.handleUsername(currentUser.username)
+      this.props.handlePassword(currentUser.password)
+      this.props.handleLogin(false)
+    } else {
+      alert('Username /or login incorrect, please try again.')
+    }
   }
 
   handleFormInput = (e) => {
@@ -44,7 +64,7 @@ class LoginForm extends Component {
             <label htmlFor="password">password : </label>
             <input className="login-input"  type="password" id="password"/>
               <br></br>
-            <button className="form-button">Login</button>
+            <button onClick={this.submitLogin} className="form-button">Login</button>
           </form>
 
         </div>
