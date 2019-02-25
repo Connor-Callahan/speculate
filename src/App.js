@@ -48,7 +48,6 @@ class App extends Component {
     fetch('http://localhost:3000/api/v1/transactions/')
     .then(r => r.json())
     .then(data => {
-      console.log(data)
       transactions = data.filter(transaction => transaction.user_id === this.props.id)
       this.props.handleUserTransactions(transactions)
     })

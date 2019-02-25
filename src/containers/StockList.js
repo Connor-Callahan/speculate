@@ -13,7 +13,6 @@ const mapStateToProps = (state) => {
 }
 
 const StockList = (props) => {
-  console.log(props)
   let filtered = []
 
   if(props.stockFilter.length > 0) {

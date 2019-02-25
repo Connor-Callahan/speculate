@@ -18,6 +18,9 @@ const defaultState = {
   balance: null,
   id: null,
   transactions: [],
+  filtered: [],
+  filter: 'all',
+  sort: null
 }
 
 export default(state=defaultState, action) => {
@@ -59,10 +62,18 @@ export default(state=defaultState, action) => {
     // transaction
     case 'HANDLE_TRANSACTION':
     return {...state, orderSize: action.payload}
+    case 'ADD_TRANSACTION':
+    return {...state, transactions: action.payload}
     case 'FETCH_TRANSACTIONS':
     return {...state, transactions: action.payload}
     case 'HANDLE_SORT':
     return {...state, transactions: action.payload}
+    case 'SET_SORT':
+    return {...state, sort: action.payload}
+    case 'HANDLE_FILTER':
+    return {...state, filtered: action.payload}
+    case 'SET_FILTER':
+    return {...state, filter: action.payload}
     default:
 
     return state

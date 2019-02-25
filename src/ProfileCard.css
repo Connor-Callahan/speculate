@@ -1,3 +1,4 @@
+
 /* click listener on the ProfileList, individual stock div */
 .profile-card {
   /* border:1px solid #0095ff; */
@@ -79,7 +80,11 @@
 }
 
 .create-transaction {
-  margin-left: 70%;
+  position: relative;
+  border: 2px solid lightgrey;
+  margin-left: 55%;
+  margin-top: -5%;
+  width: 20%;
   margin-bottom: -14%;
 }
 

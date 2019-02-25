@@ -38,18 +38,18 @@ class ProfileCard extends Component {
     return (
         <div className="profile-card">
           <h1 className="company-name">{this.props.stock.quote.companyName}</h1>
+          {
+            this.props.loggedIn?
+            <Transaction handleFormInput={this.props.handleFormInput}
+            fetchTransactions={this.props.fetchTransactions}/>
+            :
+            <p></p>
+          }
             <img className="profile-icon" src={this.props.icon.url} alt="" width="100" height="120"/>
             <button className="close-button" onClick={this.handleClose}>𝖷</button>
             <h3 className="symbol">Ticker : {this.props.stock.quote.symbol}</h3>
             <h3 className="symbol">Sector : {this.props.stock.quote.sector}</h3>
             <p className="profile-description">{this.props.profile.description}</p>
-            {
-              this.props.loggedIn?
-              <Transaction handleFormInput={this.props.handleFormInput}
-              fetchTransactions={this.fetchTransactions}/>
-              :
-              <p></p>
-            }
             <div className="header-container">
             <h3 className="profile-header">Price : {this.props.stock.quote.latestPrice}</h3>
             <h3 className="profile-header">Time : {this.props.stock.quote.latestTime}</h3>
