@@ -1,12 +1,40 @@
 import React from 'react';
 import {connect} from 'react-redux'
+import NewsFeed from '../components/NewsFeed'
+import TransactionsTable from './TransactionsTable'
 
-const UserAccount = () => {
+
+const mapStateToProps = (state) => {
+  return {
+    loggedIn: state.loggedIn,
+    balance: state.balance,
+    transactions: state.transactions
+  }
+}
+
+const UserAccount = (props) => {
 
   return <div id="user-container">
-          <h1>poop</h1>
+          {
+            props.loggedIn ?
+            <div>
+            {
+              props.transactions.length > 0 ?
+              <div>
+              <TransactionsTable />
+              </div>
+              :
+              <p>shit</p>
+            }
+            </div>
+
+            :
+            <div>
+            <NewsFeed />
+            </div>
+          }
         </div>
 }
 
 
-export default UserAccount;
+export default connect(mapStateToProps)(UserAccount)

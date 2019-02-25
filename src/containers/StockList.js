@@ -13,6 +13,7 @@ const mapStateToProps = (state) => {
 }
 
 const StockList = (props) => {
+  console.log(props)
   let filtered = []
 
   if(props.stockFilter.length > 0) {
@@ -21,7 +22,7 @@ const StockList = (props) => {
   return <div id="stock-list">
         {
           props.stock ?
-          <ProfileCard />
+          <ProfileCard fetchTransactions={props.fetchTransactions}/>
           :
             filtered.map(stock => {
               return <StockProfile

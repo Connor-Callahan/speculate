@@ -10,7 +10,7 @@ const mapStateToProps = (state) => {
 const NewsFeed = (props) => {
 
     return (
-      <div id="user-container">
+      <div>
         <img id="nytimes" alt="nytimes" src={ require("../nytimes.png") } />
       {
         props.newsFeed.length < 2 ?

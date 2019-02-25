@@ -5,7 +5,13 @@ const mapDispatchToProps = (dispatch) => {
   return {
     handleLogin: (login) => dispatch( {type:'HANDLE_USER_LOGIN', payload:login}),
     handleUsername: (username) => dispatch( {type: 'HANDLE_USERNAME', payload:username}),
-    handlePassword: (password) => dispatch( {type: 'HANDLE_PASSWORD', payload:password})
+    handlePassword: (password) => dispatch( {type: 'HANDLE_PASSWORD', payload:password}),
+    handleFirstName: (firstname) => dispatch( {type: 'HANDLE_FIRST_NAME', payload:firstname}),
+    handleLastName: (lastname) => dispatch( {type: 'HANDLE_LAST_NAME', payload:lastname}),
+    handleUserID: (id) => dispatch( {type: 'HANDLE_USER_ID', payload:id}),
+    handleBalance: (balance) => dispatch( {type: 'HANDLE_USER_BALANCE', payload:balance}),
+    handleLoggedIn: (login) => dispatch( {type: 'HANDLE_LOGGED_IN', payload:login}),
+    handleLoggedIn: (login) => dispatch( {type: 'HANDLE_LOGGED_IN', payload:login}),
   }
 }
 
@@ -13,7 +19,8 @@ const mapStateToProps = (state) => {
   return {
     login: state.login,
     username: state.username,
-    password: state.password
+    password: state.password,
+    loggedIn: state.loggedIn
   }
 }
 
@@ -28,7 +35,6 @@ class LoginForm extends Component {
     e.preventDefault()
     let allUsernames = await fetch(`http://localhost:3000/api/v1/users/`)
     .then(r => r.json())
-    console.log(allUsernames)
 
     let currentUser = allUsernames.find(user => {
       return user.username === this.props.username
@@ -36,10 +42,18 @@ class LoginForm extends Component {
     if(currentUser) {
       this.props.handleUsername(currentUser.username)
       this.props.handlePassword(currentUser.password)
+      this.props.handleFirstName(currentUser.first_name)
+      this.props.handleLastName(currentUser.last_name)
+      this.props.handleBalance(currentUser.balance)
+      this.props.handleUserID(currentUser.id)
+      this.props.handlePassword(currentUser.user_id)
       this.props.handleLogin(false)
+      this.props.handleLoggedIn(true)
+      this.props.fetchTransactions()
     } else {
       alert('Username /or login incorrect, please try again.')
     }
+    console.log('here')
   }
 
   handleFormInput = (e) => {
@@ -48,9 +62,8 @@ class LoginForm extends Component {
       case 'username' :
       return this.props.handleUsername(e.target.value)
       case 'password' :
-      return this.props.handlePassword(e.target.value)
+      return this.props.handlePassword(e.target.value) 
     }
-
   }
 
   render() {

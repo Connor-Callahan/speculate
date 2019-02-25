@@ -22,7 +22,6 @@ class StockProfile extends Component {
   handleSelectStock = async ({target}) => {
     const selectedStock = await fetch(`https://api.iextrading.com/1.0/stock/${target.id}/batch?types=quote,news,chart&range=1m&last=10`)
     .then(r => r.json())
-    .then(this.props.handleStock(selectedStock))
     const selectedStockProfile = await fetch(`https://api.iextrading.com/1.0/stock/${target.id}/company`)
     .then(r => r.json())
     const selectedChart = await fetch(`https://api.iextrading.com/1.0/stock/${target.id}/chart/`)

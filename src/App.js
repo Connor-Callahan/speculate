@@ -3,25 +3,26 @@ import './App.css';
 import './ProfileCard.css';
 import './UserAccount.css';
 import StockList from './containers/StockList'
-import Login from './components/Login'
+import Login from './containers/Login'
 import UserAccount from './containers/UserAccount'
 import SearchStocks from './components/SearchStocks'
-import ProfileCard from './components/ProfileCard'
-import NewsFeed from './components/NewsFeed'
+
 import {connect} from 'react-redux'
 
 
 const mapStateToProps = (state) => {
   return {
     symbols: state.symbols,
-    stockFilter: state.stockFilter
+    stockFilter: state.stockFilter,
+    id: state.id,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     symbols: (data) => dispatch({type:'FETCH_SYMBOLS', payload:data}),
-    handleNewsFeed: (newsFeed) => dispatch( {type:'HANDLE_NEWS_FEED', payload:newsFeed})
+    handleNewsFeed: (newsFeed) => dispatch( {type:'HANDLE_NEWS_FEED', payload:newsFeed}),
+    handleUserTransactions: (transactions) => dispatch( {type:'FETCH_TRANSACTIONS', payload:transactions})
   }
 }
 
@@ -42,15 +43,25 @@ class App extends Component {
     })
   }
 
+  fetchTransactions = () => {
+    let transactions = []
+    fetch('http://localhost:3000/api/v1/transactions/')
+    .then(r => r.json())
+    .then(data => {
+      console.log(data)
+      transactions = data.filter(transaction => transaction.user_id === this.props.id)
+      this.props.handleUserTransactions(transactions)
+    })
+  }
+
 
   render() {
     return (
       <div className="App">
       <SearchStocks />
-      <StockList />
-      <NewsFeed />
+      <StockList fetchTransactions={this.fetchTransactions}/>
       <UserAccount />
-      <Login />
+      <Login fetchTransactions={this.fetchTransactions}/>
       </div>
     );
   }

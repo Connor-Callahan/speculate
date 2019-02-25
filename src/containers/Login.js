@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import LoginForm from '../containers/LoginForm'
+import LoginForm from '../components/LoginForm'
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -10,7 +10,9 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    login: state.login
+    login: state.login,
+    username: state.username,
+    loggedIn: state.loggedIn,
   }
 }
 
@@ -24,12 +26,11 @@ class Login extends Component {
   }
 
   render() {
-    console.log(this.props.login)
     return (
       <div id="user-login">
       {
-        this.props.login ?
-        <LoginForm />
+        this.props.login && this.props.loggedIn === false ?
+        <LoginForm fetchTransactions={this.props.fetchTransactions}/>
         :
         <button
         id="login-button"
