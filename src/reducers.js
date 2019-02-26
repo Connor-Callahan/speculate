@@ -2,7 +2,6 @@
 const defaultState = {
   symbols: [],
   stockFilter: '',
-  filtered: [],
   stock: null,
   profile: null,
   chart: null,
@@ -17,12 +16,12 @@ const defaultState = {
   lastname: null,
   balance: null,
   value: null,
+  cumulative: null,
   portfolio: null,
   id: null,
   transactions: [],
-  filtered: [],
-  filter: 'all',
-  sort: null
+  filtered: null,
+  sorted: null,
 }
 
 export default(state=defaultState, action) => {
@@ -59,6 +58,8 @@ export default(state=defaultState, action) => {
     return {...state, balance: action.payload}
     case 'HANDLE_CURRENT_VALUE':
     return {...state, value: action.payload}
+    case 'HANDLE_CUMULATIVE_VALUE':
+    return {...state, cumulative: action.payload}
     case 'HANDLE_CURRENT_PORT':
     return {...state, portfolio: action.payload}
     case 'HANDLE_USER_ID':
@@ -68,16 +69,12 @@ export default(state=defaultState, action) => {
     // transaction
     case 'HANDLE_TRANSACTION':
     return {...state, orderSize: action.payload}
-    case 'ADD_TRANSACTION':
-    return {...state, transactions: action.payload}
     case 'FETCH_TRANSACTIONS':
     return {...state, transactions: action.payload}
-    case 'SET_SORT':
-    return {...state, sort: action.payload}
+    case 'SORT_TRANSACTIONS':
+    return {...state, sorted: action.payload}
     case 'HANDLE_FILTER':
     return {...state, filtered: action.payload}
-    case 'SET_FILTER':
-    return {...state, filter: action.payload}
 
     default:
 

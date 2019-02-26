@@ -5,7 +5,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     handleTransaction: (amount) => dispatch( {type:'HANDLE_TRANSACTION', payload:amount}),
     adjustBalance: (amount) => dispatch( {type:'HANDLE_USER_BALANCE', payload:amount}),
-    addTransaction: (transaction) => dispatch( {type:'ADD_TRANSACTION', payload:transaction}),
   }
 }
 
@@ -54,6 +53,7 @@ class Transaction extends Component {
       let boughtStock = null
       let soldStock = null
       let curStockShare = 0
+      let adjustedBalance = null
 
       // filter through the transactions to create a new object of aggregate bought and sold for same stocks
       if(currentStock) {
@@ -90,14 +90,12 @@ class Transaction extends Component {
         boughtStock = numBought.find(transaction => {
          return transaction.stock_symbol === this.props.stock.quote.symbol
        })
-        if(soldStock) {
           if(e.target.id === 'sell' && soldStock) {
             curStockShare = boughtStock.num_shares - soldStock.num_shares
-          }
           } else {
               curStockShare = boughtStock.num_shares - 0
-            }
           }
+      }
 
       // distinguish between buying and selling -> create post request to transactions table
       if(e.target.id === 'buy' && Number(this.props.balance) < totalCost) {
@@ -122,14 +120,11 @@ class Transaction extends Component {
         })
         .then(r => r.json())
 
-        let adjustedBalance = this.props.balance - parseInt(totalCost)
-        console.log('totalCost', totalCost)
-        console.log('adjustedBalance', adjustedBalance)
-        console.log('balance', this.props.balance)
+        adjustedBalance = this.props.balance - parseInt(totalCost)
         this.props.adjustBalance(adjustedBalance)
-        this.props.fetchTransactions()
+
       } else if (e.target.id === 'sell' && parseInt(this.props.orderSize, 10) <= curStockShare) {
-        let adjustedBalance = this.props.balance + parseInt(totalCost, 10)
+
         fetch('http://localhost:3000/api/v1/transactions/', {
           method: 'POST',
           headers: {
@@ -148,9 +143,9 @@ class Transaction extends Component {
           })
         })
         .then(r => r.json())
-
-        this.props.fetchTransactions()
-        console.log('here')
+        
+        adjustedBalance = this.props.balance + parseInt(totalCost, 10)
+        this.props.adjustBalance(adjustedBalance)
       } else {
         // alert if no shares of the stock are available in the users portfolio
         alert('No shares available to trade!')

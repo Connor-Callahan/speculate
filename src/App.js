@@ -22,7 +22,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     symbols: (data) => dispatch({type:'FETCH_SYMBOLS', payload:data}),
     handleNewsFeed: (newsFeed) => dispatch( {type:'HANDLE_NEWS_FEED', payload:newsFeed}),
-    handleUserTransactions: (transactions) => dispatch( {type:'FETCH_TRANSACTIONS', payload:transactions})
   }
 }
 
@@ -43,16 +42,6 @@ class App extends Component {
     })
   }
 
-  fetchTransactions = () => {
-    let transactions = []
-    fetch('http://localhost:3000/api/v1/transactions/')
-    .then(r => r.json())
-    .then(data => {
-      transactions = data.filter(transaction => transaction.user_id === this.props.id)
-      this.props.handleUserTransactions(transactions)
-    })
-  }
-
 
   render() {
     return (
@@ -60,7 +49,7 @@ class App extends Component {
       <SearchStocks />
       <StockList fetchTransactions={this.fetchTransactions}/>
       <UserAccount />
-      <Login fetchTransactions={this.fetchTransactions}/>
+      <Login />
       </div>
     );
   }

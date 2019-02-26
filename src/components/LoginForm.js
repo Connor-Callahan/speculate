@@ -11,7 +11,7 @@ const mapDispatchToProps = (dispatch) => {
     handleUserID: (id) => dispatch( {type: 'HANDLE_USER_ID', payload:id}),
     handleBalance: (balance) => dispatch( {type: 'HANDLE_USER_BALANCE', payload:balance}),
     handleLoggedIn: (login) => dispatch( {type: 'HANDLE_LOGGED_IN', payload:login}),
-    handleLoggedIn: (login) => dispatch( {type: 'HANDLE_LOGGED_IN', payload:login}),
+    handleUserTransactions: (transactions) => dispatch( {type:'FETCH_TRANSACTIONS', payload:transactions})
   }
 }
 
@@ -20,11 +20,23 @@ const mapStateToProps = (state) => {
     login: state.login,
     username: state.username,
     password: state.password,
-    loggedIn: state.loggedIn
+    loggedIn: state.loggedIn,
+    id: state.id
   }
 }
 
 class LoginForm extends Component {
+
+  handleFormInput = (e) => {
+    let input = e.target.id
+    switch(input) {
+      case 'username' :
+      return this.props.handleUsername(e.target.value)
+      case 'password' :
+      return this.props.handlePassword(e.target.value)
+      default:
+    }
+  }
 
   handleLogin = (e) => {
     this.props.login ?
@@ -49,21 +61,20 @@ class LoginForm extends Component {
       this.props.handlePassword(currentUser.user_id)
       this.props.handleLogin(false)
       this.props.handleLoggedIn(true)
-      this.props.fetchTransactions()
+      this.fetchTransactions()
     } else {
       alert('Username /or login incorrect, please try again.')
     }
-    console.log('here')
   }
 
-  handleFormInput = (e) => {
-    let input = e.target.id
-    switch(input) {
-      case 'username' :
-      return this.props.handleUsername(e.target.value)
-      case 'password' :
-      return this.props.handlePassword(e.target.value) 
-    }
+  fetchTransactions = () => {
+    let transactions = []
+      fetch('http://localhost:3000/api/v1/transactions/')
+      .then(r => r.json())
+      .then(data => {
+        transactions = data.filter(transaction => transaction.user_id === this.props.id)
+        this.props.handleUserTransactions(transactions)
+      })
   }
 
   render() {

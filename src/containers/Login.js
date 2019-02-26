@@ -50,7 +50,7 @@ class Login extends Component {
       <div id="user-login">
       {
         this.props.login && this.props.loggedIn === false ?
-        <LoginForm fetchTransactions={this.props.fetchTransactions}/>
+        <LoginForm />
         :
         null
       }

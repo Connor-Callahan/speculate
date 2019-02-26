@@ -108,6 +108,18 @@ h2 {
   height: 20px;
 }
 
+#all-balances {
+  width: auto;
+  margin-bottom: 10px;
+}
+
+#value {
+  position: relative;
+  top: -20px;
+  font-size: 10px;
+  font-family: poppins;
+}
+
 .table-data {
   width: 900px;
 }

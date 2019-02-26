@@ -9,8 +9,11 @@ const mapStateToProps = (state) => {
     loggedIn: state.loggedIn,
     balance: state.balance,
     transactions: state.transactions
-  }
+    }
 }
+
+
+
 
 const UserAccount = (props) => {
 
