@@ -25,6 +25,7 @@ class TransactionsTable extends Component {
 
 
    filterTransactions = (e) => {
+     this.props.handleSorted(null)
      let bought = this.props.transactions.filter(transaction => {
        return transaction.order_type === 'buy'
      })
@@ -55,34 +56,41 @@ sortPortfolio = (e) => {
 
   switch (e.target.id) {
     case 'symbol':
-    sorted = this.props.transactions.sort(function(a, b) {
+    sorted = copy.sort(function(a, b) {
       return a.stock_symbol.localeCompare(b.stock_symbol)
     })
     break;
     case 'price':
-    sorted = this.props.transactions.sort(function(a, b) {
+    sorted = copy.sort(function(a, b) {
       return b.price - a.price
     })
     break;
     case 'num_shares':
-    sorted = this.props.transactions.sort(function(a, b) {
+    sorted = copy.sort(function(a, b) {
       return b.num_shares - a.num_shares
     })
     break;
     case 'cost':
-    sorted = this.props.transactions.sort(function(a, b) {
+    sorted = copy.sort(function(a, b) {
       return b.cost - a.cost
     })
     break;
     default:
   }
-  console.log(sorted)
   this.props.handleSorted(sorted)
 }
 
 // ------render------------------------------
   render() {
 
+    let transactions = []
+    if(this.props.sorted) {
+      transactions = this.props.sorted
+    } else if (this.props.filtered) {
+      transactions = this.props.filtered
+    } else {
+      transactions = this.props.transactions
+    }
     // create time associated with current balance value
     let date = new Date
 
@@ -107,34 +115,33 @@ sortPortfolio = (e) => {
           </th>
           <th>
             <h2 id="price" onClick={this.sortPortfolio}>
-              Price
+              Price ▾
             </h2>
           </th>
           <th>
             <h2 id="num_shares" onClick={this.sortPortfolio}>
-              # of Shares
+              # of Shares ▾
             </h2>
           </th>
           <th>
             <h2 id="cost" onClick={this.sortPortfolio}>
-              Cost
+              Cost ▾
             </h2>
           </th>
             <th>
             <h2 id="cost" >
-            Order Type
+            Order Type ▾
             </h2>
             </th>
             <th>
             <h2 id="cost" >
-            Date/Time
+            Date/Time ▾
             </h2>
             </th>
           </tr>
-
           {
-            this.props.filtered ?
-            this.props.filtered.map(transaction => {
+
+            transactions.map(transaction => {
               return <tr key={Math.random()}>
               <td>{transaction.stock_symbol}</td>
               <td>${transaction.price}</td>
@@ -144,17 +151,7 @@ sortPortfolio = (e) => {
               <td>{transaction.date_time}</td>
               </tr>
             })
-            :
-            this.props.transactions.map(transaction => {
-              return <tr key={Math.random()}>
-              <td>{transaction.stock_symbol}</td>
-              <td>${transaction.price}</td>
-              <td>{transaction.num_shares}</td>
-              <td>${transaction.cost}</td>
-              <td>{transaction.order_type}</td>
-              <td>{transaction.date_time}</td>
-              </tr>
-            })
+
           }
 
       </tbody>
