@@ -155,10 +155,9 @@ class TransactionsTable extends Component {
 
     if(this.props.value != null) {
       currentStockVal = Object.values(this.props.portfolio)
-    }
-
-    for(let i = 0; i < currentStockVal.length; i++) {
-      this.props.portfolio[i].currentVal = (currentStockVal[i].quote.latestPrice * this.props.portfolio[i].num_shares).toFixed(2)
+      for(let i = 0; i < currentStockVal.length; i++) {
+        this.props.portfolio[i].currentVal = (currentStockVal[i].quote.latestPrice * this.props.portfolio[i].num_shares).toFixed(2)
+      }
     }
 
     console.log( currentStockVal)
@@ -167,11 +166,8 @@ class TransactionsTable extends Component {
 
     if(this.props.filter === 'all') {
         sorted = this.props.transactions.slice()
-    } else if(this.props.filter === 'bought' || 'sold') {
+    } else {
         sorted = this.props.filtered.slice()
-      } else {
-
-        sorted = currentStockVal.slice()
       }
 
     switch (this.props.sort) {
