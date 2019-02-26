@@ -3,10 +3,11 @@ import {connect} from 'react-redux'
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleSort: (transactions) => dispatch( {type:'HANDLE_SORT', payload:transactions}),
     setSort: (sort) => dispatch( {type:'SET_SORT', payload:sort}),
     handleFilter: (filtered) => dispatch( {type:'HANDLE_FILTER', payload:filtered}),
     setFilter: (filter) => dispatch( {type:'SET_FILTER', payload:filter}),
+    handleCurrentPort : (port) => dispatch( {type:'HANDLE_CURRENT_PORT', payload:port}),
+    handleCurrentVal: (value) => dispatch( {type:'HANDLE_CURRENT_VALUE', payload:value}),
   }
 }
 
@@ -16,7 +17,9 @@ const mapStateToProps = (state) => {
     balance: state.balance,
     filter: state.filter,
     filtered: state.filtered,
-    sort: state.sort
+    sort: state.sort,
+    value: state.value,
+    portfolio: state.portfolio
   }
 }
 
@@ -62,14 +65,113 @@ class TransactionsTable extends Component {
      }
    }
 
+   handleCurrentVal = () => {
+    let bought = this.props.transactions.filter(transaction => {
+      return transaction.order_type === 'buy'
+    })
+    let sold = this.props.transactions.filter(transaction => {
+      return transaction.order_type === 'sell'
+    })
+
+    let newBoughtArr = []
+
+    let newSoldArr = []
+
+    bought.forEach(transaction => {
+      let stock_symbol = transaction.stock_symbol
+      let num_shares = transaction.num_shares
+      let price = transaction.price
+      let cost = transaction.cost
+      let foundTransaction = newBoughtArr.find(transaction => {
+        return transaction.stock_symbol === stock_symbol
+      })
+        if(foundTransaction) {
+          foundTransaction.cost += cost
+          foundTransaction.price = price
+          foundTransaction.num_shares += num_shares
+        } else {
+          newBoughtArr.push(transaction)
+        }
+      return newBoughtArr
+    })
+
+    sold.forEach(transaction => {
+      let stock_symbol = transaction.stock_symbol
+      let num_shares = transaction.num_shares
+      let price = transaction.price
+      let cost = transaction.cost
+      let foundTransaction = newSoldArr.find(transaction => {
+        return transaction.stock_symbol === stock_symbol
+      })
+        if(foundTransaction) {
+          foundTransaction.cost += cost
+          foundTransaction.price = price
+          foundTransaction.num_shares += num_shares
+        } else {
+          newSoldArr.push(transaction)
+        }
+      return newSoldArr
+    })
+
+    let totalCurPort = []
+
+    newBoughtArr.forEach(transaction => {
+      let stock_symbol = transaction.stock_symbol
+      let num_shares = transaction.num_shares
+      let price = transaction.price
+      let cost = transaction.cost
+      let foundTransaction = newSoldArr.find(transaction => {
+        return transaction.stock_symbol === stock_symbol
+      })
+      if(foundTransaction) {
+        foundTransaction.cost = cost - foundTransaction.cost
+        foundTransaction.price = cost - foundTransaction.price
+        foundTransaction.num_share = num_shares - foundTransaction.num_shares
+        totalCurPort.push(foundTransaction)
+      } else {
+        totalCurPort.push(transaction)
+      }
+    })
+
+
+    let currentPort = totalCurPort.map(transaction => {
+      return transaction.stock_symbol
+    })
+
+    let currentVal = null
+
+    fetch(`https://api.iextrading.com/1.0/stock/market/batch?symbols=${currentPort}&types=quote&range=1m&last=5`)
+    .then(r => r.json())
+    .then(data => {
+      this.props.handleCurrentVal(data)
+    })
+    this.props.setFilter('holdings')
+    this.props.handleCurrentPort(currentPort)
+}
+
+// ------render------------------------------
   render() {
+    let currentStockVal = []
+
+    if(this.props.value != null) {
+      currentStockVal = Object.values(this.props.portfolio)
+    }
+
+    for(let i = 0; i < currentStockVal.length; i++) {
+      this.props.portfolio[i].currentVal = (currentStockVal[i].quote.latestPrice * this.props.portfolio[i].num_shares).toFixed(2)
+    }
+
+    console.log( currentStockVal)
 
     let sorted = null
 
     if(this.props.filter === 'all') {
         sorted = this.props.transactions.slice()
-    } else {
+    } else if(this.props.filter === 'bought' || 'sold') {
         sorted = this.props.filtered.slice()
+      } else {
+
+        sorted = currentStockVal.slice()
       }
 
     switch (this.props.sort) {
@@ -102,7 +204,7 @@ class TransactionsTable extends Component {
       <div className="table-data">
       <h1>All Transactions</h1>
       <h4 className='balance'>Balance : ﹩{this.props.balance}</h4>
-      <button className="portfolio-button">Holdings</button>
+      <button className="portfolio-button" onClick={this.handleCurrentVal}>Holdings</button>
       <button id="bought" className="portfolio-button" onClick={this.filterTransactions}>Bought</button>
       <button id="sold" className="portfolio-button" onClick={this.filterTransactions}>Sold</button>
       <button id="all" className="portfolio-button" onClick={this.filterTransactions}>All</button>

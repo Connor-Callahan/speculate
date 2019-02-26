@@ -16,6 +16,8 @@ const defaultState = {
   firstname: null,
   lastname: null,
   balance: null,
+  value: null,
+  portfolio: null,
   id: null,
   transactions: [],
   filtered: [],
@@ -55,6 +57,10 @@ export default(state=defaultState, action) => {
     return {...state, lastname: action.payload}
     case 'HANDLE_USER_BALANCE':
     return {...state, balance: action.payload}
+    case 'HANDLE_CURRENT_VALUE':
+    return {...state, value: action.payload}
+    case 'HANDLE_CURRENT_PORT':
+    return {...state, portfolio: action.payload}
     case 'HANDLE_USER_ID':
     return {...state, id: action.payload}
     case 'HANDLE_LOGGED_IN':
@@ -66,14 +72,13 @@ export default(state=defaultState, action) => {
     return {...state, transactions: action.payload}
     case 'FETCH_TRANSACTIONS':
     return {...state, transactions: action.payload}
-    case 'HANDLE_SORT':
-    return {...state, transactions: action.payload}
     case 'SET_SORT':
     return {...state, sort: action.payload}
     case 'HANDLE_FILTER':
     return {...state, filtered: action.payload}
     case 'SET_FILTER':
     return {...state, filter: action.payload}
+
     default:
 
     return state
