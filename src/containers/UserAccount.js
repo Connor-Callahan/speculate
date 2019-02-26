@@ -19,6 +19,8 @@ class UserAccount extends Component {
       currentStockVal = Object.values(this.props.currentVal)
     }
 
+    console.log(currentStockVal)
+
     for(let i = 0; i < currentStockVal.length; i++) {
       this.props.bought[i].currentStockVal = (currentStockVal[i].quote.latestPrice * this.props.bought[i].num_shares).toFixed(2)
     }
