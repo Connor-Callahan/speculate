@@ -18,7 +18,7 @@ const defaultState = {
   balance: null,
   value: null,
   cumulative: null,
-  portfolio: null,
+  portfolio: [],
   id: null,
   transactions: [],
   filtered: null,
