@@ -17,11 +17,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleTransactions: (transactions) => dispatch( {type:'FETCH_TRANSACTIONS', payload:transactions})
+    handleTransactions: (transactions) => dispatch( {type:'FETCH_TRANSACTIONS', payload:transactions}),
+    handleChart: (data) => dispatch( {type:'HANDLE_USER_CHART', payload:data})
   }
 }
-
-
 
 
 class UserAccount extends Component {
@@ -30,8 +29,28 @@ class UserAccount extends Component {
   let transactions = await fetch('http://localhost:3000/api/v1/transactions/')
     .then(r => r.json())
   let filtered = transactions.filter(transaction => transaction.user_id === this.props.id)
-  console.log(transactions)
    this.props.handleTransactions(filtered)
+   this.handleChart()
+  }
+
+  handleChart = () => {
+    let chart = []
+    let copy = this.props.transactions.slice().map(o => ({ ...o }))
+    copy.forEach(transaction => {
+      let stock_symbol = transaction.stock_symbol
+      let cost = transaction.cost
+      let duplicate = chart.find(transaction => {
+        return transaction.stock_symbol === stock_symbol
+      })
+      if(duplicate) {
+        duplicate.cost += transaction.cost
+        chart.push(duplicate)
+      } else {
+        chart.push(transaction)
+      }
+
+    })
+    this.props.handleChart(chart)
   }
 
   render(){
@@ -48,7 +67,7 @@ class UserAccount extends Component {
                   :
                   <div>
                   <p>Welcome, {this.props.firstname}</p>
-                  <button onClick={this.fetchTransactions}>View Transactions</button>
+                  <button className="portfolio-button" onClick={this.fetchTransactions}>View Transactions</button>
                   </div>
                 }
                 </div>

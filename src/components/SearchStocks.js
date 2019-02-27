@@ -10,7 +10,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleStockFilter: (event) => dispatch({type:'HANDLE_STOCK_FILTER', payload: event.target.value})
+    handleStockFilter: (event) => dispatch({type:'HANDLE_STOCK_FILTER', payload: event.target.value}),
   }
 }
 

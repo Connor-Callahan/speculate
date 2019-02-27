@@ -6,7 +6,8 @@ const mapDispatchToProps = (dispatch) => {
     handleStock: (selectedStock) => dispatch( {type:'HANDLE_STOCK_DATA', payload:selectedStock}),
     profile: (selectedStockProfile) => dispatch( {type:'HANDLE_STOCK_PROFILE', payload:selectedStockProfile}),
     chart: (selectedChart) => dispatch( {type:'HANDLE_STOCK_CHART', payload:selectedChart}),
-    handleIcon: (stockIcon) => dispatch( {type:'HANDLE_STOCK_ICON', payload:stockIcon})
+    handleIcon: (stockIcon) => dispatch( {type:'HANDLE_STOCK_ICON', payload:stockIcon}),
+    handleFilter: (filtered) => dispatch( {type:'HANDLE_FILTER', payload:filtered}),
   }
 }
 
@@ -28,6 +29,7 @@ class StockProfile extends Component {
     .then(r => r.json())
     const stockIcon = await fetch(`https://api.iextrading.com/1.0/stock/${target.id}/logo`)
     .then(r => r.json())
+    this.props.handleFilter(null)
     this.props.handleIcon(stockIcon)
     this.props.profile(selectedStockProfile)
     this.props.chart(selectedChart)

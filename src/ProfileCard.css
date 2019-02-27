@@ -81,10 +81,11 @@
 
 .create-transaction {
   position: relative;
-  border: 2px solid lightgrey;
-  margin-left: 55%;
+  border: 1px solid  #0095ff;
+  margin-left: 34%;
   margin-top: -5%;
-  width: 20%;
+  padding-left: 10%;
+  width: 40%;
   margin-bottom: -14%;
 }
 

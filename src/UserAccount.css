@@ -86,6 +86,13 @@ h4 {
   margin-bottom: 2%;
 }
 
+/* chart for all transactions */
+#transaction-chart {
+  position: relative;
+  border:1px solid #0095ff;
+  width: 60%;
+}
+
 /* styling for portfolio table */
 
 .user-portfolio {

@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 
+import TransactionChart from '../components/TransactionChart'
+import Portfolio from '../components/Portfolio'
+
 const mapDispatchToProps = (dispatch) => {
   return {
     handleFilter: (filtered) => dispatch( {type:'HANDLE_FILTER', payload:filtered}),
-    handleSorted: (transactions) => dispatch( {type:'SORT_TRANSACTIONS', payload:transactions})
+    handleSorted: (transactions) => dispatch( {type:'SORT_TRANSACTIONS', payload:transactions}),
+    handleChart: (data) => dispatch( {type:'HANDLE_USER_CHART', payload:data})
   }
 }
 
@@ -17,9 +21,11 @@ const mapStateToProps = (state) => {
     sorted: state.sorted,
     value: state.value,
     portfolio: state.portfolio,
-    cumulative: state.cumulative
+    cumulative: state.cumulative,
+    userChart: state.userChart
   }
 }
+
 
 class TransactionsTable extends Component {
 
@@ -32,16 +38,39 @@ class TransactionsTable extends Component {
      let sold = this.props.transactions.filter(transaction => {
        return transaction.order_type === 'sell'
      })
-
+     let copy = this.props.transactions.slice().map(o => ({ ...o }))
      switch(e.target.id) {
        case 'bought' :
-       return this.props.handleFilter(bought)
+       return this.props.handleFilter(bought),
+              this.filterChart(bought)
        case 'sold' :
-       return this.props.handleFilter(sold)
+       return this.props.handleFilter(sold),
+              this.filterChart(sold)
        case 'all' :
-       return this.props.handleFilter(null)
+       return this.props.handleFilter(null),
+              this.filterChart(copy)
        default:
      }
+   }
+
+   filterChart = (transactions) => {
+     let chart = []
+     let copy = transactions.slice().map(o => ({ ...o }))
+     copy.forEach(transaction => {
+       let stock_symbol = transaction.stock_symbol
+       let cost = transaction.cost
+       let duplicate = chart.find(transaction => {
+         return transaction.stock_symbol === stock_symbol
+       })
+       if(duplicate) {
+         duplicate.cost += transaction.cost
+         chart.push(duplicate)
+       } else {
+         chart.push(transaction)
+       }
+
+     })
+     this.props.handleChart(chart)
    }
 
 sortPortfolio = (e) => {
@@ -98,8 +127,10 @@ sortPortfolio = (e) => {
       <div>
       <div className="table-data">
       <h1>All Transactions</h1>
+      <Portfolio />
       <h4 className='balance'>Balance : ﹩{this.props.balance}</h4>
       <p id='value' className='balance'>Updated : {date.toString()}</p>
+      <TransactionChart />
       <div>
       <button id="bought" className="portfolio-button" onClick={this.filterTransactions}>Bought</button>
       <button id="sold" className="portfolio-button" onClick={this.filterTransactions}>Sold</button>
@@ -130,17 +161,16 @@ sortPortfolio = (e) => {
           </th>
             <th>
             <h2 id="cost" >
-            Order Type ▾
+            Order Type
             </h2>
             </th>
             <th>
             <h2 id="cost" >
-            Date/Time ▾
+            Date/Time
             </h2>
             </th>
           </tr>
           {
-
             transactions.map(transaction => {
               return <tr key={Math.random()}>
               <td>{transaction.stock_symbol}</td>

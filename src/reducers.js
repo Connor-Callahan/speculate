@@ -5,6 +5,7 @@ const defaultState = {
   stock: null,
   profile: null,
   chart: null,
+  userChart: [],
   icon: null,
   newsFeed: [],
   login: false,
@@ -43,7 +44,7 @@ export default(state=defaultState, action) => {
     return {...state, icon: action.payload}
     case 'HANDLE_NEWS_FEED':
     return {...state, newsFeed: action.payload}
-    // User login
+    // User login ------------>
     case 'HANDLE_USER_LOGIN':
     return {...state, login: action.payload}
     case 'HANDLE_USERNAME':
@@ -56,6 +57,7 @@ export default(state=defaultState, action) => {
     return {...state, lastname: action.payload}
     case 'HANDLE_USER_BALANCE':
     return {...state, balance: action.payload}
+    // Portfolio -------------->
     case 'HANDLE_CURRENT_VALUE':
     return {...state, value: action.payload}
     case 'HANDLE_CUMULATIVE_VALUE':
@@ -79,6 +81,8 @@ export default(state=defaultState, action) => {
     return {...state, sorted: action.payload}
     case 'HANDLE_FILTER':
     return {...state, filtered: action.payload}
+    case 'HANDLE_USER_CHART':
+    return {...state, userChart: action.payload}
 
     default:
 
