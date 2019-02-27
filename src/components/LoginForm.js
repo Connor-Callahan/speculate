@@ -11,7 +11,6 @@ const mapDispatchToProps = (dispatch) => {
     handleUserID: (id) => dispatch( {type: 'HANDLE_USER_ID', payload:id}),
     handleBalance: (balance) => dispatch( {type: 'HANDLE_USER_BALANCE', payload:balance}),
     handleLoggedIn: (login) => dispatch( {type: 'HANDLE_LOGGED_IN', payload:login}),
-    handleUserTransactions: (transactions) => dispatch( {type:'FETCH_TRANSACTIONS', payload:transactions})
   }
 }
 
@@ -61,21 +60,12 @@ class LoginForm extends Component {
       this.props.handlePassword(currentUser.user_id)
       this.props.handleLogin(false)
       this.props.handleLoggedIn(true)
-      this.fetchTransactions()
     } else {
       alert('Username /or login incorrect, please try again.')
     }
   }
 
-  fetchTransactions = () => {
-    let transactions = []
-      fetch('http://localhost:3000/api/v1/transactions/')
-      .then(r => r.json())
-      .then(data => {
-        transactions = data.filter(transaction => transaction.user_id === this.props.id)
-        this.props.handleUserTransactions(transactions)
-      })
-  }
+
 
   render() {
     return (

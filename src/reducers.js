@@ -69,8 +69,10 @@ export default(state=defaultState, action) => {
     // transaction
     case 'HANDLE_TRANSACTION':
     return {...state, orderSize: action.payload}
-    case 'FETCH_TRANSACTIONS':
-    return {...state, transactions: action.payload}
+    case 'ADD_TRANSACTION':
+    return {...state,
+      transactions: [...state.transactions, action.payload]
+    }
     case 'SORT_TRANSACTIONS':
     return {...state, sorted: action.payload}
     case 'HANDLE_FILTER':

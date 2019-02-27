@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 const mapDispatchToProps = (dispatch) => {
   return {
     handleTransaction: (amount) => dispatch( {type:'HANDLE_TRANSACTION', payload:amount}),
+    addTransaction: (transaction) => dispatch( {type:'ADD_TRANSACTION', payload:transaction}),
     adjustBalance: (amount) => dispatch( {type:'HANDLE_USER_BALANCE', payload:amount}),
   }
 }
@@ -24,13 +25,16 @@ class Transaction extends Component {
     this.props.handleTransaction(e.target.value)
   }
 
-  filterTransactions = () => {
-
-  }
-
   handleOrder = async (e) => {
     e.preventDefault()
     e.persist()
+    // fetch transactions
+
+    let transactions = await fetch('http://localhost:3000/api/v1/transactions/')
+      .then(r => r.json())
+
+    let filtered = transactions.filter(transaction => transaction.user_id === this.props.id)
+
     // conditional check for input
     if(this.props.orderSize <= 0) {
       alert('Please enter an order amount greater than 0')
@@ -44,7 +48,7 @@ class Transaction extends Component {
     let currentStock = null
 
     // determine if the selected stock already has a record of pre-existing transactions
-      currentStock = this.props.transactions.find(transaction => {
+      currentStock = filtered.find(transaction => {
         return transaction.stock_symbol === this.props.stock.quote.symbol
       })
 
@@ -55,9 +59,9 @@ class Transaction extends Component {
       let curStockShare = 0
       let adjustedBalance = null
 
-      // filter through the transactions to create a new object of aggregate bought and sold for same stocks
+      // filter through the filtered users to create a new object of aggregate bought and sold for same stocks
       if(currentStock) {
-        this.props.transactions.forEach(transaction => {
+        filtered.forEach(transaction => {
           if(transaction.order_type === 'sell') {
             let stock_symbol = transaction.stock_symbol
             let num_shares = transaction.num_shares
@@ -119,6 +123,9 @@ class Transaction extends Component {
           })
         })
         .then(r => r.json())
+        .then(data => {
+          this.props.addTransaction(data)
+        })
 
         adjustedBalance = this.props.balance - parseInt(totalCost)
         this.props.adjustBalance(adjustedBalance)
@@ -143,7 +150,10 @@ class Transaction extends Component {
           })
         })
         .then(r => r.json())
-        
+        .then(data => {
+          this.props.addTransaction(data)
+        })
+
         adjustedBalance = this.props.balance + parseInt(totalCost, 10)
         this.props.adjustBalance(adjustedBalance)
       } else {
@@ -151,9 +161,8 @@ class Transaction extends Component {
         alert('No shares available to trade!')
       }
     }
-
   }
-
+  //
   render() {
     return (
       <div className="create-transaction">
