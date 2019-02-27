@@ -65,8 +65,6 @@ class LoginForm extends Component {
     }
   }
 
-
-
   render() {
     return (
       <div id="login-container">

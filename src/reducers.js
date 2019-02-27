@@ -67,6 +67,8 @@ export default(state=defaultState, action) => {
     case 'HANDLE_LOGGED_IN':
     return {...state, loggedIn: action.payload}
     // transaction
+    case 'FETCH_TRANSACTIONS':
+    return {...state, transactions: action.payload}
     case 'HANDLE_TRANSACTION':
     return {...state, orderSize: action.payload}
     case 'ADD_TRANSACTION':
