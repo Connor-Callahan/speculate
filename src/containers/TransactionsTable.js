@@ -8,7 +8,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     handleFilter: (filtered) => dispatch( {type:'HANDLE_FILTER', payload:filtered}),
     handleSorted: (transactions) => dispatch( {type:'SORT_TRANSACTIONS', payload:transactions}),
-    handleChart: (data) => dispatch( {type:'HANDLE_USER_CHART', payload:data})
+    handleChart: (data) => dispatch( {type:'HANDLE_USER_CHART', payload:data}),
+    handleCurrentPort : (port) => dispatch( {type:'HANDLE_CURRENT_PORT', payload:port}),
+    handleCurrentVal: (value) => dispatch( {type:'HANDLE_CURRENT_VALUE', payload:value})
   }
 }
 
@@ -32,6 +34,8 @@ class TransactionsTable extends Component {
 
    filterTransactions = (e) => {
      this.props.handleSorted(null)
+     this.props.handleCurrentPort(null)
+     this.props.handleCurrentVal(null)
      let bought = this.props.transactions.filter(transaction => {
        return transaction.order_type === 'buy'
      })
@@ -68,7 +72,6 @@ class TransactionsTable extends Component {
        } else {
          chart.push(transaction)
        }
-
      })
      this.props.handleChart(chart)
    }

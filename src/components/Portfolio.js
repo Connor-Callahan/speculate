@@ -128,27 +128,25 @@ class Profile extends Component {
     if(this.props.value != null) {
       currentStockVal = Object.values(this.props.value)
       for(let i = 0; i < currentStockVal.length; i++) {
-        this.props.portfolio[i].currentVal = (currentStockVal[i].quote.latestPrice * this.props.portfolio[i].num_shares).toFixed(2)
+        this.props.portfolio[i].currentVal = (currentStockVal[i].quote.latestPrice * this.props.portfolio[i].num_shares)
       }
     }
 
-    console.log('porfolio',this.props.portfolio)
-    console.log('currentstockval', currentStockVal)
-// create time associated with updated portfolio value
+    // create time associated with updated portfolio value
     let date = new Date
 
     return (
       <div>
       {
-        this.props.portfolio.length > 0 ?
+        this.props.portfolio ?
         <div className="table-data">
-          <h1>All Transactions</h1>
-          <h4 className='balance'>Balance : ﹩{this.props.balance}</h4>
+          <h1>Portfolio</h1>
+          // <h4 className='balance'>Balance : ﹩{this.props.balance}</h4>
           {
             this.props.cumulative ?
             <div id="all-balances">
             <h4 className='balance'>Value : ﹩{this.props.cumulative}</h4>
-            <p3 id='value' className='balance'>Updated : {date.toString()}</p3>
+            <p id='value' className='balance'>Updated : {date.toString()}</p>
             </div>
             :
             null
@@ -180,28 +178,11 @@ class Profile extends Component {
                   Cost
                 </h2>
               </th>
-              {
-                this.props.filter === 'holdings' ?
-                <th>
+               <th>
                 <h2 id="cost" onClick={this.sortPortfolio}>
                 Current Value
                 </h2>
-                </th>
-                :
-                <div>
-                <th>
-                <h2 id="cost" onClick={this.sortPortfolio}>
-                Order Type
-                </h2>
-                </th>
-                <th>
-                <h2 id="cost" onClick={this.sortPortfolio}>
-                Date/Time
-                </h2>
-                </th>
-                </div>
-              }
-
+               </th>
               </tr>
               {
 
