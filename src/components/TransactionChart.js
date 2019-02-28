@@ -16,7 +16,6 @@ const mapStateToProps = (state) => {
 class TransactionChart extends Component {
 
   render() {
-    console.log(this.props.userChart)
     return (
       <div>
         <div id="transaction-chart">

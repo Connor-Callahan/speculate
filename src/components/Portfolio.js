@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
+import ReactChartkick, { PieChart } from 'react-chartkick'
+import Chart from 'chart.js'
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -141,7 +143,6 @@ class Profile extends Component {
         this.props.portfolio ?
         <div className="table-data">
           <h1>Portfolio</h1>
-          // <h4 className='balance'>Balance : ﹩{this.props.balance}</h4>
           {
             this.props.cumulative ?
             <div id="all-balances">
@@ -152,9 +153,15 @@ class Profile extends Component {
             null
           }
           <button className="portfolio-button" onClick={this.handleCurrentVal}>Holdings</button>
-          <button id="bought" className="portfolio-button" onClick={this.filterTransactions}>Bought</button>
-          <button id="sold" className="portfolio-button" onClick={this.filterTransactions}>Sold</button>
-          <button id="all" className="portfolio-button" onClick={this.filterTransactions}>All</button>
+          {
+            <PieChart
+            width="200px"
+            legend={false}
+            donut={true}
+            prefix="$"
+            data={this.props.portfolio.map(transaction => [transaction.stock_symbol, transaction.cost])}/>
+
+          }
           <table className="user-portfolio">
            <tbody>
             <tr>

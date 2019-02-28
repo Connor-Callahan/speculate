@@ -63,6 +63,7 @@ class LoginForm extends Component {
     } else {
       alert('Username /or login incorrect, please try again.')
     }
+    console.log('here')
   }
 
   render() {

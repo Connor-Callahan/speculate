@@ -9,7 +9,6 @@ const mapStateToProps = (state) => {
     loggedIn: state.loggedIn,
     balance: state.balance,
     transactions: state.transactions,
-    transactions: state.transactions,
     firstname: state.firstname,
     id: state.id,
     }
@@ -43,7 +42,7 @@ class UserAccount extends Component {
         return transaction.stock_symbol === stock_symbol
       })
       if(duplicate) {
-        duplicate.cost += transaction.cost
+        duplicate.cost += cost
         chart.push(duplicate)
       } else {
         chart.push(transaction)
