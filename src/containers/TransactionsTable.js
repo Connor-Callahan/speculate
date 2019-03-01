@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
+import Portfolio from '../components/Portfolio'
 
 import TransactionChart from '../components/TransactionChart'
-import Portfolio from '../components/Portfolio'
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -31,7 +31,7 @@ const mapStateToProps = (state) => {
 
 class TransactionsTable extends Component {
 
-
+// filter bought/sold and all - bought/sold states as 'filtered'
    filterTransactions = (e) => {
      this.props.handleSorted(null)
      this.props.handleCurrentPort(null)
@@ -129,70 +129,83 @@ sortPortfolio = (e) => {
     return (
       <div>
       <div className="table-data">
-      <h1>All Transactions</h1>
+      {
+        this.props.portfolio ?
+        null
+        :
+        <div>
+        <h1>All Transactions</h1>
+        <h4 className='balance'>Balance : ﹩{this.props.balance}</h4>
+        <p id='value' className='balance'>Updated : {date.toString()}</p>
+        </div>
+      }
       <Portfolio />
-      <h4 className='balance'>Balance : ﹩{this.props.balance}</h4>
-      <p id='value' className='balance'>Updated : {date.toString()}</p>
-      <TransactionChart />
       <div>
-      <button id="bought" className="portfolio-button" onClick={this.filterTransactions}>Bought</button>
-      <button id="sold" className="portfolio-button" onClick={this.filterTransactions}>Sold</button>
-      <button id="all" className="portfolio-button" onClick={this.filterTransactions}>All</button>
+      <button id="bought" className="transaction-button" onClick={this.filterTransactions}>Bought</button>
+      <button id="sold" className="transaction-button" onClick={this.filterTransactions}>Sold</button>
+      <button id="all" className="transaction-button" onClick={this.filterTransactions}>All</button>
       </div>
-      <table className="user-portfolio">
-       <tbody>
+      {
+        this.props.portfolio ?
+        null
+        :
+        <div>
+        <TransactionChart />
+        <table className="user-portfolio">
+        <tbody>
         <tr>
-          <th>
-            <h2 id="symbol" onClick={this.sortPortfolio}>
-              Symbol ▾
-            </h2>
-          </th>
-          <th>
-            <h2 id="price" onClick={this.sortPortfolio}>
-              Price ▾
-            </h2>
-          </th>
-          <th>
-            <h2 id="num_shares" onClick={this.sortPortfolio}>
-              # of Shares ▾
-            </h2>
-          </th>
-          <th>
-            <h2 id="cost" onClick={this.sortPortfolio}>
-              Cost ▾
-            </h2>
-          </th>
-            <th>
-            <h2 id="cost" >
-            Order Type
-            </h2>
-            </th>
-            <th>
-            <h2 id="cost" >
-            Date/Time
-            </h2>
-            </th>
-          </tr>
-          {
-            transactions.map(transaction => {
-              return <tr key={Math.random()}>
-              <td>{transaction.stock_symbol}</td>
-              <td>${transaction.price}</td>
-              <td>{transaction.num_shares}</td>
-              <td>${transaction.cost}</td>
-              <td>{transaction.order_type}</td>
-              <td>{transaction.date_time}</td>
-              </tr>
-            })
+        <th>
+        <h2 id="symbol" onClick={this.sortPortfolio}>
+        Symbol ▾
+        </h2>
+        </th>
+        <th>
+        <h2 id="price" onClick={this.sortPortfolio}>
+        Price ▾
+        </h2>
+        </th>
+        <th>
+        <h2 id="num_shares" onClick={this.sortPortfolio}>
+        # of Shares ▾
+        </h2>
+        </th>
+        <th>
+        <h2 id="cost" onClick={this.sortPortfolio}>
+        Cost ▾
+        </h2>
+        </th>
+        <th>
+        <h2 id="cost" >
+        Order Type
+        </h2>
+        </th>
+        <th>
+        <h2 id="cost" >
+        Date/Time
+        </h2>
+        </th>
+        </tr>
+        {
+          transactions.map(transaction => {
+            return <tr key={Math.random()}>
+            <td>{transaction.stock_symbol}</td>
+            <td>${transaction.price}</td>
+            <td>{transaction.num_shares}</td>
+            <td>${transaction.cost}</td>
+            <td>{transaction.order_type}</td>
+            <td>{transaction.date_time}</td>
+            </tr>
+          })
 
-          }
+        }
 
-      </tbody>
+        </tbody>
 
-    </table>
+        </table>
       </div>
-
+      }
       </div>
+    </div>
     )
   }
 }

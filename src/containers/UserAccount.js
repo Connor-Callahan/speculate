@@ -66,7 +66,10 @@ class UserAccount extends Component {
                   :
                   <div>
                   <p>Welcome, {this.props.firstname}</p>
-                  <button className="portfolio-button" onClick={this.fetchTransactions}>View Transactions</button>
+                  <button className="transaction-button"
+                  onClick={this.fetchTransactions}>
+                  View Transactions
+                  </button>
                   </div>
                 }
                 </div>

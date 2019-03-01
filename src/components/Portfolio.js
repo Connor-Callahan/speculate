@@ -117,9 +117,7 @@ class Profile extends Component {
       this.props.handleCurrentVal(data)
       this.props.handleCumVal((cumVal).toFixed(2))
     })
-    console.log('after',portVal)
     this.props.handleCurrentPort(portVal)
-    debugger
   }
 }
 
@@ -130,7 +128,7 @@ class Profile extends Component {
     if(this.props.value != null) {
       currentStockVal = Object.values(this.props.value)
       for(let i = 0; i < currentStockVal.length; i++) {
-        this.props.portfolio[i].currentVal = (currentStockVal[i].quote.latestPrice * this.props.portfolio[i].num_shares)
+        this.props.portfolio[i].currentVal = (currentStockVal[i].quote.latestPrice)
       }
     }
 
@@ -150,9 +148,8 @@ class Profile extends Component {
             <p id='value' className='balance'>Updated : {date.toString()}</p>
             </div>
             :
-            null
+            <p>Loading...</p>
           }
-          <button className="portfolio-button" onClick={this.handleCurrentVal}>Holdings</button>
           {
             <PieChart
             width="200px"
@@ -192,7 +189,6 @@ class Profile extends Component {
                </th>
               </tr>
               {
-
                   this.props.portfolio.map(transaction => {
                     let totalVal = (transaction.currentVal * transaction.num_shares).toFixed(2)
                     let totalCost = (transaction.cost).toFixed(2)

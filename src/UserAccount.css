@@ -4,10 +4,10 @@
   overflow-x: hidden;
   padding: 2%;
   height: 65%;
-  max-width: 50%;
+  width: 50%;
   margin-top: 1%;
-  margin-left: 46%;
-  margin-right: 2%;
+  margin-left: 45%;
+  margin-right: 5%;
   /* border: 1px solid blue; */
 }
 
@@ -123,12 +123,32 @@ h2 {
 #value {
   position: relative;
   top: -20px;
+  margin-bottom: -5%;
   font-size: 10px;
   font-family: poppins;
 }
 
 .table-data {
   width: 900px;
+}
+
+.transaction-button {
+  position: relative;
+  border:1px solid #0095ff;
+  border-radius: 14px;
+  width: 90px;
+  outline: none;
+  color: #0095ff;
+  padding: 4px 8px;
+  text-align: center;
+  margin: 3px;
+  margin-left: 1px;
+  margin-bottom: 15px;
+  text-decoration: none;
+  font-size: 12px;
+  transition-duration: 0.4s;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 200;
 }
 
 .portfolio-button {
@@ -141,7 +161,7 @@ h2 {
   padding: 4px 8px;
   text-align: center;
   margin: 3px;
-  margin-left: 1px;
+  margin-left: 45%;
   margin-bottom: 15px;
   text-decoration: none;
   font-size: 12px;
