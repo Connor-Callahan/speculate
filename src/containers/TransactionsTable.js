@@ -131,7 +131,7 @@ sortPortfolio = (e) => {
       <div className="table-data">
       {
         this.props.portfolio ?
-        null
+        <button id="all" className="portfolio-button" onClick={this.filterTransactions}>All Transactions</button>
         :
         <div>
         <h1>All Transactions</h1>
@@ -140,16 +140,16 @@ sortPortfolio = (e) => {
         </div>
       }
       <Portfolio />
-      <div>
-      <button id="bought" className="transaction-button" onClick={this.filterTransactions}>Bought</button>
-      <button id="sold" className="transaction-button" onClick={this.filterTransactions}>Sold</button>
-      <button id="all" className="transaction-button" onClick={this.filterTransactions}>All</button>
-      </div>
       {
         this.props.portfolio ?
         null
         :
         <div>
+        <div>
+        <button id="bought" className="transaction-button" onClick={this.filterTransactions}>Bought</button>
+        <button id="sold" className="transaction-button" onClick={this.filterTransactions}>Sold</button>
+        <button id="all" className="transaction-button" onClick={this.filterTransactions}>All</button>
+        </div>
         <TransactionChart />
         <table className="user-portfolio">
         <tbody>

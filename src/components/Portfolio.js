@@ -21,8 +21,9 @@ const mapStateToProps = (state) => {
   }
 }
 
-class Profile extends Component {
 
+
+class Profile extends Component {
 
    handleCurrentVal = () => {
     let copy = this.props.transactions.slice().map(o => ({ ...o }))
@@ -120,6 +121,7 @@ class Profile extends Component {
     this.props.handleCurrentPort(portVal)
   }
 }
+
 
 // ------render------------------------------
   render() {
