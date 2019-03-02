@@ -21,6 +21,7 @@ const defaultState = {
   portfolio: null,
   id: null,
   transactions: [],
+  index: 10,
   filtered: null,
   sector: null,
   sorted: null,
@@ -87,6 +88,8 @@ export default(state=defaultState, action) => {
     return {...state, sorted: action.payload}
     case 'HANDLE_FILTER':
     return {...state, filtered: action.payload}
+    case 'HANDLE_INDEX':
+    return {...state, index: action.payload}
     case 'HANDLE_USER_CHART':
     return {...state, userChart: action.payload}
 

@@ -10,7 +10,8 @@ const mapDispatchToProps = (dispatch) => {
     handleSorted: (transactions) => dispatch( {type:'SORT_TRANSACTIONS', payload:transactions}),
     handleChart: (data) => dispatch( {type:'HANDLE_USER_CHART', payload:data}),
     handleCurrentPort : (port) => dispatch( {type:'HANDLE_CURRENT_PORT', payload:port}),
-    handleCurrentVal: (value) => dispatch( {type:'HANDLE_CURRENT_VALUE', payload:value})
+    handleCurrentVal: (value) => dispatch( {type:'HANDLE_CURRENT_VALUE', payload:value}),
+    handleTable: (index) => dispatch( {type:'HANDLE_INDEX', payload:index})
   }
 }
 
@@ -24,7 +25,8 @@ const mapStateToProps = (state) => {
     value: state.value,
     portfolio: state.portfolio,
     cumulative: state.cumulative,
-    userChart: state.userChart
+    userChart: state.userChart,
+    index: state.index
   }
 }
 
@@ -32,7 +34,7 @@ const mapStateToProps = (state) => {
 class TransactionsTable extends Component {
 
 // filter bought/sold and all - bought/sold states as 'filtered'
-   filterTransactions = (e) => {
+  filterTransactions = (e) => {
      this.props.handleSorted(null)
      this.props.handleCurrentPort(null)
      this.props.handleCurrentVal(null)
@@ -57,7 +59,8 @@ class TransactionsTable extends Component {
      }
    }
 
-   filterChart = (transactions) => {
+// filter transactions for bar graph (aggregate object of same stocks and their cost)
+  filterChart = (transactions) => {
      let chart = []
      let copy = transactions.slice().map(o => ({ ...o }))
      copy.forEach(transaction => {
@@ -75,15 +78,15 @@ class TransactionsTable extends Component {
      this.props.handleChart(chart)
    }
 
-sortPortfolio = (e) => {
-  let copy = null
-  let sorted = null
+  sortPortfolio = (e) => {
+     let copy = null
+     let sorted = null
 
-  if(this.props.filtered ) {
-    copy = this.props.filtered.slice()
-  } else {
-    copy = this.props.transactions.slice()
-  }
+     if(this.props.filtered ) {
+       copy = this.props.filtered.slice()
+     } else {
+       copy = this.props.transactions.slice()
+     }
 
   switch (e.target.id) {
     case 'symbol':
@@ -111,6 +114,15 @@ sortPortfolio = (e) => {
   this.props.handleSorted(sorted)
 }
 
+  handleTable = (e) => {
+    if(e.target.id === 'next') {
+      let next = this.props.index + 10
+      this.props.handleTable(next)
+    } else {
+      let previous = this.props.index - 10
+      this.props.handleTable(previous)
+    }
+  }
 // ------render------------------------------
   render() {
 
@@ -122,6 +134,13 @@ sortPortfolio = (e) => {
     } else {
       transactions = this.props.transactions
     }
+
+    let start = null
+    if(this.props.index > 7) {
+      start = this.props.index - 7
+    }
+    
+    let limit = transactions.slice(start, this.props.index)
     // create time associated with current balance value
     let date = new Date
 
@@ -150,6 +169,10 @@ sortPortfolio = (e) => {
         <button id="all" className="transaction-button" onClick={this.filterTransactions}>All</button>
         </div>
         <TransactionChart />
+        <div className="transition-arrows">
+        <button id="previous" onClick={this.handleTable}>previous</button>
+        <button id="next" onClick={this.handleTable}>next</button>
+        </div>
         <table className="user-portfolio">
         <tbody>
         <tr>
@@ -185,7 +208,7 @@ sortPortfolio = (e) => {
         </th>
         </tr>
         {
-          transactions.map(transaction => {
+          limit.map(transaction => {
             return <tr key={Math.random()}>
             <td>{transaction.stock_symbol}</td>
             <td>${transaction.price}</td>

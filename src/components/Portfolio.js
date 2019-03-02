@@ -161,7 +161,7 @@ class Profile extends Component {
             legend={false}
             donut={true}
             prefix="$"
-            data={this.props.portfolio.map(transaction => [transaction.stock_symbol, transaction.cost])}/>
+            data={this.props.portfolio.map(transaction => [transaction.stock_symbol, (transaction.currentVal * transaction.num_shares).toFixed(2)])}/>
 
           }
           <table className="user-portfolio">
@@ -197,7 +197,7 @@ class Profile extends Component {
                   this.props.portfolio.map(transaction => {
                     let totalVal = (transaction.currentVal * transaction.num_shares).toFixed(2)
                     let totalCost = (transaction.cost).toFixed(2)
-                    return <tr>
+                    return <tr key={Math.random(10)}>
                     <td>{transaction.stock_symbol}</td>
                     <td>{(transaction.price).toFixed(2)}</td>
                     <td>{transaction.num_shares}</td>
