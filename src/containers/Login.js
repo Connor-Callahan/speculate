@@ -6,6 +6,13 @@ const mapDispatchToProps = (dispatch) => {
   return {
     handleLogin: (login) => dispatch( {type:'HANDLE_USER_LOGIN', payload:login}),
     logout: (logout) => dispatch( {type:'HANDLE_LOGGED_IN', payload:logout}),
+    handleUsername: (username) => dispatch( {type: 'HANDLE_USERNAME', payload:username}),
+    handlePassword: (password) => dispatch( {type: 'HANDLE_PASSWORD', payload:password}),
+    handleFirstName: (firstname) => dispatch( {type: 'HANDLE_FIRST_NAME', payload:firstname}),
+    handleLastName: (lastname) => dispatch( {type: 'HANDLE_LAST_NAME', payload:lastname}),
+    handleUserID: (id) => dispatch( {type: 'HANDLE_USER_ID', payload:id}),
+    handleBalance: (balance) => dispatch( {type: 'HANDLE_USER_BALANCE', payload:balance}),
+    handleLoggedIn: (login) => dispatch( {type: 'HANDLE_LOGGED_IN', payload:login}),
   }
 }
 
@@ -43,6 +50,14 @@ class Login extends Component {
     })
     this.props.handleLogin(false)
     this.props.logout(false)
+    this.props.handleUsername(null)
+    this.props.handlePassword(null)
+    this.props.handleFirstName(null)
+    this.props.handleLastName(null)
+    this.props.handleBalance(null)
+    this.props.handleUserID(null)
+    this.props.handlePassword(null)
+    this.props.handleLoggedIn(false)
   }
 
   render() {

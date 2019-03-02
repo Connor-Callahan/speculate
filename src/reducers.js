@@ -22,7 +22,9 @@ const defaultState = {
   id: null,
   transactions: [],
   filtered: null,
+  sector: null,
   sorted: null,
+  alphaSort: null
 }
 
 export default(state=defaultState, action) => {
@@ -30,10 +32,14 @@ export default(state=defaultState, action) => {
   switch(action.type) {
     case 'FETCH_SYMBOLS':
     return {...state, symbols: action.payload}
+    case 'HANDLE_ALPHA_SORT':
+    return {...state, symbols: action.payload}
     case 'HANDLE_STOCK_FILTER':
     return {...state, stockFilter: action.payload}
     case 'FILTER_SYMBOLS':
     return {...state, filtered: action.payload}
+    case 'HANDLE_STOCK_SECTOR':
+    return {...state, sector: action.payload}
     case 'HANDLE_STOCK_DATA':
     return {...state, stock: action.payload}
     case 'HANDLE_STOCK_PROFILE':

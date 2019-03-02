@@ -8,16 +8,23 @@ const mapStateToProps = (state) => {
   return {
     symbols: state.symbols,
     stockFilter: state.stockFilter,
-    stock: state.stock
+    stock: state.stock,
+    sector: state.sector
   }
 }
 
 const StockList = (props) => {
+  // filter stocks by selected sector, search, -&&
   let filtered = []
 
-  if(props.stockFilter.length > 0) {
+  if(props.stockFilter.length > 0 && props.sector) {
+    filtered = (props.sector.filter(stock => stock.symbol.toLowerCase().includes(props.stockFilter.toLowerCase()) || stock.name.toLowerCase().includes(props.stockFilter.toLowerCase()))).slice(0, 7)
+  } else if(props.stockFilter.length > 0) {
     filtered = (props.symbols.filter(stock => stock.symbol.toLowerCase().includes(props.stockFilter.toLowerCase()) || stock.name.toLowerCase().includes(props.stockFilter.toLowerCase()))).slice(0, 7)
+  } else if(props.sector) {
+    filtered = props.sector
   }
+
   return <div id="stock-list">
         {
           props.stock ?

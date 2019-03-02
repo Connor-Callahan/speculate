@@ -21,12 +21,13 @@ const mapStateToProps = (state) => {
   }
 }
 
-
-
 class Profile extends Component {
 
    handleCurrentVal = () => {
+     // create a copy of all transactions in state
     let copy = this.props.transactions.slice().map(o => ({ ...o }))
+
+    // filter bought and sold
     let bought = copy.filter(transaction => {
       return transaction.order_type === 'buy'
     })
@@ -35,9 +36,9 @@ class Profile extends Component {
     })
 
     let newBoughtArr = []
-
     let newSoldArr = []
 
+    // iterate over bought/sold stocks to push a new aggregate object(if same stock found) of the entires stocks value into the new empty arrays
     bought.forEach(transaction => {
       let stock_symbol = transaction.stock_symbol
       let num_shares = transaction.num_shares
@@ -75,8 +76,8 @@ class Profile extends Component {
     })
 
     let totalCurPort = []
-    console.log('newSoldAbove', newSoldArr)
 
+    // iterate through the new arrays as before the combine the cost of any duplicate stocks
     newBoughtArr.forEach(transaction => {
       let stock_symbol = transaction.stock_symbol
       let num_shares = transaction.num_shares
@@ -87,7 +88,7 @@ class Profile extends Component {
       })
       if(foundTransaction) {
         foundTransaction.cost = cost - foundTransaction.cost
-        foundTransaction.price = foundTransaction.price
+        foundTransaction.price = price
         foundTransaction.num_shares = num_shares - foundTransaction.num_shares
         totalCurPort.push(foundTransaction)
       } else {
@@ -96,11 +97,12 @@ class Profile extends Component {
     })
 
     let cumVal = null
-
+    // filter any transactions of companies with equal number of bough/sold shares
     let portVal = totalCurPort.filter(transaction => {
       return transaction.num_shares > 0
     })
 
+    // if an equal amount of shares have been bough/sold of each stock, there should be no stocks in the portfolio
     if(portVal.length > 0) {
       let curPortVal = portVal.map(transaction => {
         return transaction.stock_symbol
@@ -108,6 +110,7 @@ class Profile extends Component {
 
     let multiStock = null
 
+    // retrieve current value for the price of each stock in portfolio
     fetch(`https://api.iextrading.com/1.0/stock/market/batch?symbols=${curPortVal}&types=quote&range=1m&last=5`)
     .then(r => r.json())
     .then(data => {
@@ -202,8 +205,6 @@ class Profile extends Component {
                     <td>${totalVal}</td>
                     </tr>
                   })
-
-
               }
 
           </tbody>
@@ -217,8 +218,6 @@ class Profile extends Component {
         >Portfolio
         </button>
       }
-
-
       </div>
     )
   }
@@ -226,99 +225,3 @@ class Profile extends Component {
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile)
-
-
-//
-// <div className="table-data">
-// <h1>All Transactions</h1>
-// <h4 className='balance'>Balance : ﹩{this.props.balance}</h4>
-// {
-//   this.props.cumulative ?
-//   <div id="all-balances">
-//   <h4 className='balance'>Value : ﹩{this.props.cumulative}</h4>
-//   <p3 id='value' className='balance'>Updated : {date.toString()}</p3>
-//   </div>
-//   :
-//   null
-// }
-// <button className="portfolio-button" onClick={this.handleCurrentVal}>Holdings</button>
-// <button id="bought" className="portfolio-button" onClick={this.filterTransactions}>Bought</button>
-// <button id="sold" className="portfolio-button" onClick={this.filterTransactions}>Sold</button>
-// <button id="all" className="portfolio-button" onClick={this.filterTransactions}>All</button>
-// <table className="user-portfolio">
-//  <tbody>
-//   <tr>
-//     <th>
-//       <h2 id="symbol" onClick={this.sortPortfolio}>
-//         Symbol ▾
-//       </h2>
-//     </th>
-//     <th>
-//       <h2 id="price" onClick={this.sortPortfolio}>
-//         Price
-//       </h2>
-//     </th>
-//     <th>
-//       <h2 id="num_shares" onClick={this.sortPortfolio}>
-//         # of Shares
-//       </h2>
-//     </th>
-//     <th>
-//       <h2 id="cost" onClick={this.sortPortfolio}>
-//         Cost
-//       </h2>
-//     </th>
-//     {
-//       this.props.filter === 'holdings' ?
-//       <th>
-//       <h2 id="cost" onClick={this.sortPortfolio}>
-//       Current Value
-//       </h2>
-//       </th>
-//       :
-//       <div>
-//       <th>
-//       <h2 id="cost" onClick={this.sortPortfolio}>
-//       Order Type
-//       </h2>
-//       </th>
-//       <th>
-//       <h2 id="cost" onClick={this.sortPortfolio}>
-//       Date/Time
-//       </h2>
-//       </th>
-//       </div>
-//     }
-//
-//     </tr>
-//     {
-//       this.props.filter === 'holdings' ?
-//         portfolio.map(transaction => {
-//           let totalVal = (transaction.currentVal * transaction.num_shares).toFixed(2)
-//           let totalCost = (transaction.cost).toFixed(2)
-//           return <tr>
-//           <td>{transaction.stock_symbol}</td>
-//           <td>{(transaction.price).toFixed(2)}</td>
-//           <td>{transaction.num_shares}</td>
-//           <td>${totalCost}</td>
-//           <td>${totalVal}</td>
-//           </tr>
-//         })
-//         :
-//         limit.map(transaction => {
-//           return <tr>
-//           <td>{transaction.stock_symbol}</td>
-//           <td>${transaction.price}</td>
-//           <td>{transaction.num_shares}</td>
-//           <td>${transaction.cost}</td>
-//           <td>{transaction.order_type}</td>
-//           <td>{transaction.date_time}</td>
-//           </tr>
-//         })
-//
-//     }
-//
-// </tbody>
-//
-// </table>
-// </div>

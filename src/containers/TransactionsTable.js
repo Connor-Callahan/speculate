@@ -62,7 +62,6 @@ class TransactionsTable extends Component {
      let copy = transactions.slice().map(o => ({ ...o }))
      copy.forEach(transaction => {
        let stock_symbol = transaction.stock_symbol
-       let cost = transaction.cost
        let duplicate = chart.find(transaction => {
          return transaction.stock_symbol === stock_symbol
        })

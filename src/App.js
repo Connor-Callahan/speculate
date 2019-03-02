@@ -46,10 +46,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      <SearchStocks />
-      <StockList fetchTransactions={this.fetchTransactions}/>
-      <UserAccount />
       <Login />
+      <SearchStocks />
+      <StockList />
+      <UserAccount />
       </div>
     );
   }
