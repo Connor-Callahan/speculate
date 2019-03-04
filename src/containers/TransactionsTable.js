@@ -115,10 +115,10 @@ class TransactionsTable extends Component {
 }
 
   handleTable = (e) => {
-    if(e.target.id === 'next') {
+    if(e.target.id === 'next' && this.props.transactions.length > this.props.index) {
       let next = this.props.index + 10
       this.props.handleTable(next)
-    } else {
+    } else if(e.target.id === 'previous' && this.props.transactions.length < this.props.index) {
       let previous = this.props.index - 10
       this.props.handleTable(previous)
     }
@@ -136,10 +136,10 @@ class TransactionsTable extends Component {
     }
 
     let start = null
-    if(this.props.index > 7) {
-      start = this.props.index - 7
+    if(this.props.index > 10) {
+      start = this.props.index - 10
     }
-    
+
     let limit = transactions.slice(start, this.props.index)
     // create time associated with current balance value
     let date = new Date
@@ -169,9 +169,10 @@ class TransactionsTable extends Component {
         <button id="all" className="transaction-button" onClick={this.filterTransactions}>All</button>
         </div>
         <TransactionChart />
+
         <div className="transition-arrows">
-        <button id="previous" onClick={this.handleTable}>previous</button>
-        <button id="next" onClick={this.handleTable}>next</button>
+        <button id="previous" className="index-button" onClick={this.handleTable}>&#8249;</button>
+        <button id="next" className="index-button" onClick={this.handleTable}>&#8250;</button>
         </div>
         <table className="user-portfolio">
         <tbody>

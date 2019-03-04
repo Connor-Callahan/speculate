@@ -58,6 +58,7 @@ class Login extends Component {
     this.props.handleUserID(null)
     this.props.handlePassword(null)
     this.props.handleLoggedIn(false)
+
   }
 
   render() {

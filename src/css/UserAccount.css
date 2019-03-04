@@ -89,8 +89,27 @@ h4 {
 /* chart for all transactions */
 #transaction-chart {
   position: relative;
-  border:1px solid #0095ff;
   width: 60%;
+}
+
+.index-button {
+  position: relative;
+  border: 1px solid #0095ff;
+  height: auto;
+  outline: none;
+  color: #0095ff;
+  padding: 4px 8px;
+  text-align: center;
+  margin: 3px;
+  margin-bottom: 15px;
+  text-decoration: none;
+  font-size: 20px;
+  transition-duration: 0.4s;
+}
+
+.index-button:hover {
+  background-color: #0095ff;
+  color: white;
 }
 
 /* styling for portfolio table */
@@ -149,6 +168,11 @@ h2 {
   transition-duration: 0.4s;
   font-family: 'Poppins', sans-serif;
   font-weight: 200;
+}
+
+.transaction-button:hover {
+  background-color: #0095ff;
+  color: white;
 }
 
 .portfolio-button {

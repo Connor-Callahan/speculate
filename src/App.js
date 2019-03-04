@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './App.css';
-import './ProfileCard.css';
-import './UserAccount.css';
+import './css/App.css';
+import './css/ProfileCard.css';
+import './css/UserAccount.css';
 import StockList from './containers/StockList'
 import Login from './containers/Login'
 import UserAccount from './containers/UserAccount'
