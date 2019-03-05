@@ -101,8 +101,10 @@ class Transaction extends Component {
           }
       }
 
+      let date = new Date()
       // distinguish between buying and selling -> create post request to transactions table
       if(e.target.id === 'buy' && Number(this.props.balance) < totalCost) {
+
         alert('Insufficient funds! Please check your current balance.')
       } else if (e.target.id === 'buy') {
         fetch('http://localhost:3000/api/v1/transactions/', {

@@ -210,13 +210,15 @@ class TransactionsTable extends Component {
         </tr>
         {
           limit.map(transaction => {
+            let date = new Date(transaction.date_time)
+            console.log('date', date)
             return <tr key={Math.random()}>
             <td>{transaction.stock_symbol}</td>
             <td>${transaction.price}</td>
             <td>{transaction.num_shares}</td>
             <td>${transaction.cost}</td>
             <td>{transaction.order_type}</td>
-            <td>{transaction.date_time}</td>
+            <td>{date.toDateString()}</td>
             </tr>
           })
 
