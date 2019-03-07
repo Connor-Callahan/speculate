@@ -4,15 +4,26 @@ html, body {
 
 #landing-header {
   font-family: 'Sarala', sans-serif;
-  font-size: 12vh;
+  font-size: 10vh;
   font-weight: 400;
 }
 
 #landing-paragraph {
-  margin-top: -12%;
   font-family: 'Sarala', sans-serif;
   font-size: 2.7vh;
   font-weight: 400;
+}
+
+hr {
+    display: block;
+    margin-before: 0.5em;
+    margin-after: 0.5em;
+    margin-start: auto;
+    margin-end: auto;
+    margin-top: -12%;
+    overflow: hidden;
+    border-style: inset;
+    border-width: 1px;
 }
 
 #login-background {
@@ -27,7 +38,7 @@ html, body {
   position: absolute;
   margin-top: 2.5%;
   margin-left: 2.5%;
-  border:3px solid black;
+  border:2px solid black;
   outline: none;
   background: transparent;
   font-size: 15px;
@@ -53,7 +64,7 @@ html, body {
   height: 50%;
   padding: 1%;
   border: 2px solid black;
-  font-family: poppins;
+  font-family: 'Sarala', sans-serif;
 }
 
 #close-login {
@@ -69,7 +80,7 @@ html, body {
   text-decoration: none;
   font-size: 14px;
   transition-duration: 0.4s;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Sarala', sans-serif;
   font-weight: 600;
 }
 
@@ -90,7 +101,7 @@ html, body {
   border-radius: 12px;
   outline: none;
   font-size: 12px;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Sarala', sans-serif;
   transition-duration: 0.4s;
   font-weight: 200;
 
@@ -124,6 +135,7 @@ html, body {
 }
 
 #login-form {
+  font-family: 'Sarala', sans-serif;
   margin-left: 40%;
   margin-bottom: 2%;
 }

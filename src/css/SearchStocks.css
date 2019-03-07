@@ -35,25 +35,11 @@
   font-weight: 100;
 }
 
-/* class for all sorting select(!!!change so filter and sort are different) */
-#sort-input {
-  position: relative;
-  outline: transparent;
-  background-color: transparent;
-  margin-right: 15px;
-  width: 10%;
-  height: auto;
-  font-size: 15px;
-  color: black;
-  font-family: 'Sarala', sans-serif;
-  border: none;
-}
-
 #search-input::placeholder {
   color: white;
 }
 
-#select-input {
+.select-input {
   position: relative;
   margin-right: 15px;
   outline: transparent;

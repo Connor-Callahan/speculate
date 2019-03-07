@@ -9,6 +9,7 @@
 #user-welcome {
   position: relative;;
   margin-left: 20%;
+  margin-right: 15%;
   margin-top: 20%;
 }
 
@@ -41,7 +42,7 @@
 
 h4 {
   font-size: 14px;
-  font-family: poppins;
+  font-family: Sarala;
   font-weight: 400;
   margin: 0;
 }
@@ -53,7 +54,7 @@ h4 {
 #table-data {
   height: auto;
   margin-left: 2%;
-  padding: 2%;
+  padding: 3%;
   margin-top: 7%;
   /* border: 5px solid black; */
 }
@@ -100,7 +101,7 @@ height: 20px;
 
 h2 {
   font-size: 12px;
-  font-family: poppins;
+  font-family: Sarala;
   text-align: left;
   height: 20px;
 }
@@ -115,7 +116,7 @@ h2 {
   top: -20px;
   margin-bottom: -5%;
   font-size: 10px;
-  font-family: poppins;
+  font-family: Sarala;
 }
 
 .table-data {
@@ -125,8 +126,7 @@ h2 {
 .transaction-button {
   position: relative;
   border:2px solid black;
-  border-radius: 14px;
-  width: 90px;
+  width: auto;
   outline: none;
   color: black;
   padding: 4px 8px;
@@ -150,15 +150,13 @@ h2 {
 #all-button {
   position: absolute;
   border:2px solid black;
-  border-radius: 14px;
   width: 120px;
   outline: none;
   color: black;
   padding: 4px 8px;
   text-align: center;
   margin: 3px;
-  margin-left: 55%;
-  margin-bottom: 5%;
+  margin-left: 60%;
   text-decoration: none;
   font-size: 12px;
   transition-duration: 0.4s;
@@ -174,15 +172,14 @@ h2 {
 .portfolio-button {
   position: absolute;
   border:2px solid black;
-  border-radius: 14px;
   width: 120px;
   outline: none;
   color: black;
   padding: 4px 8px;
   text-align: center;
   margin: 3px;
-  margin-left: 50%;
-  margin-top: -10%;
+  margin-left: 60%;
+  margin-top: -12%;
   text-decoration: none;
   font-size: 12px;
   transition-duration: 0.4s;

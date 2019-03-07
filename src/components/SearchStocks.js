@@ -53,13 +53,13 @@ class SearchStocks extends Component {
       placeholder='Type to Search Stocks'
       />
       Sort By :
-      <select id="sort-input"
+      <select className="select-input"
       onChange={this.handleSort}>
         <option value="A-Z">(A-Z)</option>
         <option value="Z-A">(Z-A)</option>
       </select>
       Filter By :
-      <select id="select-input" onChange={this.handleStockSector}>
+      <select className="select-input" onChange={this.handleStockSector}>
         <option  value="All">All</option>
         <option  value="Communication%20Services">Communication Services</option>
         <option  value="Consumer%20Discretionary">Consumer Discretionary</option>

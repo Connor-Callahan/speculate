@@ -36,11 +36,6 @@ class App extends Component {
     .then(data => {
       this.props.symbols(data)
     })
-    fetch('https://api.nytimes.com/svc/topstories/v2/business.json?api-key=v7lE9QjGViDovQFmJUTfCbfD1vUaeA4w')
-      .then(r => r.json())
-      .then(data => {
-        this.props.handleNewsFeed(data.results)
-    })
   }
 
 

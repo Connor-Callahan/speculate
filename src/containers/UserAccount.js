@@ -69,6 +69,7 @@ class UserAccount extends Component {
                   <div id="user-welcome">
                   <h1>Welcome, {this.props.firstname}</h1>
                   <h4 className='balance'>Balance : ﹩{this.props.balance}</h4>
+                  <p>Proceed to view past transactions and current holdings. Search or browse company files to exchange shares.</p>
                   <button className="transaction-button"
                   onClick={this.fetchTransactions}>
                   View Account

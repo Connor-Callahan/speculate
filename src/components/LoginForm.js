@@ -33,6 +33,12 @@ class LoginForm extends Component {
       return this.props.handleUsername(e.target.value)
       case 'password' :
       return this.props.handlePassword(e.target.value)
+      case 'balance' :
+      return this.props.handleBalance(e.target.value)
+      case 'firstname' :
+      return this.props.handleFirstName(e.target.value)
+      case 'lastname' :
+      return this.props.handleLastName(e.target.value)
       default:
     }
   }
@@ -65,6 +71,33 @@ class LoginForm extends Component {
     }
   }
 
+  createAccount = (e) => {
+    e.preventDefault()
+    fetch('http://localhost:3000/api/v1/users/', {
+      method: 'POST',
+      headers: {
+        'Content-Type' : 'application/json',
+        'Accept' : 'application/json'
+      },
+      body: JSON.stringify({
+        first_name: this.props.firstname,
+        last_name: this.props.lastname,
+        username: this.props.username,
+        password: this.props.password,
+        balance: this.props.balance
+      })
+    }, this.setState({
+      isLoggedIn: true,
+      loginContainer: false
+    }))
+    .then(r => r.json())
+    .then(data => {
+      this.setState({
+        user_id: data.id
+      })
+    })
+  }
+
   render() {
     return (
       <div id="login-container">
@@ -77,6 +110,27 @@ class LoginForm extends Component {
             <input className="login-input"  type="password" id="password"/>
               <br></br>
             <button onClick={this.submitLogin} className="form-button">Login</button>
+          </form>
+
+          <form id="create-login-form"
+          autoComplete="off"
+          onChange={this.handleFormInput} >
+            <label htmlFor="firstname">first name : </label>
+            <input className="login-input" type="text" id="firstname"/>
+              <br></br>
+            <label htmlFor="lastname">last name : </label>
+            <input className="login-input" type="text" id="lastname"/>
+              <br></br>
+            <label htmlFor="username">username : </label>
+            <input className="login-input" type="text" id="username"/>
+              <br></br>
+            <label htmlFor="password">password : </label>
+            <input className="login-input" type="password" id="password"/>
+              <br></br>
+            <label htmlFor="balance">balance : </label>
+            <input className="login-input" type="number" id="balance"/>
+              <br></br>
+          <button className="form-button" >Submit</button>
           </form>
 
         </div>
