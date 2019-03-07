@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import Landing from './Landing'
 import TransactionsTable from './TransactionsTable'
+import Portfolio from '../components/Portfolio'
 
 
 const mapStateToProps = (state) => {
@@ -11,6 +12,7 @@ const mapStateToProps = (state) => {
     transactions: state.transactions,
     firstname: state.firstname,
     id: state.id,
+    portfolio: state.portfolio
     }
 }
 
@@ -59,16 +61,17 @@ class UserAccount extends Component {
                 this.props.loggedIn ?
                 <div>
                 {
-                  this.props.transactions.length > 0 ?
+                  this.props.transactions.length > 0?
                   <div>
                   <TransactionsTable />
                   </div>
                   :
-                  <div>
-                  <p>Welcome, {this.props.firstname}</p>
+                  <div id="user-welcome">
+                  <h1>Welcome, {this.props.firstname}</h1>
+                  <h4 className='balance'>Balance : ﹩{this.props.balance}</h4>
                   <button className="transaction-button"
                   onClick={this.fetchTransactions}>
-                  View Transactions
+                  View Account
                   </button>
                   </div>
                 }

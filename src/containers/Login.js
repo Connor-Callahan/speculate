@@ -30,6 +30,7 @@ class Login extends Component {
 
 // open and close the form to login or create an account -> loginForm comp closes with login state change
   handleLogin = (e) => {
+    console.log('fuck')
     this.props.login ?
     this.props.handleLogin(false)
     :

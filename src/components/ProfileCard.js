@@ -75,6 +75,7 @@ class ProfileCard extends Component {
               width="auto"
               height="250px"
               prefix="$"
+              colors={["black"]}
               points={false}
               curve={false}
               data={this.props.chart.reduce(function(collector,value){

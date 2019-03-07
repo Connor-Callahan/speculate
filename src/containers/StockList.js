@@ -25,20 +25,29 @@ const StockList = (props) => {
     filtered = props.sector
   }
 
-  return <div id="stock-list">
+  return <div>
+          {
+            props.stock ?
+            <ProfileCard fetchTransactions={props.fetchTransactions}/>
+            :
+            null
+          }
+
+    <div id="stock-list">
         {
           props.stock ?
-          <ProfileCard fetchTransactions={props.fetchTransactions}/>
+          null
           :
-            filtered.map(stock => {
-              return <StockProfile
-              key={Math.random()}
-              symbol={stock.symbol}
-              name={stock.name}
-              />
-            })
+          filtered.map(stock => {
+            return <StockProfile
+            key={Math.random()}
+            symbol={stock.symbol}
+            name={stock.name}
+            />
+          })
         }
 
+        </div>
         </div>
 }
 

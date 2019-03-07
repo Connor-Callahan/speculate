@@ -223,7 +223,8 @@ class Profile extends Component {
         <button
         className="portfolio-button"
         onClick={this.handleCurrentVal}
-        >Portfolio
+        >
+        View Portfolio
         </button>
       }
       </div>

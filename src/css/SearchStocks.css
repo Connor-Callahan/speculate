@@ -1,15 +1,26 @@
-/* search bar input, search through all stocks */
+/* search input, search through all stocks */
+
+#search {
+  position: absolute;
+  margin-left: 50%;
+  width: 50%;
+  height: 100%;
+  color: black;
+  background: goldenrod;
+}
+
 #search-input {
   outline: none;
   position: relative;
-  margin-top: 2%;
+  margin-top: 2.5%;
   background: transparent;
   height: 35px;
-  width: 220px;
+  width: 45%;;
   color: grey;
-  margin-left: 0.5%;
-  font-size: 22px;
-  color: black;
+  margin-left: 2%;
+  margin-right: 2%;
+  font-size: 30px;
+  color: white;
   border:none;
 }
 
@@ -17,9 +28,9 @@
   position: absolute;
   width: 40%;
   height: 80%;
-  overflow-y: scroll;;
-  margin-left: 2%;
-  margin-top: 1%;
+  margin-left: 52%;
+  overflow-y: scroll;
+  margin-top: 4%;
   font-family: 'Poppins', sans-serif;
   font-weight: 100;
 }
@@ -30,11 +41,11 @@
   outline: transparent;
   background-color: transparent;
   margin-right: 15px;
-  width: 165px;
+  width: 10%;
   height: auto;
   font-size: 15px;
-  color: white;
-  font-family: 'Poppins', sans-serif;
+  color: black;
+  font-family: 'Sarala', sans-serif;
   border: none;
 }
 
@@ -47,10 +58,10 @@
   margin-right: 15px;
   outline: transparent;
   background-color: transparent;
-  width: 220px;
+  width: 10%;
   height: auto;
   font-size: 15px;
-  color: white;
-  font-family: 'Poppins', sans-serif;
+  color: black;
+  font-family: 'Sarala', sans-serif;
   border: none;
 }

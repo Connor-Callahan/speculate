@@ -42,7 +42,7 @@ class SearchStocks extends Component {
 
   render() {
     return (
-      <div id="app-header">
+      <div id="search">
 
       <input
       id="search-input"
@@ -55,8 +55,8 @@ class SearchStocks extends Component {
       Sort By :
       <select id="sort-input"
       onChange={this.handleSort}>
-        <option value="A-Z">Alphabetical (A-Z)</option>
-        <option value="Z-A">Alphabetical (Z-A)</option>
+        <option value="A-Z">(A-Z)</option>
+        <option value="Z-A">(Z-A)</option>
       </select>
       Filter By :
       <select id="select-input" onChange={this.handleStockSector}>

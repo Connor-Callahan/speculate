@@ -1,0 +1,44 @@
+/* NYTIMES logo  */
+#nytimes {
+  width: 35%;
+  margin-bottom: 20px;
+}
+
+/* newsfeed component for alternate div content  */
+.article {
+  width: 95%;
+  margin-bottom: 80px;
+}
+
+.article-header {
+  font-family: poppins;
+  width: 70%;
+  font-weight: 300;
+  font-size: 18px;
+}
+
+/* styling for links (attached to header) */
+a {
+  text-decoration: none;
+  width: 70%;
+  color: black;
+}
+
+a:hover {
+  color: black;
+}
+
+.article-image {
+  position: relative;
+  border: 1px solid black;
+  padding: 1%;
+  width: 110px;
+  margin-top: -2%;
+  margin-left: 2%;
+  margin-right: -2%;
+  float: right;
+}
+
+.article {
+  width: 90%;
+}

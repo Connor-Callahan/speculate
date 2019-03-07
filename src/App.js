@@ -47,10 +47,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      <Login />
+      <UserAccount />
       <SearchStocks />
       <StockList />
-      <UserAccount />
+      <Login />
       </div>
     );
   }
