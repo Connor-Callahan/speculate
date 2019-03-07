@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './css/App.css';
 import './css/ProfileCard.css';
 import './css/UserAccount.css';
+import './css/SearchStocks.css';
 import StockList from './containers/StockList'
 import Login from './containers/Login'
 import UserAccount from './containers/UserAccount'

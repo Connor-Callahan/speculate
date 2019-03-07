@@ -1,0 +1,56 @@
+/* search bar input, search through all stocks */
+#search-input {
+  outline: none;
+  position: relative;
+  margin-top: 2%;
+  background: transparent;
+  height: 35px;
+  width: 220px;
+  color: grey;
+  margin-left: 0.5%;
+  font-size: 22px;
+  color: black;
+  border:none;
+}
+
+#stock-list {
+  position: absolute;
+  width: 40%;
+  height: 80%;
+  overflow-y: scroll;;
+  margin-left: 2%;
+  margin-top: 1%;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 100;
+}
+
+/* class for all sorting select(!!!change so filter and sort are different) */
+#sort-input {
+  position: relative;
+  outline: transparent;
+  background-color: transparent;
+  margin-right: 15px;
+  width: 165px;
+  height: auto;
+  font-size: 15px;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  border: none;
+}
+
+#search-input::placeholder {
+  color: white;
+}
+
+#select-input {
+  position: relative;
+  margin-right: 15px;
+  outline: transparent;
+  background-color: transparent;
+  width: 220px;
+  height: auto;
+  font-size: 15px;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  border: none;
+}

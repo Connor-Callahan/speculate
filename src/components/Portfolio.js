@@ -126,16 +126,24 @@ class Profile extends Component {
 }
 
 
+
+
+
 // ------render------------------------------
   render() {
     let currentStockVal = []
+    let sectorAnalysis = []
 
     if(this.props.value != null) {
       currentStockVal = Object.values(this.props.value)
       for(let i = 0; i < currentStockVal.length; i++) {
         this.props.portfolio[i].currentVal = (currentStockVal[i].quote.latestPrice)
       }
+      this.props.portfolio.forEach(transaction => {
+        console.log(transaction)
+      })
     }
+
 
     // create time associated with updated portfolio value
     let date = new Date
@@ -168,27 +176,27 @@ class Profile extends Component {
            <tbody>
             <tr>
               <th>
-                <h2 id="symbol" onClick={this.sortPortfolio}>
+                <h2 id="symbol" >
                   Symbol ▾
                 </h2>
               </th>
               <th>
-                <h2 id="price" onClick={this.sortPortfolio}>
+                <h2 id="price" >
                   Price
                 </h2>
               </th>
               <th>
-                <h2 id="num_shares" onClick={this.sortPortfolio}>
+                <h2 id="num_shares" >
                   # of Shares
                 </h2>
               </th>
               <th>
-                <h2 id="cost" onClick={this.sortPortfolio}>
+                <h2 id="cost" >
                   Cost
                 </h2>
               </th>
                <th>
-                <h2 id="cost" onClick={this.sortPortfolio}>
+                <h2 id="cost">
                 Current Value
                 </h2>
                </th>

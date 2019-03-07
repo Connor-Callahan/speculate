@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import NewsFeed from '../components/NewsFeed'
+import Landing from './Landing'
 import TransactionsTable from './TransactionsTable'
 
 
@@ -76,7 +76,7 @@ class UserAccount extends Component {
 
                 :
                 <div>
-                <NewsFeed />
+                <Landing />
                 </div>
               }
             </div>
