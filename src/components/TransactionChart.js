@@ -24,6 +24,7 @@ class TransactionChart extends Component {
           <ColumnChart
           height="200px"
           padding="20px"
+          colors={["goldenrod"]}
           // xtitle="Company"
           // ytitle="Number of Shares"
           data={this.props.userChart.map(transaction => [transaction.stock_symbol, transaction.cost])} />

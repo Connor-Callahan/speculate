@@ -149,7 +149,7 @@ class TransactionsTable extends Component {
       <div id="table-data">
       {
         this.props.portfolio ?
-        <button id="all" className="portfolio-button" onClick={this.filterTransactions}>All Transactions</button>
+        <button id="all" id="all-button" onClick={this.filterTransactions}>All Transactions</button>
         :
         <div>
         <h1>All Transactions</h1>

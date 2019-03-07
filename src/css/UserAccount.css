@@ -147,6 +147,30 @@ h2 {
   color: white;
 }
 
+#all-button {
+  position: absolute;
+  border:2px solid black;
+  border-radius: 14px;
+  width: 120px;
+  outline: none;
+  color: black;
+  padding: 4px 8px;
+  text-align: center;
+  margin: 3px;
+  margin-left: 55%;
+  margin-bottom: 5%;
+  text-decoration: none;
+  font-size: 12px;
+  transition-duration: 0.4s;
+  font-family: 'Sarala', sans-serif;
+  font-weight: 700;
+}
+
+#all-button:hover {
+  background-color: black;
+  color: white;
+}
+
 .portfolio-button {
   position: absolute;
   border:2px solid black;
