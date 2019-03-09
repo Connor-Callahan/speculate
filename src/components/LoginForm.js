@@ -20,6 +20,9 @@ const mapStateToProps = (state) => {
     username: state.username,
     password: state.password,
     loggedIn: state.loggedIn,
+    firstname: state.firstname,
+    lastname: state.lastname,
+    balance: state.balance,
     id: state.id
   }
 }
@@ -92,9 +95,9 @@ class LoginForm extends Component {
     }))
     .then(r => r.json())
     .then(data => {
-      this.setState({
-        user_id: data.id
-      })
+      this.props.handleUserID(data.id)
+      this.props.handleLogin(false)
+      this.props.handleLoggedIn(false)
     })
   }
 
@@ -130,7 +133,7 @@ class LoginForm extends Component {
             <label htmlFor="balance">balance : </label>
             <input className="login-input" type="number" id="balance"/>
               <br></br>
-          <button className="form-button" >Submit</button>
+          <button className="form-button" onClick={this.createAccount}>Submit</button>
           </form>
 
         </div>

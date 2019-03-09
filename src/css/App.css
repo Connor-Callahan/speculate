@@ -8,6 +8,12 @@ html, body {
   font-weight: 400;
 }
 
+#landing-line {
+  position: relative;
+  font-size: 10vh;
+  z-index: -1000;
+}
+
 #landing-paragraph {
   font-family: 'Sarala', sans-serif;
   font-size: 2.7vh;
@@ -35,12 +41,12 @@ hr {
 }
 
 #login-button {
-  position: absolute;
+  position: relative;
   margin-top: 2.5%;
   margin-left: 2.5%;
   border:2px solid black;
   outline: none;
-  background: transparent;
+  background: white;
   font-size: 15px;
   font-family: 'Sarala', sans-serif;
   font-weight: 700;
@@ -48,6 +54,24 @@ hr {
 }
 
 #login-button:hover {
+  background-color: black;
+  color: white;
+}
+
+#logout-button {
+  position: relative;
+  margin-top: 2.5%;
+  margin-left: 36%;
+  border:2px solid black;
+  outline: none;
+  background: white;
+  font-size: 15px;
+  font-family: 'Sarala', sans-serif;
+  font-weight: 700;
+  transition-duration: 0.4s;
+}
+
+#logout-button:hover {
   background-color: black;
   color: white;
 }
@@ -61,7 +85,7 @@ hr {
   right: 0;
   left: 0;
   width: 50%;
-  height: 50%;
+  height: auto;
   padding: 1%;
   border: 2px solid black;
   font-family: 'Sarala', sans-serif;

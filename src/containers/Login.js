@@ -74,7 +74,7 @@ class Login extends Component {
       {
         this.props.loggedIn ?
         <button
-        id="login-button"
+        id="logout-button"
         onClick={this.handleLogout}>
         Logout
         </button>

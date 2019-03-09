@@ -17,7 +17,7 @@ const Landing = (props) => {
           :
           <div id="landing">
           <h1 id="landing-header">Speculate.</h1>
-          <hr></hr>
+          <hr id="landing-line"></hr>
           <p id="landing-paragraph">An application to simulate trading shares of companies listed on the U.S. Stock Exchange. Create an account to start adding virtual orders and tracking trades. Use the search bar to locate a company profile or browse by market sector.</p>
           </div>
         }
