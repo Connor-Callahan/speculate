@@ -1,68 +1,39 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Speculate.
 
-## Available Scripts
+This application was created to simulate trading shares of companies listed on the U.S. Stock Exchange. Add shares of companies with the money in your balance to create a portfolio of stocks. Sell shares within that portfolio to add to your balance. Track the performance of your portfolio over time and review detailed analytics of your transactions, earnings and returns.
 
-In the project directory, you can run:
+## Components
 
-### `npm start`
+#### LoginForm.js
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Contains the form to either create a new account or log into an account as a pre-existing user. Two separate functions to 'login' and 'create' to initiate the createAccount and handleLogin functions with the form values.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+### Portfolio.js
 
-### `npm test`
+An aggregate of all stocks currently owned in the portfolio. The function handleCurrentVal filters bought and sold to first determine which stocks exist in the portfolio (shares bought - shares sold) and create a new object with the values of the same stock combined. Using chartkick to render a pie chart of cost value. The current value of the total number of shares of stock is also updated in this function.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### ProfileCard.js
 
-### `npm run build`
+Data, description and price history chart for each company. Rendered by a click event located on each company header mapped in StockList.js. Conditionally rendered by setting state of state.stock.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### SearchStocks.js
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+Search bar, sector filter and alphabetical sorting. Listed results are dynamically sliced to the first 7 during search. When a sector is selected the returned data is sliced to stocks with a market cap above $17,000,000,000. (all stocks within the sector are still searchable, just not part of the inital browse.) 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Transaction.js
 
-### `npm run eject`
+### TransactionChart.js
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### TransactionTable.js
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Containers
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Landing.js
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Login.js
 
-## Learn More
+### StockList.js
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### StockProfile.js
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+### UserAccount.js
