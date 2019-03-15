@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 
+import { searchSymbols, sortSymbols } from '../actions'
+
 const mapStateToProps = (state) => {
   return {
     symbols: state.symbols,
@@ -11,9 +13,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleStockFilter: (event) => dispatch({type:'HANDLE_STOCK_FILTER', payload: event.target.value}),
+    searchSymbols: (event) => dispatch(searchSymbols(event)),
     handleSector: (data) => dispatch({type:'HANDLE_STOCK_SECTOR', payload: data}),
-    handleSymbols: (alphaSort) => dispatch({type:'HANDLE_ALPHA_SORT', payload: alphaSort})
+    sortSymbols: (sort) => dispatch(sortSymbols(sort))
   }
 }
 
@@ -33,10 +35,10 @@ class SearchStocks extends Component {
   e.persist()
   let sortedStocks = this.props.symbols.slice().map(o => ({ ...o }))
   if(e.target.value === 'Z-A') {
-    this.props.handleSymbols(sortedStocks.reverse())
+    this.props.sortSymbols(sortedStocks.reverse())
   }
   else if(e.target.value === 'A-Z') {
-    this.props.handleSymbols(sortedStocks.reverse())
+    this.props.sortSymbols(sortedStocks.reverse())
   }
 }
 

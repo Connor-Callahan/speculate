@@ -10,6 +10,8 @@ import SearchStocks from './components/SearchStocks'
 
 import {connect} from 'react-redux'
 
+import { fetchSymbols } from './actions'
+
 
 const mapStateToProps = (state) => {
   return {
@@ -21,7 +23,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    symbols: (data) => dispatch({type:'FETCH_SYMBOLS', payload:data}),
+    fetchSymbols: (symbols) => dispatch(fetchSymbols(symbols)),
     handleNewsFeed: (newsFeed) => dispatch( {type:'HANDLE_NEWS_FEED', payload:newsFeed}),
   }
 }
@@ -34,7 +36,7 @@ class App extends Component {
     fetch('https://api.iextrading.com/1.0/ref-data/symbols')
     .then(r => r.json())
     .then(data => {
-      this.props.symbols(data)
+      this.props.fetchSymbols(data)
     })
   }
 

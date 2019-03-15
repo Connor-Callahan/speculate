@@ -33,9 +33,9 @@ export default(state=defaultState, action) => {
   switch(action.type) {
     case 'FETCH_SYMBOLS':
     return {...state, symbols: action.payload}
-    case 'HANDLE_ALPHA_SORT':
+    case 'ALPHA_SORT':
     return {...state, symbols: action.payload}
-    case 'HANDLE_STOCK_FILTER':
+    case 'FILTER_SEARCH':
     return {...state, stockFilter: action.payload}
     case 'FILTER_SYMBOLS':
     return {...state, filtered: action.payload}

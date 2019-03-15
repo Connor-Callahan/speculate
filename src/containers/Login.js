@@ -13,7 +13,7 @@ const mapDispatchToProps = (dispatch) => {
     handleUserID: (id) => dispatch( {type: 'HANDLE_USER_ID', payload:id}),
     handleBalance: (balance) => dispatch( {type: 'HANDLE_USER_BALANCE', payload:balance}),
     handleLoggedIn: (login) => dispatch( {type: 'HANDLE_LOGGED_IN', payload:login}),
-    handleTransactions: (transactions) => dispatch( {type:'FETCH_TRANSACTIONS', payload:transactions})
+    fetchTransactions: (transactions) => dispatch( {type:'FETCH_TRANSACTIONS', payload:transactions})
   }
 }
 
@@ -60,7 +60,7 @@ class Login extends Component {
     this.props.handleUserID(null)
     this.props.handlePassword(null)
     this.props.handleLoggedIn(false)
-    this.props.handleTransactions([])
+    this.props.fetchTransactions([])
 
   }
 

@@ -50,7 +50,7 @@ Displays a list of stocks that updates based on user search input. Can be filter
 
 ### StockProfile.js
 
-Child to StockList and rendered based on the user search input. When a StockProfile is clicked the fetch for stock data (52week high, lo, P/E ratio, etc.), company description, data to render the price chart, and the associated icon. The ProfileCard is then rendered with all of the data needed to display. 
+Child to StockList and rendered based on the user search input. When a StockProfile is clicked the fetch for stock data (52week high, lo, P/E ratio, etc.), company description, data to render the price chart, and the associated icon. The ProfileCard is then rendered with all of the data needed to display.
 
 ### UserAccount.js
 
