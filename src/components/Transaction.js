@@ -121,7 +121,7 @@ class Transaction extends Component {
             cost: totalCost,
             commission: 7,
             order_type: e.target.id,
-            date_time: price.quote.latestTime
+            date_time: date
           })
         })
         .then(r => r.json())
@@ -148,7 +148,7 @@ class Transaction extends Component {
             cost: totalCost,
             commission: 7,
             order_type: e.target.id,
-            date_time: price.quote.latestTime
+            date_time: date
           })
         })
         .then(r => r.json())
