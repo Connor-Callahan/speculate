@@ -31,6 +31,7 @@ const defaultState = {
 export default(state=defaultState, action) => {
 
   switch(action.type) {
+    // Stock Data/Presentation ---->
     case 'FETCH_SYMBOLS':
     return {...state, symbols: action.payload}
     case 'ALPHA_SORT':
@@ -39,31 +40,33 @@ export default(state=defaultState, action) => {
     return {...state, stockFilter: action.payload}
     case 'FILTER_SYMBOLS':
     return {...state, filtered: action.payload}
-    case 'HANDLE_STOCK_SECTOR':
+    case 'FILTER_SECTOR':
     return {...state, sector: action.payload}
-    case 'HANDLE_STOCK_DATA':
+    case 'SELECT_STOCK':
     return {...state, stock: action.payload}
-    case 'HANDLE_STOCK_PROFILE':
+    case 'STOCK_PROFILE':
     return {...state, profile: action.payload}
-    case 'HANDLE_STOCK_CHART':
+    case 'STOCK_CHART':
     return {...state, chart: action.payload}
-    case 'HANDLE_STOCK_ICON':
+    case 'STOCK_ICON':
     return {...state, icon: action.payload}
-    case 'HANDLE_NEWS_FEED':
-    return {...state, newsFeed: action.payload}
     // User login ------------>
-    case 'HANDLE_USER_LOGIN':
+    case 'USER_LOGIN':
     return {...state, login: action.payload}
-    case 'HANDLE_USERNAME':
+    case 'USERNAME':
     return {...state, username: action.payload}
-    case 'HANDLE_PASSWORD':
+    case 'PASSWORD':
     return {...state, password: action.payload}
-    case 'HANDLE_FIRST_NAME':
+    case 'FIRST_NAME':
     return {...state, firstname: action.payload}
-    case 'HANDLE_LAST_NAME':
+    case 'LAST_NAME':
     return {...state, lastname: action.payload}
-    case 'HANDLE_USER_BALANCE':
+    case 'USER_BALANCE':
     return {...state, balance: action.payload}
+    case 'USER_ID':
+    return {...state, id: action.payload}
+    case 'LOGGED_IN':
+    return {...state, loggedIn: action.payload}
     // Portfolio -------------->
     case 'HANDLE_CURRENT_VALUE':
     return {...state, value: action.payload}
@@ -71,10 +74,6 @@ export default(state=defaultState, action) => {
     return {...state, cumulative: action.payload}
     case 'HANDLE_CURRENT_PORT':
     return {...state, portfolio: action.payload}
-    case 'HANDLE_USER_ID':
-    return {...state, id: action.payload}
-    case 'HANDLE_LOGGED_IN':
-    return {...state, loggedIn: action.payload}
     // transaction
     case 'FETCH_TRANSACTIONS':
     return {...state, transactions: action.payload}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 
-import { searchSymbols, sortSymbols } from '../actions'
+import { searchSymbols, sortSymbols, filterSector } from '../actions'
 
 const mapStateToProps = (state) => {
   return {
@@ -14,7 +14,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     searchSymbols: (event) => dispatch(searchSymbols(event)),
-    handleSector: (data) => dispatch({type:'HANDLE_STOCK_SECTOR', payload: data}),
+    filterSector: (sector) => dispatch(filterSector(sector)),
     sortSymbols: (sort) => dispatch(sortSymbols(sort))
   }
 }
@@ -27,8 +27,8 @@ class SearchStocks extends Component {
     for(let i = 0; i < selectedSector.length; i++) {
       selectedSector[i].name = selectedSector[i].companyName
     }
-    const sectorFilter = selectedSector.filter(sector => sector.marketCap > 17000000000)
-    this.props.handleSector(sectorFilter)
+    const filter = selectedSector.filter(sector => sector.marketCap > 17000000000)
+    this.props.filterSector(filter)
   }
 
   handleSort = (e) => {
@@ -50,7 +50,7 @@ class SearchStocks extends Component {
       id="search-input"
       autoComplete="off"
       type="text"
-      onChange={this.props.handleStockFilter}
+      onChange={this.props.searchSymbols}
       value={this.props.stockFilter}
       placeholder='Type to Search Stocks'
       />

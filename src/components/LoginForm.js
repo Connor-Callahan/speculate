@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 
+import { loginUser, setUsername, setPassword, setFirstname, setLastname, setUserID, setBalance, loggedIn} from '../actions'
+
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleLogin: (login) => dispatch( {type:'HANDLE_USER_LOGIN', payload:login}),
-    handleUsername: (username) => dispatch( {type: 'HANDLE_USERNAME', payload:username}),
-    handlePassword: (password) => dispatch( {type: 'HANDLE_PASSWORD', payload:password}),
-    handleFirstName: (firstname) => dispatch( {type: 'HANDLE_FIRST_NAME', payload:firstname}),
-    handleLastName: (lastname) => dispatch( {type: 'HANDLE_LAST_NAME', payload:lastname}),
-    handleUserID: (id) => dispatch( {type: 'HANDLE_USER_ID', payload:id}),
-    handleBalance: (balance) => dispatch( {type: 'HANDLE_USER_BALANCE', payload:balance}),
-    handleLoggedIn: (login) => dispatch( {type: 'HANDLE_LOGGED_IN', payload:login}),
+    loginUser: (user) => dispatch(loginUser(user)),
+    setUsername: (username) => dispatch(setUsername(username)),
+    handlePassword: (password) => dispatch(setPassword(password)),
+    setFirstname: (firstname) => dispatch(setFirstname(firstname)),
+    setLastname: (lastname) => dispatch(setLastname(lastname)),
+    setUserID: (id) => dispatch(setUserID(id)),
+    setBalance: (balance) => dispatch(setBalance(balance)),
+    loggedIn: (login) => dispatch(loggedIn(login)),
   }
 }
 
@@ -37,11 +39,11 @@ class LoginForm extends Component {
       case 'password' :
       return this.props.handlePassword(e.target.value)
       case 'balance' :
-      return this.props.handleBalance(e.target.value)
+      return this.props.setBalance(e.target.value)
       case 'firstname' :
-      return this.props.handleFirstName(e.target.value)
+      return this.props.setFirstname(e.target.value)
       case 'lastname' :
-      return this.props.handleLastName(e.target.value)
+      return this.props.setLastname(e.target.value)
       default:
     }
   }
@@ -62,13 +64,13 @@ class LoginForm extends Component {
     if(currentUser) {
       this.props.handleUsername(currentUser.username)
       this.props.handlePassword(currentUser.password)
-      this.props.handleFirstName(currentUser.first_name)
-      this.props.handleLastName(currentUser.last_name)
-      this.props.handleBalance(currentUser.balance)
-      this.props.handleUserID(currentUser.id)
+      this.props.setFirstname(currentUser.first_name)
+      this.props.setLastname(currentUser.last_name)
+      this.props.setBalance(currentUser.balance)
+      this.props.setUserID(currentUser.id)
       this.props.handlePassword(currentUser.user_id)
       this.props.handleLogin(false)
-      this.props.handleLoggedIn(true)
+      this.props.loggedIn(true)
     } else {
       alert('Username /or login incorrect, please try again.')
     }
@@ -95,9 +97,9 @@ class LoginForm extends Component {
     }))
     .then(r => r.json())
     .then(data => {
-      this.props.handleUserID(data.id)
+      this.props.setUserID(data.id)
       this.props.handleLogin(false)
-      this.props.handleLoggedIn(false)
+      this.props.loggedIn(false)
     })
   }
 

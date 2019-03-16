@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 
+import { selectStock, setProfile, setChart, setIcon } from '../actions'
+
+
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleStock: (selectedStock) => dispatch( {type:'HANDLE_STOCK_DATA', payload:selectedStock}),
-    profile: (selectedStockProfile) => dispatch( {type:'HANDLE_STOCK_PROFILE', payload:selectedStockProfile}),
-    chart: (selectedChart) => dispatch( {type:'HANDLE_STOCK_CHART', payload:selectedChart}),
-    handleIcon: (stockIcon) => dispatch( {type:'HANDLE_STOCK_ICON', payload:stockIcon}),
+    selectStock: (stock) => dispatch(selectStock(stock)),
+    setProfile: (description) => dispatch(setProfile(description)),
+    setChart: (chart) => dispatch(setChart(chart)),
+    setIcon: (icon) => dispatch(setIcon(icon)),
     handleFilter: (filtered) => dispatch( {type:'HANDLE_FILTER', payload:filtered}),
   }
 }
@@ -30,10 +33,10 @@ class StockProfile extends Component {
     const stockIcon = await fetch(`https://api.iextrading.com/1.0/stock/${target.id}/logo`)
     .then(r => r.json())
     this.props.handleFilter(null)
-    this.props.handleIcon(stockIcon)
-    this.props.profile(selectedStockProfile)
-    this.props.chart(selectedChart)
-    this.props.handleStock(selectedStock)
+    this.props.setIcon(stockIcon)
+    this.props.setProfile(selectedStockProfile)
+    this.props.setChart(selectedChart)
+    this.props.selectStock(selectedStock)
   }
 
   render() {
