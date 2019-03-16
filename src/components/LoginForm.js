@@ -7,7 +7,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     loginUser: (user) => dispatch(loginUser(user)),
     setUsername: (username) => dispatch(setUsername(username)),
-    handlePassword: (password) => dispatch(setPassword(password)),
+    setPassword: (password) => dispatch(setPassword(password)),
     setFirstname: (firstname) => dispatch(setFirstname(firstname)),
     setLastname: (lastname) => dispatch(setLastname(lastname)),
     setUserID: (id) => dispatch(setUserID(id)),
@@ -63,12 +63,11 @@ class LoginForm extends Component {
     })
     if(currentUser) {
       this.props.handleUsername(currentUser.username)
-      this.props.handlePassword(currentUser.password)
+      this.props.setPassword(currentUser.password)
       this.props.setFirstname(currentUser.first_name)
       this.props.setLastname(currentUser.last_name)
       this.props.setBalance(currentUser.balance)
       this.props.setUserID(currentUser.id)
-      this.props.handlePassword(currentUser.user_id)
       this.props.handleLogin(false)
       this.props.loggedIn(true)
     } else {

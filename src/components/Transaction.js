@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 
+import { createTransaction, addTransaction, setBalance } from '../actions'
+
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleTransaction: (amount) => dispatch( {type:'HANDLE_TRANSACTION', payload:amount}),
-    addTransaction: (transaction) => dispatch( {type:'ADD_TRANSACTION', payload:transaction}),
-    adjustBalance: (amount) => dispatch( {type:'HANDLE_USER_BALANCE', payload:amount}),
+    createTransaction: (amount) => dispatch(createTransaction(amount)),
+    addTransaction: (transaction) => dispatch(addTransaction(transaction)),
+    adjustBalance: (amount) => dispatch(setBalance(amount))
   }
 }
 
@@ -22,7 +24,7 @@ const mapStateToProps = (state) => {
 class Transaction extends Component {
 
   handleFormInput = (e) => {
-    this.props.handleTransaction(e.target.value)
+    this.props.createTransaction(e.target.value)
   }
 
   handleOrder = async (e) => {

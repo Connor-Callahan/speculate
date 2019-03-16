@@ -4,6 +4,8 @@ import Landing from './Landing'
 import TransactionsTable from './TransactionsTable'
 import Portfolio from '../components/Portfolio'
 
+import { fetchTransactions, setUserChart } from '../actions'
+
 
 const mapStateToProps = (state) => {
   return {
@@ -18,19 +20,19 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleTransactions: (transactions) => dispatch( {type:'FETCH_TRANSACTIONS', payload:transactions}),
-    handleChart: (data) => dispatch( {type:'HANDLE_USER_CHART', payload:data})
+    fetchTransactions: (transactions) => dispatch(fetchTransactions(transactions)),
+    setUserChart: (chart) => dispatch(setUserChart(chart))
   }
 }
 
 
 class UserAccount extends Component {
 
-  fetchTransactions = async() => {
+  handleTransactions = async() => {
   let transactions = await fetch('http://localhost:3000/api/v1/transactions/')
     .then(r => r.json())
   let filtered = transactions.filter(transaction => transaction.user_id === this.props.id)
-   this.props.handleTransactions(filtered)
+   this.props.fetchTransactions(filtered)
    this.handleChart()
   }
 
@@ -51,7 +53,7 @@ class UserAccount extends Component {
       }
 
     })
-    this.props.handleChart(chart)
+    this.props.setUserChart(chart)
   }
 
   render(){
@@ -71,7 +73,7 @@ class UserAccount extends Component {
                   <h4 className='balance'>Balance : ﹩{this.props.balance}</h4>
                   <p>Proceed to view past transactions and current holdings. Search or browse company files to exchange shares.</p>
                   <button className="transaction-button"
-                  onClick={this.fetchTransactions}>
+                  onClick={this.handleTransactions}>
                   View Account
                   </button>
                   </div>

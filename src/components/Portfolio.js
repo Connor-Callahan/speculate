@@ -3,11 +3,12 @@ import {connect} from 'react-redux'
 import ReactChartkick, { PieChart } from 'react-chartkick'
 import Chart from 'chart.js'
 
+import { setPortfolio, setCurrentValue, setTotalValue } from '../actions'
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleCurrentPort : (port) => dispatch( {type:'HANDLE_CURRENT_PORT', payload:port}),
-    handleCurrentVal: (value) => dispatch( {type:'HANDLE_CURRENT_VALUE', payload:value}),
-    handleCumVal: (value) => dispatch( {type:'HANDLE_CUMULATIVE_VALUE', payload:value}),
+    setPortfolio : (portfolio) => dispatch(setPortfolio(portfolio)),
+    setCurrentValue: (value) => dispatch(setCurrentValue(value)),
+    setTotalValue: (total) => dispatch(setTotalValue(total)),
   }
 }
 
@@ -23,7 +24,7 @@ const mapStateToProps = (state) => {
 
 class Profile extends Component {
 
-   handleCurrentVal = () => {
+   handleValue = () => {
      // create a copy of all transactions in state
     let copy = this.props.transactions.slice().map(o => ({ ...o }))
 
@@ -118,10 +119,10 @@ class Profile extends Component {
         multiStock = portVal.find(transaction => transaction.stock_symbol === symbol)
         cumVal += data[symbol].quote.latestPrice * multiStock.num_shares
       })
-      this.props.handleCurrentVal(data)
-      this.props.handleCumVal((cumVal).toFixed(2))
+      this.props.setCurrentValue(data)
+      this.props.setTotalValue((cumVal).toFixed(2))
     })
-    this.props.handleCurrentPort(portVal)
+    this.props.setPortfolio(portVal)
   }
 }
 
@@ -222,7 +223,7 @@ class Profile extends Component {
         :
         <button
         className="portfolio-button"
-        onClick={this.handleCurrentVal}
+        onClick={this.handleValue}
         >
         View Portfolio
         </button>

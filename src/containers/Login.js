@@ -2,18 +2,20 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import LoginForm from '../components/LoginForm'
 
+import { loginUser, loggedIn, setUsername, setPassword, setFirstname, setLastname, setUserID, setBalance, fetchTransactions} from '../actions'
+
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleLogin: (login) => dispatch( {type:'HANDLE_USER_LOGIN', payload:login}),
-    logout: (logout) => dispatch( {type:'HANDLE_LOGGED_IN', payload:logout}),
-    handleUsername: (username) => dispatch( {type: 'HANDLE_USERNAME', payload:username}),
-    handlePassword: (password) => dispatch( {type: 'HANDLE_PASSWORD', payload:password}),
-    handleFirstName: (firstname) => dispatch( {type: 'HANDLE_FIRST_NAME', payload:firstname}),
-    handleLastName: (lastname) => dispatch( {type: 'HANDLE_LAST_NAME', payload:lastname}),
-    handleUserID: (id) => dispatch( {type: 'HANDLE_USER_ID', payload:id}),
-    handleBalance: (balance) => dispatch( {type: 'HANDLE_USER_BALANCE', payload:balance}),
-    handleLoggedIn: (login) => dispatch( {type: 'HANDLE_LOGGED_IN', payload:login}),
-    fetchTransactions: (transactions) => dispatch( {type:'FETCH_TRANSACTIONS', payload:transactions})
+    loginUser: (login) => dispatch(loginUser(login)),
+    logout: (logout) => dispatch(loggedIn(logout)),
+    loggedIn: (login) => dispatch(loggedIn(login)),
+    setUsername: (username) => dispatch(setUsername(username)),
+    setPassword: (password) => dispatch(setPassword(password)),
+    setFirstname: (firstname) => dispatch(setFirstname(firstname)),
+    setLastname: (lastname) => dispatch(setLastname(lastname)),
+    setUserID: (id) => dispatch(setUserID(id)),
+    setBalance: (balance) => dispatch(setBalance(balance)),
+    fetchTransactions: (transactions) => dispatch(fetchTransactions(transactions))
   }
 }
 
@@ -31,11 +33,10 @@ class Login extends Component {
 
 // open and close the form to login or create an account -> loginForm comp closes with login state change
   handleLogin = (e) => {
-    console.log('fuck')
     this.props.login ?
-    this.props.handleLogin(false)
+    this.props.loginUser(false)
     :
-    this.props.handleLogin(true)
+    this.props.loginUser(true)
   }
 
 // change login state and loggedIn (div to login and button to logout) -> patch balance to user table on logout
@@ -50,18 +51,17 @@ class Login extends Component {
         balance: this.props.balance
       })
     })
-    this.props.handleLogin(false)
+    this.props.loginUser(false)
     this.props.logout(false)
-    this.props.handleUsername(null)
-    this.props.handlePassword(null)
-    this.props.handleFirstName(null)
-    this.props.handleLastName(null)
-    this.props.handleBalance(null)
-    this.props.handleUserID(null)
-    this.props.handlePassword(null)
-    this.props.handleLoggedIn(false)
+    this.props.setUsername(null)
+    this.props.setPassword(null)
+    this.props.setFirstname(null)
+    this.props.setLastname(null)
+    this.props.setBalance(null)
+    this.props.setUserID(null)
+    this.props.setPassword(null)
+    this.props.loggedIn(false)
     this.props.fetchTransactions([])
-
   }
 
   render() {

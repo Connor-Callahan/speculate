@@ -68,28 +68,28 @@ export default(state=defaultState, action) => {
     case 'LOGGED_IN':
     return {...state, loggedIn: action.payload}
     // Portfolio -------------->
-    case 'HANDLE_CURRENT_VALUE':
-    return {...state, value: action.payload}
-    case 'HANDLE_CUMULATIVE_VALUE':
-    return {...state, cumulative: action.payload}
-    case 'HANDLE_CURRENT_PORT':
+    case 'CURRENT_PORTFOLIO':
     return {...state, portfolio: action.payload}
-    // transaction
-    case 'FETCH_TRANSACTIONS':
-    return {...state, transactions: action.payload}
-    case 'HANDLE_TRANSACTION':
+    case 'CURRENT_VALUE':
+    return {...state, value: action.payload}
+    case 'CUMULATIVE_VALUE':
+    return {...state, cumulative: action.payload}
+    // Transaction --------------->
+    case 'CREATE_TRANSACTION':
     return {...state, orderSize: action.payload}
     case 'ADD_TRANSACTION':
     return {...state,
       transactions: [...state.transactions, action.payload]
     }
+    case 'FETCH_TRANSACTIONS':
+    return {...state, transactions: action.payload}
     case 'SORT_TRANSACTIONS':
     return {...state, sorted: action.payload}
-    case 'HANDLE_FILTER':
+    case 'SET_FILTER':
     return {...state, filtered: action.payload}
-    case 'HANDLE_INDEX':
+    case 'SET_INDEX':
     return {...state, index: action.payload}
-    case 'HANDLE_USER_CHART':
+    case 'USER_CHART':
     return {...state, userChart: action.payload}
 
     default:

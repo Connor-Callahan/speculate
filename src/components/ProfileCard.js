@@ -19,20 +19,20 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleStock: (selectedStock) => dispatch( {type:'HANDLE_STOCK_DATA', payload:null}),
-    handleChart: (selectChart) => dispatch( {type: 'HANDLE_STOCK_CHART', payload:selectChart})
+    setStock: (selectedStock) => dispatch( {type:'SELECT_STOCK', payload:null}),
+    setChart: (selectChart) => dispatch( {type: 'STOCK_CHART', payload:selectChart})
   }
 }
 
 class ProfileCard extends Component {
   handleClose = () => {
-    this.props.handleStock(null)
+    this.props.setStock(null)
   }
 
   handleChart = async ({target}) => {
     const selectChart = await fetch(`https://api.iextrading.com/1.0/stock/${this.props.stock.quote.symbol}/chart/${target.id}`)
     .then(r => r.json())
-    this.props.handleChart(selectChart)
+    this.props.setChart(selectChart)
   }
   render() {
     return (

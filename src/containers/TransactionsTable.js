@@ -4,14 +4,16 @@ import Portfolio from '../components/Portfolio'
 
 import TransactionChart from '../components/TransactionChart'
 
+import { setFilter, sortTransactions, setUserChart, setCurrentValue, setPortfolio, setIndex } from '../actions'
+
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleFilter: (filtered) => dispatch( {type:'HANDLE_FILTER', payload:filtered}),
-    handleSorted: (transactions) => dispatch( {type:'SORT_TRANSACTIONS', payload:transactions}),
-    handleChart: (data) => dispatch( {type:'HANDLE_USER_CHART', payload:data}),
-    handleCurrentPort : (port) => dispatch( {type:'HANDLE_CURRENT_PORT', payload:port}),
-    handleCurrentVal: (value) => dispatch( {type:'HANDLE_CURRENT_VALUE', payload:value}),
-    handleTable: (index) => dispatch( {type:'HANDLE_INDEX', payload:index})
+    setFilter: (filter) => dispatch(setFilter(filter)),
+    sortTransactions: (transactions) => dispatch(sortTransactions(transactions)),
+    handleChart: (chart) => dispatch(setUserChart(chart)),
+    currentPortfolio : (portfolio) => dispatch(setPortfolio(portfolio)),
+    currentValue: (value) => dispatch(setCurrentValue(value)),
+    setIndex: (index) => dispatch(setIndex(index))
   }
 }
 
@@ -35,9 +37,9 @@ class TransactionsTable extends Component {
 
 // filter bought/sold and all - bought/sold states as 'filtered'
   filterTransactions = (e) => {
-     this.props.handleSorted(null)
-     this.props.handleCurrentPort(null)
-     this.props.handleCurrentVal(null)
+     this.props.sortTransactions(null)
+     this.props.currentPortfolio(null)
+     this.props.currentValue(null)
      let bought = this.props.transactions.filter(transaction => {
        return transaction.order_type === 'buy'
      })
@@ -47,13 +49,13 @@ class TransactionsTable extends Component {
      let copy = this.props.transactions.slice().map(o => ({ ...o }))
      switch(e.target.id) {
        case 'bought' :
-       return this.props.handleFilter(bought),
+       return this.props.setFilter(bought),
               this.filterChart(bought)
        case 'sold' :
-       return this.props.handleFilter(sold),
+       return this.props.setFilter(sold),
               this.filterChart(sold)
        case 'all' :
-       return this.props.handleFilter(null),
+       return this.props.setFilter(null),
               this.filterChart(copy)
        default:
      }
@@ -111,16 +113,16 @@ class TransactionsTable extends Component {
     break;
     default:
   }
-  this.props.handleSorted(sorted)
+  this.props.sortTransactions(sorted)
 }
 
-  handleTable = (e) => {
+  handleIndex = (e) => {
     if(e.target.id === 'next' && this.props.transactions.length > this.props.index) {
       let next = this.props.index + 10
-      this.props.handleTable(next)
+      this.props.setIndex(next)
     } else if(e.target.id === 'previous' && this.props.transactions.length < this.props.index) {
       let previous = this.props.index - 10
-      this.props.handleTable(previous)
+      this.props.handleIndex(previous)
     }
   }
 // ------render------------------------------
@@ -171,8 +173,8 @@ class TransactionsTable extends Component {
         <TransactionChart />
 
         <div className="transition-arrows">
-        <button id="previous" className="index-button" onClick={this.handleTable}>&#8249;</button>
-        <button id="next" className="index-button" onClick={this.handleTable}>&#8250;</button>
+        <button id="previous" className="index-button" onClick={this.handleIndex}>&#8249;</button>
+        <button id="next" className="index-button" onClick={this.handleIndex}>&#8250;</button>
         </div>
         <table className="user-portfolio">
         <tbody>

@@ -117,3 +117,81 @@ export const loggedIn = (login) => {
     payload:login
   }
 }
+
+// Portfolio.js -------------->
+
+export const setPortfolio = (portfolio) => {
+  return {
+    type:'CURRENT_PORTFOLIO',
+    payload: portfolio
+  }
+}
+
+export const setCurrentValue = (value) => {
+  return {
+    type:'CURRENT_VALUE',
+    payload: value
+  }
+}
+
+export const setTotalValue = (total) => {
+  return {
+    type:'CUMULATIVE_VALUE',
+    payload: total
+  }
+}
+
+// UserAccount.js ------------------>
+
+export const fetchTransactions = (transactions) => {
+  return {
+    type:'FETCH_TRANSACTIONS',
+    payload: transactions
+  }
+}
+
+export const setUserChart = (chart) => {
+  return {
+    type:'USER_CHART',
+    payload: chart
+  }
+}
+
+// Transaction.js -------------->
+
+export const createTransaction = (size) => {
+  return {
+    type:'CREATE_TRANSACTION',
+    payload: size
+  }
+}
+
+export const addTransaction = (transaction) => {
+  return {
+    type:'ADD_TRANSACTION',
+    payload: transaction
+  }
+}
+
+//  TransactionsTable.js ---------------->
+
+export const setFilter = (filter) => {
+  return {
+    type:'SET_FILTER',
+    payload:filter
+  }
+}
+
+export const sortTransactions = (transactions) => {
+  return {
+    type:'SORT_TRANSACTIONS',
+    payload: transactions
+  }
+}
+
+export const setIndex = (index) => {
+  return {
+    type: 'SET_INDEX',
+    payload: index
+  }
+}
