@@ -112,7 +112,7 @@ export const setBalance = (balance) => {
   }
 }
 
-export const loggedIn = (login) => {
+export const setLogout = (login) => {
   return {
     type: 'LOGGED_IN',
     payload:login

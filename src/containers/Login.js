@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import LoginForm from '../components/LoginForm'
 
-import { setLogin, setUsername, setPassword, setFirstname, setLastname, setUserID, setBalance, fetchTransactions} from '../actions'
+import { setLogin, setLogout, setUsername, setPassword, setFirstname, setLastname, setUserID, setBalance, fetchTransactions} from '../actions'
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -13,7 +13,8 @@ const mapDispatchToProps = (dispatch) => {
     setLastname: (lastname) => dispatch(setLastname(lastname)),
     setUserID: (id) => dispatch(setUserID(id)),
     setBalance: (balance) => dispatch(setBalance(balance)),
-    fetchTransactions: (transactions) => dispatch(fetchTransactions(transactions))
+    fetchTransactions: (transactions) => dispatch(fetchTransactions(transactions)),
+    setLogout: (login) => dispatch(setLogout(login))
   }
 }
 
@@ -50,16 +51,15 @@ class Login extends Component {
       })
     })
     this.props.setLogin(false)
-    this.props.logout(false)
-    this.props.handleUsername(null)
-    this.props.handlePassword(null)
-    this.props.handleFirstName(null)
-    this.props.handleLastName(null)
-    this.props.handleBalance(null)
-    this.props.handleUserID(null)
-    this.props.handlePassword(null)
-    this.props.handleLoggedIn(false)
-    this.props.handleTransactions([])
+    this.props.setUsername(null)
+    this.props.setPassword(null)
+    this.props.setFirstname(null)
+    this.props.setLastname(null)
+    this.props.setBalance(null)
+    this.props.setUserID(null)
+    this.props.setPassword(null)
+    this.props.setLogout(false)
+    this.props.fetchTransactions([])
   }
 
   render() {

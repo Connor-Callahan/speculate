@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 
-import { setLogin, setUsername, setPassword, setFirstname, setLastname, setUserID, setBalance, loggedIn} from '../actions'
+import { setLogin, setLogout, setUsername, setPassword, setFirstname, setLastname, setUserID, setBalance} from '../actions'
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -12,7 +12,7 @@ const mapDispatchToProps = (dispatch) => {
     setLastname: (lastname) => dispatch(setLastname(lastname)),
     setUserID: (id) => dispatch(setUserID(id)),
     setBalance: (balance) => dispatch(setBalance(balance)),
-    loggedIn: (login) => dispatch(loggedIn(login))
+    setLogout: (login) => dispatch(setLogout(login))
   }
 }
 
@@ -69,7 +69,7 @@ class LoginForm extends Component {
       this.props.setBalance(currentUser.balance)
       this.props.setUserID(currentUser.id)
       this.props.setLogin(false)
-      this.props.loggedIn(true)
+      this.props.setLogout(true)
     } else {
       alert('Username /or login incorrect, please try again.')
     }
