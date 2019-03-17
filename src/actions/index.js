@@ -62,12 +62,13 @@ export const setIcon = (icon) => {
 
 // LoginForm.js ------------------------->
 
-export const loginUser = (user) => {
+export const setLogin = (login) => {
   return {
     type:'USER_LOGIN',
-    payload: user
+    payload: login
   }
 }
+
 
 export const setUsername = (username) => {
   return {

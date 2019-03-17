@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 
-import { loginUser, setUsername, setPassword, setFirstname, setLastname, setUserID, setBalance, loggedIn} from '../actions'
+import { setLogin, setUsername, setPassword, setFirstname, setLastname, setUserID, setBalance, loggedIn} from '../actions'
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loginUser: (user) => dispatch(loginUser(user)),
+    setLogin: (login) => dispatch(setLogin(login)),
     setUsername: (username) => dispatch(setUsername(username)),
     setPassword: (password) => dispatch(setPassword(password)),
     setFirstname: (firstname) => dispatch(setFirstname(firstname)),
     setLastname: (lastname) => dispatch(setLastname(lastname)),
     setUserID: (id) => dispatch(setUserID(id)),
     setBalance: (balance) => dispatch(setBalance(balance)),
-    loggedIn: (login) => dispatch(loggedIn(login)),
+    loggedIn: (login) => dispatch(loggedIn(login))
   }
 }
 
@@ -35,9 +35,9 @@ class LoginForm extends Component {
     let input = e.target.id
     switch(input) {
       case 'username' :
-      return this.props.handleUsername(e.target.value)
+      return this.props.setUsername(e.target.value)
       case 'password' :
-      return this.props.handlePassword(e.target.value)
+      return this.props.setPassword(e.target.value)
       case 'balance' :
       return this.props.setBalance(e.target.value)
       case 'firstname' :
@@ -50,7 +50,7 @@ class LoginForm extends Component {
 
   handleLogin = (e) => {
     this.props.login ?
-    this.props.handleLogin(false) : this.props.handleLogin(true)
+    this.props.setLogin(false) : this.props.setLogin(true)
   }
 
   submitLogin = async(e) => {
@@ -62,13 +62,13 @@ class LoginForm extends Component {
       return user.username === this.props.username
     })
     if(currentUser) {
-      this.props.handleUsername(currentUser.username)
+      this.props.setUsername(currentUser.username)
       this.props.setPassword(currentUser.password)
       this.props.setFirstname(currentUser.first_name)
       this.props.setLastname(currentUser.last_name)
       this.props.setBalance(currentUser.balance)
       this.props.setUserID(currentUser.id)
-      this.props.handleLogin(false)
+      this.props.setLogin(false)
       this.props.loggedIn(true)
     } else {
       alert('Username /or login incorrect, please try again.')
@@ -96,9 +96,9 @@ class LoginForm extends Component {
     }))
     .then(r => r.json())
     .then(data => {
-      this.props.setUserID(data.id)
-      this.props.handleLogin(false)
-      this.props.loggedIn(false)
+      this.props.handleUserID(data.id)
+      this.props.setLogin(false)
+      this.props.handleLoggedIn(false)
     })
   }
 

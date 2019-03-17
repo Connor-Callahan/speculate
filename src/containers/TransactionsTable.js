@@ -213,7 +213,6 @@ class TransactionsTable extends Component {
         {
           limit.map(transaction => {
             let date = new Date(transaction.date_time)
-            console.log('date', date)
             return <tr key={Math.random()}>
             <td>{transaction.stock_symbol}</td>
             <td>${transaction.price}</td>
