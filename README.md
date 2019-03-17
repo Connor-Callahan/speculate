@@ -1,6 +1,6 @@
 # Speculate.
 
-![short-demo-main](src/short-demo-main.gif)
+![short-demo-main](src/assets/short-demo-main.gif)
 
 This application was created to simulate trading shares of companies listed on the U.S. Stock Exchange. Add shares of companies with the money in your balance to create a portfolio of stocks. Sell shares within that portfolio to add to your balance. Track the performance of your portfolio over time and review detailed analytics of your transactions, earnings and returns.
 
