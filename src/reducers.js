@@ -24,8 +24,7 @@ const defaultState = {
   index: 10,
   filtered: null,
   sector: null,
-  sorted: null,
-  alphaSort: null
+  sorted: null
 }
 
 export default(state=defaultState, action) => {
