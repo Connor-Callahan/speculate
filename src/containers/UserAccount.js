@@ -9,12 +9,12 @@ import { fetchTransactions, setUserChart } from '../actions'
 
 const mapStateToProps = (state) => {
   return {
-    loggedIn: state.loggedIn,
-    balance: state.balance,
-    transactions: state.transactions,
-    firstname: state.firstname,
-    id: state.id,
-    portfolio: state.portfolio
+    loggedIn: state.user.loggedIn,
+    balance: state.user.balance,
+    transactions: state.transaction.transactions,
+    firstname: state.user.firstname,
+    id: state.user.id,
+    portfolio: state.transaction.portfolio
     }
 }
 

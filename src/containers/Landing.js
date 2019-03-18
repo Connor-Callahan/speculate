@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 
 const mapStateToProps = (state) => {
   return {
-    loggedIn: state.loggedIn
+    loggedIn: state.user.loggedIn
   }
 }
 

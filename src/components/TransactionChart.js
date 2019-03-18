@@ -5,10 +5,10 @@ import Chart from 'chart.js'
 
 const mapStateToProps = (state) => {
   return {
-    transactions: state.transactions,
-    filtered: state.filtered,
-    sorted: state.sorted,
-    userChart: state.userChart
+    transactions: state.transaction.transactions,
+    filtered: state.transaction.filtered,
+    sorted: state.transaction.sorted,
+    userChart: state.transaction.userChart
   }
 }
 

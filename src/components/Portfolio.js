@@ -14,11 +14,11 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    transactions: state.transactions,
-    balance: state.balance,
-    value: state.value,
-    portfolio: state.portfolio,
-    cumulative: state.cumulative
+    transactions: state.transaction.transactions,
+    balance: state.user.balance,
+    value: state.transaction.value,
+    portfolio: state.transaction.portfolio,
+    cumulative: state.transaction.cumulative
   }
 }
 

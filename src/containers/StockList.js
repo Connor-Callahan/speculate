@@ -6,10 +6,10 @@ import ProfileCard from '../components/ProfileCard'
 
 const mapStateToProps = (state) => {
   return {
-    symbols: state.symbols,
-    stockFilter: state.stockFilter,
-    stock: state.stock,
-    sector: state.sector
+    symbols: state.stock.symbols,
+    stockFilter: state.stock.stockFilter,
+    stock: state.stock.stock,
+    sector: state.stock.sector
   }
 }
 

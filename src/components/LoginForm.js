@@ -18,14 +18,14 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    login: state.login,
-    username: state.username,
-    password: state.password,
-    loggedIn: state.loggedIn,
-    firstname: state.firstname,
-    lastname: state.lastname,
-    balance: state.balance,
-    id: state.id
+    login: state.user.login,
+    username: state.user.username,
+    password: state.user.password,
+    loggedIn: state.user.loggedIn,
+    firstname: state.user.firstname,
+    lastname: state.user.lastname,
+    balance: state.user.balance,
+    id: state.user.id
   }
 }
 

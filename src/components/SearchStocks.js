@@ -5,8 +5,8 @@ import { searchSymbols, sortSymbols, filterSector } from '../actions'
 
 const mapStateToProps = (state) => {
   return {
-    symbols: state.symbols,
-    stockFilter: state.stockFilter,
+    symbols: state.stock.symbols,
+    stockFilter: state.stock.stockFilter,
 
   }
 }

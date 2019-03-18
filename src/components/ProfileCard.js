@@ -9,11 +9,11 @@ ReactChartkick.addAdapter(Chart)
 
 const mapStateToProps = (state) => {
   return {
-    stock: state.stock,
-    profile: state.profile,
-    chart: state.chart,
-    icon: state.icon,
-    loggedIn: state.loggedIn
+    stock: state.stock.stock,
+    profile: state.stock.profile,
+    chart: state.stock.chart,
+    icon: state.stock.icon,
+    loggedIn: state.user.loggedIn
   }
 }
 

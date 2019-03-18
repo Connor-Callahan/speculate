@@ -15,16 +15,13 @@ import { fetchSymbols } from './actions'
 
 const mapStateToProps = (state) => {
   return {
-    symbols: state.symbols,
-    stockFilter: state.stockFilter,
-    id: state.id,
-  }
+    symbols: state.stock.symbols,
+    stockFilter: state.stock.stockFilter  }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchSymbols: (symbols) => dispatch(fetchSymbols(symbols)),
-    handleNewsFeed: (newsFeed) => dispatch( {type:'HANDLE_NEWS_FEED', payload:newsFeed}),
+    fetchSymbols: (symbols) => dispatch(fetchSymbols(symbols))
   }
 }
 
@@ -36,6 +33,7 @@ class App extends Component {
     fetch('https://api.iextrading.com/1.0/ref-data/symbols')
     .then(r => r.json())
     .then(data => {
+      console.log(data)
       this.props.fetchSymbols(data)
     })
   }

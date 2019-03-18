@@ -19,16 +19,15 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    transactions: state.transactions,
-    balance: state.balance,
-    filter: state.filter,
-    filtered: state.filtered,
-    sorted: state.sorted,
-    value: state.value,
-    portfolio: state.portfolio,
-    cumulative: state.cumulative,
-    userChart: state.userChart,
-    index: state.index
+    transactions: state.transaction.transactions,
+    balance: state.user.balance,
+    filtered: state.transaction.filtered,
+    sorted: state.transaction.sorted,
+    value: state.transaction.value,
+    portfolio: state.transaction.portfolio,
+    cumulative: state.transaction.cumulative,
+    userChart: state.transaction.userChart,
+    index: state.transaction.index
   }
 }
 

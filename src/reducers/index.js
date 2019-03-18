@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux'
-import stocks from './stock'
-import users from './user'
-import transactions from './transaction'
+import stock from './stock'
+import user from './user'
+import transaction from './transaction'
 
-export rootReducer = combineReducers({
+const rootReducer = combineReducers({
   stock,
   user,
   transaction
 })
+
+export default rootReducer
