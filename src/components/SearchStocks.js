@@ -22,13 +22,17 @@ const mapDispatchToProps = (dispatch) => {
 class SearchStocks extends Component {
 
   handleStockSector = async (e) => {
-    const selectedSector = await fetch(`https://api.iextrading.com/1.0/stock/market/collection/sector?collectionName=${e.target.value}`)
+    if(e.target.value != 'All') {
+      const selectedSector = await fetch(`https://api.iextrading.com/1.0/stock/market/collection/sector?collectionName=${e.target.value}`)
       .then(r => r.json())
-    for(let i = 0; i < selectedSector.length; i++) {
-      selectedSector[i].name = selectedSector[i].companyName
+      for(let i = 0; i < selectedSector.length; i++) {
+        selectedSector[i].name = selectedSector[i].companyName
+      }
+      const filter = selectedSector.filter(sector => sector.marketCap > 17000000000)
+      this.props.filterSector(filter)
+    } else {
+      this.props.filterSector(null)
     }
-    const filter = selectedSector.filter(sector => sector.marketCap > 17000000000)
-    this.props.filterSector(filter)
   }
 
   handleSort = (e) => {

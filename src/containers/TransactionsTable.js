@@ -121,7 +121,7 @@ class TransactionsTable extends Component {
       this.props.setIndex(next)
     } else if(e.target.id === 'previous' && this.props.transactions.length < this.props.index) {
       let previous = this.props.index - 10
-      this.props.handleIndex(previous)
+      this.props.setIndex(previous)
     }
   }
 // ------render------------------------------

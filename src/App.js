@@ -33,7 +33,6 @@ class App extends Component {
     fetch('https://api.iextrading.com/1.0/ref-data/symbols')
     .then(r => r.json())
     .then(data => {
-      console.log(data)
       this.props.fetchSymbols(data)
     })
   }
