@@ -23,7 +23,8 @@ const StockList = (props) => {
     filtered = (props.symbols.filter(stock => stock.symbol.toLowerCase().includes(props.stockFilter.toLowerCase()) || stock.name.toLowerCase().includes(props.stockFilter.toLowerCase()))).slice(0, 7)
   } else if(props.sector) {
     filtered = props.sector
-  } 
+  }
+  
   return <div>
           {
             props.stock ?

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import Landing from './Landing'
 import TransactionsTable from './TransactionsTable'
-import Portfolio from '../components/Portfolio'
 
 import { fetchTransactions, setUserChart } from '../actions'
 

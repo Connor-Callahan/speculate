@@ -6,6 +6,7 @@ import { searchSymbols, sortSymbols, filterSector } from '../actions'
 const mapStateToProps = (state) => {
   return {
     symbols: state.stock.symbols,
+    sector: state.stock.sector,
     stockFilter: state.stock.stockFilter,
 
   }
@@ -22,7 +23,7 @@ const mapDispatchToProps = (dispatch) => {
 class SearchStocks extends Component {
 
   handleStockSector = async (e) => {
-    if(e.target.value != 'All') {
+    if(e.target.value !== 'All') {
       const selectedSector = await fetch(`https://api.iextrading.com/1.0/stock/market/collection/sector?collectionName=${e.target.value}`)
       .then(r => r.json())
       for(let i = 0; i < selectedSector.length; i++) {
@@ -37,7 +38,8 @@ class SearchStocks extends Component {
 
   handleSort = (e) => {
   e.persist()
-  let sortedStocks = this.props.symbols.slice().map(o => ({ ...o }))
+  let sortedStocks = null
+  this.props.sector != null ? sortedStocks = this.props.sector.slice().map(o => ({ ...o })) :               sortedStocks = this.props.symbols.slice().map(o => ({ ...o }))
   if(e.target.value === 'Z-A') {
     this.props.sortSymbols(sortedStocks.reverse())
   }
