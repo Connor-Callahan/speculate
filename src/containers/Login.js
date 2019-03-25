@@ -92,21 +92,3 @@ class Login extends Component {
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)
-
-
-// import { setLogin, loggedIn, setUsername, setPassword, setFirstname, setLastname, setUserID, setBalance, fetchTransactions} from '../actions'
-//
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     setLogin: (login) => dispatch(setLogin(login)),
-//     logout: (logout) => dispatch(loggedIn(logout)),
-//     loggedIn: (login) => dispatch(loggedIn(login)),
-//     setUsername: (username) => dispatch(setUsername(username)),
-//     setPassword: (password) => dispatch(setPassword(password)),
-//     setFirstname: (firstname) => dispatch(setFirstname(firstname)),
-//     setLastname: (lastname) => dispatch(setLastname(lastname)),
-//     setUserID: (id) => dispatch(setUserID(id)),
-//     setBalance: (balance) => dispatch(setBalance(balance)),
-//     fetchTransactions: (transactions) => dispatch(fetchTransactions(transactions))
-//   }
-// }

@@ -29,7 +29,12 @@ class UserAccount extends Component {
 
   handleTransactions = async() => {
   let transactions = await fetch('http://localhost:3000/api/v1/transactions/')
-    .then(r => r.json())
+  .then(function(response) {
+		if (response.status >= 400) {
+			throw new Error("Bad response from server");
+		}
+		return response.json();
+	})
   let filtered = transactions.filter(transaction => transaction.user_id === this.props.id)
    this.props.fetchTransactions(filtered)
    this.handleChart()
