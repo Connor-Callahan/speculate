@@ -96,9 +96,9 @@ class LoginForm extends Component {
     }))
     .then(r => r.json())
     .then(data => {
-      this.props.handleUserID(data.id)
-      this.props.setLogin(false)
-      this.props.handleLoggedIn(false)
+      this.props.setUserID(data.id)
+      this.props.setLogin(true)
+      this.props.setLogout(true)
     })
   }
 
