@@ -31,17 +31,15 @@ class Transaction extends Component {
     e.preventDefault()
     e.persist()
     // fetch transactions
-
     let transactions = await fetch('http://localhost:3000/api/v1/transactions/')
       .then(r => r.json())
-
+    // filter to return only transactions associated with the user
     let filtered = transactions.filter(transaction => transaction.user_id === this.props.id)
-
-    // conditional check for input
+    // check to make sure both input fields are filled
     if(this.props.orderSize <= 0) {
       alert('Please enter an order amount greater than 0')
     } else {
-    // retrieving the current price from iex
+    // retrieving the current price of the selected stock to trade from iex
     let price = await fetch(`https://api.iextrading.com/1.0/stock/${this.props.stock.quote.symbol}/batch?types=quote,news`)
       .then(r => r.json())
 
