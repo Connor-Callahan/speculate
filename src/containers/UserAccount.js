@@ -28,7 +28,7 @@ const mapDispatchToProps = (dispatch) => {
 class UserAccount extends Component {
 
   handleTransactions = async() => {
-  let transactions = await fetch('http://localhost:3000/api/v1/transactions/')
+  let transactions = await fetch('https://speculate-app-api.herokuapp.com/api/v1/transactions/')
   .then(function(response) {
 		if (response.status >= 400) {
 			throw new Error("Bad response from server");

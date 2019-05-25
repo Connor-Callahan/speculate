@@ -55,7 +55,7 @@ class LoginForm extends Component {
 
   submitLogin = async(e) => {
     e.preventDefault()
-    let allUsernames = await fetch(`http://localhost:3000/api/v1/users/`)
+    let allUsernames = await fetch(`https://speculate-app-api.herokuapp.com/api/v1/users/`)
     .then(r => r.json())
 
     let currentUser = allUsernames.find(user => {
@@ -77,7 +77,7 @@ class LoginForm extends Component {
 
   createAccount = (e) => {
     e.preventDefault()
-    fetch('http://localhost:3000/api/v1/users/', {
+    fetch('https://speculate-app-api.herokuapp.com/api/v1/users/', {
       method: 'POST',
       headers: {
         'Content-Type' : 'application/json',

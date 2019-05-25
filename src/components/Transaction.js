@@ -31,7 +31,7 @@ class Transaction extends Component {
     e.preventDefault()
     e.persist()
     // fetch transactions
-    let transactions = await fetch('http://localhost:3000/api/v1/transactions/')
+    let transactions = await fetch('https://speculate-app-api.herokuapp.com/api/v1/transactions')
       .then(r => r.json())
     // filter to return only transactions associated with the user
     let filtered = transactions.filter(transaction => transaction.user_id === this.props.id)
@@ -107,7 +107,7 @@ class Transaction extends Component {
 
         alert('Insufficient funds! Please check your current balance.')
       } else if (e.target.id === 'buy') {
-        fetch('http://localhost:3000/api/v1/transactions/', {
+        fetch('https://speculate-app-api.herokuapp.com/api/v1/transactions/', {
           method: 'POST',
           headers: {
             'Content-Type' : 'application/json',
@@ -134,7 +134,7 @@ class Transaction extends Component {
 
       } else if (e.target.id === 'sell' && parseInt(this.props.orderSize, 10) <= curStockShare) {
 
-        fetch('http://localhost:3000/api/v1/transactions/', {
+        fetch('https://speculate-app-api.herokuapp.com/api/v1/transactions', {
           method: 'POST',
           headers: {
             'Content-Type' : 'application/json',

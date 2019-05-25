@@ -40,7 +40,7 @@ class Login extends Component {
 
 // change login state and loggedIn (div to login and button to logout) -> patch balance to user table on logout
   handleLogout = (e) => {
-    fetch(`http://localhost:3000/api/v1/users/${this.props.id}`, {
+    fetch(`https://speculate-app-api.herokuapp.com/api/v1/users/{this.props.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type' : 'application/json',
