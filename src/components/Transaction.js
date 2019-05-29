@@ -28,6 +28,13 @@ class Transaction extends Component {
   }
 
   handleOrder = async (e) => {
+
+    var StatsD = require('hot-shots');
+    var dogstatsd = new StatsD();
+
+    // Increment a counter.
+    dogstatsd.increment('page.views')
+    
     e.preventDefault()
     e.persist()
     // fetch transactions

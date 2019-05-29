@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "chart.js": "^2.7.3",
+    "hot-shots": "^6.3.0",
+    "node-dogstatsd": "0.0.7",
     "react": "^16.8.2",
     "react-chartkick": "^0.3.0",
     "react-css-blur": "^1.1.1",
