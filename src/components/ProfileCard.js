@@ -45,7 +45,6 @@ class ProfileCard extends Component {
             :
             <p></p>
           }
-            <img className="profile-icon" src={this.props.icon.url} alt="" width="100" height="120"/>
             <button className="close-button" onClick={this.handleClose}>𝖷</button>
             <h3 className="symbol">Ticker : {this.props.stock.quote.symbol}</h3>
             <h3 className="symbol">Sector : {this.props.stock.quote.sector}</h3>
