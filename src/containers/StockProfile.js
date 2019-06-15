@@ -23,18 +23,16 @@ class StockProfile extends Component {
 
 
   handleSelectStock = async ({target}) => {
-    console.log('here')
-    const selectedStock = await fetch(`https://api.iextrading.com/1.0/stock/${target.id}/batch?types=quote,news,chart&range=1m&last=10`)
+    const selectedStockProfile = await fetch(`https://cloud.iexapis.com/stable/stock/${target.id}/company?token=pk_f0958c731c62430c85edfd3a28f51053`)
     .then(r => r.json())
-    const selectedStockProfile = await fetch(`https://api.iextrading.com/1.0/stock/${target.id}/company`)
+    const selectedStock = await fetch(`https://cloud.iexapis.com/stable/stock/${target.id}/quote?token=pk_f0958c731c62430c85edfd3a28f51053`)
     .then(r => r.json())
-    const selectedChart = await fetch(`https://api.iextrading.com/1.0/stock/${target.id}/chart/`)
+    const selectedChart = await fetch(`https://cloud.iexapis.com/stable/stock/${target.id}/chart?token=pk_f0958c731c62430c85edfd3a28f51053`)
     .then(r => r.json())
-    console.log(selectedStock, selectedStockProfile, selectedChart)
     this.props.handleFilter(null)
-    this.props.setProfile(selectedStockProfile)
-    this.props.setChart(selectedChart)
     this.props.selectStock(selectedStock)
+    this.props.setProfile(selectedStockProfile.description)
+    this.props.setChart(selectedChart)
   }
 
   render() {
