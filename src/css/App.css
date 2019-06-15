@@ -10,11 +10,12 @@
 
 #user-container {
   grid-area: 2 / 2 / 4 / 5;
-  border: 2px solid blue;
+  max-width: 900px;
+  /* border: 2px solid blue; */
 }
 
 #landing {
-  border: 2px solid red;
+  /* border: 2px solid red; */
 }
 
 #landing-paragraph {
@@ -35,7 +36,54 @@
   width: 30%;
 }
 
-#navbar {
+#navbar-show {
   grid-area: 1 / 1 / 5 / 2;
   background-color: royalblue;
+}
+
+#navbar-hide {
+  grid-area: 1 / 1 / 2 / 6;
+  height: 60%;
+  margin-bottom: 1em;
+  color: white;
+  background-color: royalblue;
+}
+
+#hide-menu {
+  margin-top: 2.5%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+#hide-header {
+  grid-area: 1 / 2 / 2 / 3;
+  /* border: 2px solid yellow; */
+  margin: 0;
+}
+
+#hide-btns {
+  grid-area: 1 / 4 / 1 / 5;
+  /* border: 2px solid yellow; */
+  padding: 0.3em;
+}
+
+.login-btn {
+  float: right;
+  color: white;
+  font-family: Sarala;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 0;
+  border: 2px solid white;
+  border-radius: 22px;
+  background-color: transparent;
+}
+
+.login-btn:hover {
+  background-color: white;
+  color: royalblue;
+}
+
+#hide-create {
+  margin-right: 0.5em;
 }
