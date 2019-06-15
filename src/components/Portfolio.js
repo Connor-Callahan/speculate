@@ -112,7 +112,7 @@ class Profile extends Component {
     let multiStock = null
 
     // retrieve current value for the price of each stock in portfolio
-    fetch(`https://api.iextrading.com/1.0/stock/market/batch?symbols=${curPortVal}&types=quote&range=1m&last=5`)
+    fetch(`https://cloud.iexapis.com/v1/stock/market/batch?types=quote&symbols=${curPortVal}&range=5y%20&token=pk_f0958c731c62430c85edfd3a28f51053`)
     .then(r => r.json())
     .then(data => {
       curPortVal.forEach(symbol => {
@@ -144,7 +144,6 @@ class Profile extends Component {
         console.log(transaction)
       })
     }
-
 
     // create time associated with updated portfolio value
     let date = new Date

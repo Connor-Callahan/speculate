@@ -41,16 +41,16 @@ class Transaction extends Component {
       alert('Please enter an order amount greater than 0')
     } else {
     // retrieving the current price of the selected stock to trade from iex
-    let price = await fetch(`https://api.iextrading.com/1.0/stock/${this.props.stock.quote.symbol}/batch?types=quote,news`)
+    let price = await fetch(`https://cloud.iexapis.com/stable/stock/${this.props.stock.symbol}/quote?token=pk_f0958c731c62430c85edfd3a28f51053`)
       .then(r => r.json())
-
-    let totalCost = (price.quote.latestPrice * this.props.orderSize).toFixed(2)
+  console.log(price)
+    let totalCost = (price.latestPrice * this.props.orderSize).toFixed(2)
 
     let currentStock = null
 
     // determine if the selected stock already has a record of pre-existing transactions
       currentStock = filtered.find(transaction => {
-        return transaction.stock_symbol === this.props.stock.quote.symbol
+        return transaction.stock_symbol === this.props.stock.symbol
       })
 
       let numSold = []
@@ -89,11 +89,11 @@ class Transaction extends Component {
         })
 
         soldStock = numSold.find(transaction => {
-          return transaction.stock_symbol === this.props.stock.quote.symbol
+          return transaction.stock_symbol === this.props.stock.symbol
         })
 
         boughtStock = numBought.find(transaction => {
-         return transaction.stock_symbol === this.props.stock.quote.symbol
+         return transaction.stock_symbol === this.props.stock.symbol
        })
           if(e.target.id === 'sell' && soldStock) {
             curStockShare = boughtStock.num_shares - soldStock.num_shares
@@ -116,9 +116,9 @@ class Transaction extends Component {
           },
           body: JSON.stringify({
             user_id: this.props.id,
-            stock_symbol: this.props.stock.quote.symbol,
+            stock_symbol: this.props.stock.symbol,
             num_shares: this.props.orderSize,
-            price: price.quote.latestPrice,
+            price: price.latestPrice,
             cost: totalCost,
             commission: 7,
             order_type: e.target.id,
@@ -143,9 +143,9 @@ class Transaction extends Component {
           },
           body: JSON.stringify({
             user_id: this.props.id,
-            stock_symbol: this.props.stock.quote.symbol,
+            stock_symbol: this.props.stock.symbol,
             num_shares: this.props.orderSize,
-            price: price.quote.latestPrice,
+            price: price.latestPrice,
             cost: totalCost,
             commission: 7,
             order_type: e.target.id,
