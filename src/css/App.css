@@ -1,178 +1,41 @@
-html, body {
-  overflow: hidden;
+
+.App {
+  background-color: white;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  border: 3px solid yellow;
 }
 
-#landing-header {
-  font-family: 'Sarala', sans-serif;
-  font-size: 10vh;
-  font-weight: 400;
+#user-container {
+  grid-area: 2 / 2 / 4 / 5;
+  border: 2px solid blue;
 }
 
-#landing-line {
-  position: relative;
-  font-size: 10vh;
-  z-index: -1000;
+#landing {
+  border: 2px solid red;
 }
 
 #landing-paragraph {
-  font-family: 'Sarala', sans-serif;
-  font-size: 2.7vh;
-  font-weight: 400;
-}
-
-hr {
-    display: block;
-    margin-before: 0.5em;
-    margin-after: 0.5em;
-    margin-start: auto;
-    margin-end: auto;
-    margin-top: -12%;
-    overflow: hidden;
-    border-style: inset;
-    border-width: 1px;
-}
-
-#login-background {
-  position: absolute;
-  top: 0;
-  background: transparent;
-  width: 100%;
-  height: 100%;
-}
-
-#login-button {
-  position: relative;
-  margin-top: 2.5%;
-  margin-left: 2.5%;
-  border:2px solid black;
-  outline: none;
-  background: white;
-  font-size: 15px;
-  font-family: 'Sarala', sans-serif;
-  font-weight: 700;
-  transition-duration: 0.4s;
-}
-
-#login-button:hover {
-  background-color: black;
-  color: white;
-}
-
-#logout-button {
-  position: relative;
-  margin-top: 2.5%;
-  margin-left: 36%;
-  border:2px solid black;
-  outline: none;
-  background: white;
-  font-size: 15px;
-  font-family: 'Sarala', sans-serif;
-  font-weight: 700;
-  transition-duration: 0.4s;
-}
-
-#logout-button:hover {
-  background-color: black;
-  color: white;
-}
-
-#login-container {
-  position: absolute;
-  background: white;
-  z-index: 5000;
-  margin: auto;
-  top: 20%;
-  right: 0;
-  left: 0;
-  width: 50%;
-  height: auto;
-  padding: 1%;
-  border: 2px solid black;
-  font-family: 'Sarala', sans-serif;
-}
-
-#close-login {
-  position: relative;
-  background: transparent;
-  color: black;
-  border:2px solid black;
-  outline: none;
-  padding: 4px 8px;
   text-align: center;
-  margin-left: 20%;
-  margin-top: 2%;
-  text-decoration: none;
-  font-size: 14px;
-  transition-duration: 0.4s;
-  font-family: 'Sarala', sans-serif;
-  font-weight: 600;
+  font-size: 64px;
 }
 
-#close-login:hover {
-  background-color: black;
-  color: white;
-}
-
-.form-button {
-  position: relative;
-  margin-left: 5%;
-  margin-top: 2%;
-  margin-bottom: 4%;
-  width: 15%;
-  border:1px solid black;
-  color: black;
-  background: transparent;
-  border-radius: 12px;
-  outline: none;
-  font-size: 12px;
-  font-family: 'Sarala', sans-serif;
-  transition-duration: 0.4s;
-  font-weight: 200;
-
-}
-
-.form-button:hover {
-  background-color: black;
-  color: white;
-}
-
-/* all inputs on the login/create form */
-.login-input {
+#start-btn {
   text-align: center;
-  background-color: transparent;
-  border: 1px solid black;
-  border-radius: 12px;
-  width: 100px;
-  margin-bottom: 1%;
-  height: 20px;
-  outline: none;
+  font-size: 24px;
+  color: white;
+  padding: 0.3em;
+  background-color: royalblue;
+  border-radius: 22px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;
 }
 
-.create-input {
-  width: 100px;
-  height: 20px;
-  margin-bottom: 1%;
-  background-color: transparent;
-  border: 1px solid black;
-  border-radius: 12px;
-  outline: none;
-}
-
-#login-form {
-  font-family: 'Sarala', sans-serif;
-  margin-left: 40%;
-  margin-bottom: 2%;
-}
-
-#create-login-form {
-  margin-left: 40%;
-  margin-bottom: 2%;
-}
-
-
-#logo {
-  position: absolute;
-  margin-top: 1.5%;
-  width: 185px;
-  margin-right: 0%;
+#navbar {
+  grid-area: 1 / 1 / 5 / 2;
+  background-color: royalblue;
 }

@@ -85,7 +85,7 @@ class UserAccount extends Component {
                 </div>
 
                 :
-                <div>
+                <div id="landing">
                 <Landing />
                 </div>
               }

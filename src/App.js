@@ -3,8 +3,10 @@ import './css/App.css';
 import './css/ProfileCard.css';
 import './css/UserAccount.css';
 import './css/SearchStocks.css';
+import './css/Navigation.css';
 import StockList from './containers/StockList'
 import Login from './containers/Login'
+import Navbar from './containers/Navbar'
 import UserAccount from './containers/UserAccount'
 import SearchStocks from './components/SearchStocks'
 
@@ -42,9 +44,8 @@ class App extends Component {
     return (
       <div className="App">
       <UserAccount />
-      <SearchStocks />
-      <StockList />
-      <Login />
+      <Navbar />
+
       </div>
     );
   }
