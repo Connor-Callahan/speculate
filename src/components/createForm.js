@@ -107,12 +107,36 @@ class LoginForm extends Component {
       <div id="login-container">
         <h1 id="close-login" onClick={this.handleLogin}>Speculate.</h1>
           <form id="login-form" autoComplete="off" onChange={this.handleFormInput}>
-            <input className="login-input"  type="text" id="username" placeholder="Username"/>
+            <label htmlFor="user_name">username : </label>
+            <input className="login-input"  type="text" id="username"/>
               <br></br>
-            <input className="login-input"  type="password" id="password" placeholder="Password"/>
+            <label htmlFor="password">password : </label>
+            <input className="login-input"  type="password" id="password"/>
               <br></br>
             <button onClick={this.submitLogin} className="form-button">Login</button>
           </form>
+
+          <form id="create-login-form"
+          autoComplete="off"
+          onChange={this.handleFormInput} >
+            <label htmlFor="firstname">first name : </label>
+            <input className="login-input" type="text" id="firstname"/>
+              <br></br>
+            <label htmlFor="lastname">last name : </label>
+            <input className="login-input" type="text" id="lastname"/>
+              <br></br>
+            <label htmlFor="username">username : </label>
+            <input className="login-input" type="text" id="username"/>
+              <br></br>
+            <label htmlFor="password">password : </label>
+            <input className="login-input" type="password" id="password"/>
+              <br></br>
+            <label htmlFor="balance">balance : </label>
+            <input className="login-input" type="number" id="balance"/>
+              <br></br>
+          <button className="form-button" onClick={this.createAccount}>Submit</button>
+          </form>
+
         </div>
     )
   }

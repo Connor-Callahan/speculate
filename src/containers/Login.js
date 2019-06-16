@@ -64,26 +64,20 @@ class Login extends Component {
 
   render() {
     return (
-      <div id="user-login">
-      {
-        this.props.login && this.props.loggedIn === false ?
-        <LoginForm />
-        :
-        null
-      }
+      <div id="login-btns">
       {
         this.props.loggedIn ?
         <button
-        id="logout-button"
+        className="login-btn"
         onClick={this.handleLogout}>
         Logout
         </button>
         :
-        <button
-        id="login-button"
-        onClick={this.handleLogin}>
-        Login/Create Account
-        </button>
+
+        <div>
+          <button onClick={this.handleLogin} className="login-btn">Login</button>
+          <button className="login-btn" id="hide-create">Create Account</button>
+        </div>
       }
       </div>
     )

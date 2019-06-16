@@ -5,10 +5,12 @@ import './css/UserAccount.css';
 import './css/SearchStocks.css';
 import './css/Navigation.css';
 import StockList from './containers/StockList'
-import Login from './containers/Login'
+import LoginForm from './components/LoginForm'
 import Navbar from './containers/Navbar'
 import UserAccount from './containers/UserAccount'
 import SearchStocks from './components/SearchStocks'
+import Landing from './containers/Landing'
+
 
 import {connect} from 'react-redux'
 
@@ -18,7 +20,10 @@ import { fetchSymbols } from './actions'
 const mapStateToProps = (state) => {
   return {
     symbols: state.stock.symbols,
-    stockFilter: state.stock.stockFilter  }
+    stockFilter: state.stock.stockFilter,
+    login: state.user.login,
+    loggedIn: state.user.loggedIn
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -43,9 +48,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      <UserAccount />
-      <Navbar />
-
+      <Navbar/>
+      {
+        this.props.login && this.props.loggedIn === false ?
+        <LoginForm />
+        :
+        <UserAccount />
+      }
       </div>
     );
   }

@@ -62,7 +62,7 @@ class UserAccount extends Component {
 
   render(){
     return(
-      <div id="user-container">
+      <div className="user-container">
               {
                 this.props.loggedIn ?
                 <div>

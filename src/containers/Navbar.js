@@ -1,5 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux'
+import Login from './/Login'
+
 
 const mapStateToProps = (state) => {
   return {
@@ -18,10 +20,7 @@ const Navbar = (props) => {
           :
           <div id="hide-menu">
           <h1 id="hide-header">Speculate.</h1>
-            <div id="hide-btns">
-              <button className="login-btn">Login</button>
-              <button className="login-btn" id="hide-create">Create Account</button>
-            </div>
+            <Login id="hide-btns"/>
           </div>
         }
 
