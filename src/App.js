@@ -23,8 +23,7 @@ const mapStateToProps = (state) => {
     symbols: state.stock.symbols,
     stockFilter: state.stock.stockFilter,
     login: state.user.login,
-    loggedIn: state.user.loggedIn,
-    createForm: state.user.createForm
+    loggedIn: state.user.loggedIn
   }
 }
 
@@ -48,18 +47,15 @@ class App extends Component {
 
 
   render() {
-
-
     return (
       <div className="App">
       <Navbar/>
-        if (this.props.createForm === true){
-          <CreateForm />
-        } else if(this.props.login && this.props.loggedIn === false) {
-          <LoginForm />
-        } else {
-          <UserAccount />
-        }
+      {
+        this.props.login && this.props.loggedIn === false ?
+        <LoginForm />
+        :
+        <UserAccount />
+      }
 
       </div>
     );

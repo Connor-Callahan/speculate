@@ -29,7 +29,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-class LoginForm extends Component {
+class CreateForm extends Component {
 
   handleFormInput = (e) => {
     let input = e.target.id
