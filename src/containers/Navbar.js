@@ -16,7 +16,15 @@ const Navbar = (props) => {
       <div id={`navbar-${navShow}`}>
         {
           props.loggedIn ?
-          <h1 >Speculate.</h1>
+          <div>
+          <h1 id="show-header">Speculate.</h1>
+            <ul id="nav-list">
+              <li>Home</li>
+              <li>Dashboard</li>
+              <li>Contact</li>
+              <li>Credits</li>
+            </ul>
+          </div>
           :
           <div id="hide-menu">
           <h1 id="hide-header">Speculate.</h1>

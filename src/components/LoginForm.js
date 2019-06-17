@@ -113,6 +113,7 @@ class LoginForm extends Component {
               <br></br>
             <button onClick={this.submitLogin} className="form-button">Login</button>
           </form>
+          <p id="signup">Don't have a Speculate account yet? Sign up now.</p>
         </div>
     )
   }

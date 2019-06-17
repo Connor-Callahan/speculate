@@ -61,8 +61,11 @@ class UserAccount extends Component {
   }
 
   render(){
+
+    const landingShow = this.props.loggedIn ? 'user' : 'landing';
+
     return(
-      <div className="user-container">
+      <div className={`${landingShow}-container`}>
               {
                 this.props.loggedIn ?
                 <div>
@@ -73,6 +76,7 @@ class UserAccount extends Component {
                   </div>
                   :
                   <div id="user-welcome">
+                  <h1 id="dash-header">Dashboard</h1>
                   <h1>Welcome, {this.props.firstname}</h1>
                   <h4 className='balance'>Balance : ﹩{this.props.balance}</h4>
                   <p>Proceed to view past transactions and current holdings. Search or browse company files to exchange shares.</p>

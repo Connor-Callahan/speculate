@@ -8,6 +8,21 @@
   background-color: royalblue;
 }
 
+#nav-list {
+  color: white;
+  list-style: none;
+  text-align: left;
+}
+
+li {
+  padding: 5px;
+}
+
+#show-header {
+  color: white;
+  text-align: center;
+}
+
 #navbar-hide {
   grid-area: 1 / 1 / 2 / 6;
   height: 60%;

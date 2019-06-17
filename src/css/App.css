@@ -8,14 +8,10 @@
   /* border: 3px solid yellow; */
 }
 
-.user-container {
+.landing-container {
   grid-area: 2 / 2 / 4 / 5;
   max-width: 900px;
-  /* border: 2px solid blue; */
-}
-
-#landing {
-  /* border: 2px solid red; */
+  margin: 1em;
 }
 
 #landing-paragraph {
