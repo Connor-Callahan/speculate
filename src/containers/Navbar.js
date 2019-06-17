@@ -28,7 +28,12 @@ const Navbar = (props) => {
           :
           <div id="hide-menu">
           <h1 id="hide-header">Speculate.</h1>
-            <Login id="hide-btns"/>
+            <ul id="hide-nav-list">
+              <li>About</li>
+              <li>Contact</li>
+              <li>Credits</li>
+            </ul>
+              <Login id="hide-btns"/>
           </div>
         }
 

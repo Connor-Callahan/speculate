@@ -31,25 +31,35 @@ li {
 }
 
 #hide-menu {
-  margin-top: 2.5%;
+  margin-top: 2%;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
+  align-items: center;
 }
 
 #hide-header {
   grid-area: 1 / 2 / 2 / 3;
-  /* border: 2px solid yellow; */
   margin: 0;
 }
 
-#login-btns {
+#hide-nav-list {
   grid-area: 1 / 4 / 1 / 5;
+  margin: auto;
+  font-family: Sarala;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  list-style: none;
+  text-align: right;
+}
+
+#login-btns {
+  grid-area: 1 / 5 / 1 / 5;
   padding: 0.3em;
   /* border: 2px solid yellow; */
 }
 
 .login-btn {
-  float: right;
   color: white;
   font-family: Sarala;
   font-size: 14px;
