@@ -4,6 +4,7 @@ import './css/ProfileCard.css';
 import './css/UserAccount.css';
 import './css/SearchStocks.css';
 import './css/Navigation.css';
+import './css/UserDashboard.css';
 import StockList from './containers/StockList'
 import LoginForm from './components/LoginForm'
 import Navbar from './containers/Navbar'
@@ -22,7 +23,8 @@ const mapStateToProps = (state) => {
     symbols: state.stock.symbols,
     stockFilter: state.stock.stockFilter,
     login: state.user.login,
-    loggedIn: state.user.loggedIn
+    loggedIn: state.user.loggedIn,
+    createForm: state.user.createForm
   }
 }
 
@@ -46,16 +48,19 @@ class App extends Component {
 
 
   render() {
+
+
     return (
       <div className="App">
       <Navbar/>
-      {
-        this.props.login && this.props.loggedIn === false ?
-        <LoginForm />
-        :
-        <UserAccount />
-      }
-      
+        if (this.props.createForm === true){
+          <CreateForm />
+        } else if(this.props.login && this.props.loggedIn === false) {
+          <LoginForm />
+        } else {
+          <UserAccount />
+        }
+
       </div>
     );
   }

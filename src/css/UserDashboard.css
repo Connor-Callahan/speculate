@@ -1,0 +1,13 @@
+
+.trans-btn-small {
+  color: black;
+  margin: 1%;
+  background-color: white;
+  font-family: Sarala;
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 25px;
+  outline: none;
+  border: 2px solid black;
+  width: 100px;
+}

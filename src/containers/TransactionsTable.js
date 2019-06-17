@@ -145,6 +145,7 @@ class TransactionsTable extends Component {
     // create time associated with current balance value
     let date = new Date
 
+
     return (
       <div>
       <div id="table-data">
@@ -164,10 +165,10 @@ class TransactionsTable extends Component {
         null
         :
         <div>
-        <div>
-        <button id="bought" className="transaction-button" onClick={this.filterTransactions}>Bought</button>
-        <button id="sold" className="transaction-button" onClick={this.filterTransactions}>Sold</button>
-        <button id="all" className="transaction-button" onClick={this.filterTransactions}>All</button>
+        <div >
+        <button id="bought" className="trans-btn-small" onClick={this.filterTransactions}>Bought</button>
+        <button id="sold" className="trans-btn-small" onClick={this.filterTransactions}>Sold</button>
+        <button id="all" className="trans-btn-small" onClick={this.filterTransactions}>All</button>
         </div>
         <TransactionChart />
 

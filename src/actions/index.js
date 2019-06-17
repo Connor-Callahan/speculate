@@ -69,6 +69,13 @@ export const setLogin = (login) => {
   }
 }
 
+export const createForm = (form) => {
+  return {
+    type:'HANDLE_CREATE_FORM',
+    payload: form
+  }
+}
+
 
 export const setUsername = (username) => {
   return {
