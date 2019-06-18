@@ -17,7 +17,6 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-
 class Landing extends Component {
 
   handleLogin = (e) => {

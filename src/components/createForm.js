@@ -104,9 +104,9 @@ class CreateForm extends Component {
 
   render() {
     return (
-      <div id="login-container">
+      <div>
         <h1 id="close-login" onClick={this.handleLogin}>Speculate.</h1>
-          <form id="create-login-form"
+          <form className="login-form"
           autoComplete="off"
           onChange={this.handleFormInput} >
             <label htmlFor="firstname">first name : </label>

@@ -34,17 +34,23 @@ class Login extends Component {
 
 // open and close the form to login or create an account -> loginForm comp closes with login state change
   handleLogin = (e) => {
-    this.props.login ?
-    this.props.setLogin(false)
-    :
-    this.props.setLogin(true)
+    if(this.props.login) {
+      this.props.createForm(false)
+      this.props.setLogin(false)
+    } else {
+      this.props.createForm(false)
+      this.props.setLogin(true)
     }
+  }
 
   handleCreate = (e) => {
-    this.props.login ?
-    this.props.createForm(false)
-    :
-    this.props.createForm(true)
+    if(this.props.login)  {
+      this.props.createForm(false)
+      this.props.setLogin(false)
+    } else {
+      this.props.createForm(true)
+      this.props.setLogin(true)
+    }
   }
 
     // change login state and loggedIn (div to login and button to logout) -> patch balance to user table on logout

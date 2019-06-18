@@ -80,7 +80,7 @@ class UserAccount extends Component {
                   <h1>Welcome, {this.props.firstname}</h1>
                   <h4 className='balance'>Balance : ﹩{this.props.balance}</h4>
                   <p>Proceed to view past transactions and current holdings. Search or browse company files to exchange shares.</p>
-                  <button className="transaction-button"
+                  <button className="trans-btn"
                   onClick={this.handleTransactions}>
                   View Account
                   </button>

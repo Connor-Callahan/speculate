@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
+import CreateForm from './CreateForm'
 
 import { setLogin, setLogout, setUsername, setPassword, setFirstname, setLastname, setUserID, setBalance} from '../actions'
 
@@ -19,6 +20,7 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
   return {
     login: state.user.login,
+    createForm: state.user.createForm,
     username: state.user.username,
     password: state.user.password,
     loggedIn: state.user.loggedIn,
@@ -102,19 +104,29 @@ class LoginForm extends Component {
     })
   }
 
+
+
   render() {
+
     return (
-      <div id="login-container">
-        <h1 id="close-login" onClick={this.handleLogin}>Speculate.</h1>
-          <form id="login-form" autoComplete="off" onChange={this.handleFormInput}>
-            <input className="login-input"  type="text" id="username" placeholder="Username"/>
-              <br></br>
-            <input className="login-input"  type="password" id="password" placeholder="Password"/>
-              <br></br>
-            <button onClick={this.submitLogin} className="form-button">Login</button>
-          </form>
-          <p id="signup">Don't have a Speculate account yet? Sign up now.</p>
-        </div>
+      <div className="login-container">
+      {
+        this.props.createForm ?
+        <CreateForm />
+        :
+        <div>
+          <h1 id="close-login" onClick={this.handleLogin}>Speculate.</h1>
+            <form className="login-form" autoComplete="off" onChange={this.handleFormInput}>
+              <input className="login-input"  type="text" id="username" placeholder="Username"/>
+                <br></br>
+              <input className="login-input"  type="password" id="password" placeholder="Password"/>
+                <br></br>
+              <button onClick={this.submitLogin} className="form-button">Login</button>
+            </form>
+            <p id="signup">Don't have a Speculate account yet? Sign up now.</p>
+          </div>
+      }
+      </div>
     )
   }
 }
