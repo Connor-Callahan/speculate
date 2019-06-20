@@ -1,4 +1,12 @@
 
+
+// StockSearch.js --------> Open and close search form
+export const stockSearch = (stockSearch) => {
+  return {
+    type:'STOCK_SEARCH',
+    payload: stockSearch
+  }
+}
 // Login.js -------->
 export const fetchSymbols = (symbols) => {
   return {
@@ -166,6 +174,14 @@ export const setUserChart = (chart) => {
 }
 
 // Transaction.js -------------->
+
+export const toggleDashboard = (position) => {
+  return {
+    type:'TRANSACTION_DASHBOARD',
+    payload: position
+  }
+}
+
 
 export const createTransaction = (size) => {
   return {

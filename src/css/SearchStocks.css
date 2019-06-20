@@ -1,0 +1,10 @@
+.search-container {
+  grid-area: 1 / 2 / 4 / 6;
+  max-width: 900px;
+  min-width: 500px;
+  margin: 1em;
+  padding: 0px 50px 0px 50px;
+  z-index: 100;
+  background: white;
+  border: 2px solid black;
+}

@@ -56,6 +56,7 @@ class App extends Component {
         :
         <UserAccount />
       }
+      <SearchStocks />
       </div>
     );
   }

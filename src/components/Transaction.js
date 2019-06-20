@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 
-import { createTransaction, addTransaction, setBalance } from '../actions'
+import { createTransaction, addTransaction, setBalance, toggleDashboard} from '../actions'
 
 const mapDispatchToProps = (dispatch) => {
   return {
     createTransaction: (amount) => dispatch(createTransaction(amount)),
     addTransaction: (transaction) => dispatch(addTransaction(transaction)),
-    adjustBalance: (amount) => dispatch(setBalance(amount))
+    adjustBalance: (amount) => dispatch(setBalance(amount)),
+    toggleDashboard: (position) => dispatch(toggleDashboard(position)),
   }
 }
 
@@ -17,7 +18,9 @@ const mapStateToProps = (state) => {
     stock: state.stock.stock,
     transactions: state.transaction.transactions,
     balance: state.user.balance,
-    id: state.user.id
+    id: state.user.id,
+    loggedIn: state.user.loggedIn,
+    transDash: state.transaction.transDash
   }
 }
 
@@ -167,20 +170,29 @@ class Transaction extends Component {
   }
   //
   render() {
+    console.log(this.props.transDash)
+
     return (
       <div className="create-transaction">
-        <form >
-        <label htmlFor="Amount"></label>
-        <input className="input-field" onChange={this.handleFormInput} type="number" id="orderSize" placeholder="# of shares"/>
-        <button className="purchase-button" onClick={this.handleOrder} id="buy" >Buy</button>
-        <br></br>
-        <label htmlFor="Amount"></label>
-        <input className="input-field" onChange={this.handleFormInput} type="number" id="orderSize" placeholder="# of shares"/>
-        <button className="purchase-button" onClick={this.handleOrder} id="sell">Sell</button>
-        <br></br>
-        <label htmlFor="Amount"></label>
-        <input className="input-field" onChange={this.handleFormInput} type="number" id="orderSize" placeholder="commission"/>
-        </form>
+       {
+         this.props.transDash ?
+         <form >
+           <label htmlFor="Amount"></label>
+            <input className="input-field" onChange={this.handleFormInput} type="number" id="orderSize" placeholder="# of shares"/>
+              <button className="purchase-button" onClick={this.handleOrder} id="buy" >Buy</button>
+                <br></br>
+           <label htmlFor="Amount"></label>
+            <input className="input-field" onChange={this.handleFormInput} type="number" id="orderSize" placeholder="# of shares"/>
+              <button className="purchase-button" onClick={this.handleOrder} id="sell">Sell</button>
+                <br></br>
+           <label htmlFor="Amount"></label>
+            <input className="input-field" onChange={this.handleFormInput} type="number" id="orderSize" placeholder="commission"/>
+           </form>
+         :
+         null
+
+       }
+
       </div>
     )
   }

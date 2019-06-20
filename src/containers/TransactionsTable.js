@@ -224,9 +224,7 @@ class TransactionsTable extends Component {
           })
 
         }
-
         </tbody>
-
         </table>
       </div>
       }

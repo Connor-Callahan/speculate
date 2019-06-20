@@ -109,20 +109,15 @@ class CreateForm extends Component {
           <form className="login-form"
           autoComplete="off"
           onChange={this.handleFormInput} >
-            <label htmlFor="firstname">first name : </label>
-            <input className="login-input" type="text" id="firstname"/>
+            <input className="login-input" type="text" id="firstname" placeholder="firstname"/>
               <br></br>
-            <label htmlFor="lastname">last name : </label>
-            <input className="login-input" type="text" id="lastname"/>
+            <input className="login-input" type="text" id="lastname" placeholder="lastname"/>
               <br></br>
-            <label htmlFor="username">username : </label>
-            <input className="login-input" type="text" id="username"/>
+            <input className="login-input" type="text" id="username" placeholder="username"/>
               <br></br>
-            <label htmlFor="password">password : </label>
-            <input className="login-input" type="password" id="password"/>
+            <input className="login-input" type="password" id="password" placeholder="password"/>
               <br></br>
-            <label htmlFor="balance">balance : </label>
-            <input className="login-input" type="number" id="balance"/>
+            <input className="login-input" type="number" id="balance" placeholder="balance"/>
               <br></br>
           <button className="form-button" onClick={this.createAccount}>Submit</button>
           </form>
