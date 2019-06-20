@@ -154,9 +154,9 @@ class TransactionsTable extends Component {
         <button id="all" id="all-button" onClick={this.filterTransactions}>All Transactions</button>
         :
         <div>
-        <h1>All Transactions</h1>
-        <h4 className='balance'>Balance : ﹩{this.props.balance}</h4>
-        <p id='value' className='balance'>Updated : {date.toString()}</p>
+          <h1>Transaction History</h1>
+          <h4 className='balance'>Balance : ﹩{this.props.balance}</h4>
+          <p id='value' className='balance'>Updated : {date.toString()}</p>
         </div>
       }
       <Portfolio />

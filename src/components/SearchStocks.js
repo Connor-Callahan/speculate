@@ -10,7 +10,8 @@ const mapStateToProps = (state) => {
     symbols: state.stock.symbols,
     sector: state.stock.sector,
     stockFilter: state.stock.stockFilter,
-    stockSearch: state.stock.stockSearch
+    stockSearch: state.stock.stockSearch,
+    transDash: state.transaction.transDash
   }
 }
 
@@ -53,7 +54,7 @@ class SearchStocks extends Component {
 
   render() {
 
-    const showSearch = this.props.stockSearch ? "search": "null"
+    const showSearch = this.props.stockSearch || this.props.transDash ? "search": "null"
 
     return (
       <div className={`${showSearch}-container`}>
