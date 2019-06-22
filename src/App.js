@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import './css/App.css';
 import './css/ProfileCard.css';
 import './css/UserAccount.css';
@@ -49,14 +50,14 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      <Navbar/>
-      {
-        this.props.login && this.props.loggedIn === false ?
-        <LoginForm />
-        :
-        <UserAccount />
-      }
-      <SearchStocks />
+        <Navbar/>
+        {
+          this.props.login && this.props.loggedIn === false ?
+          <LoginForm />
+          :
+          <UserAccount />
+        }
+        <SearchStocks />
       </div>
     );
   }

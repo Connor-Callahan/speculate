@@ -12,6 +12,7 @@
     "react-css-blur": "^1.1.1",
     "react-dom": "^16.7.0",
     "react-redux": "^6.0.1",
+    "react-router-dom": "^5.0.1",
     "react-scripts": "^2.1.5",
     "react-select": "^2.3.0",
     "redux": "^4.0.1",
