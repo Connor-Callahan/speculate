@@ -24,6 +24,7 @@ class StockProfile extends Component {
 
 
   handleSelectStock = async ({target}) => {
+    console.log(API_KEY)
     const selectedStockProfile = await fetch(`https://cloud.iexapis.com/stable/stock/${target.id}/company?token=${API_KEY}`)
     .then(r => r.json())
     const selectedStock = await fetch(`https://cloud.iexapis.com/stable/stock/${target.id}/quote?token=${API_KEY}`)
