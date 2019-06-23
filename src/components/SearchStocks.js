@@ -39,7 +39,7 @@ class SearchStocks extends Component {
   handleSort = (e) => {
   e.persist()
   let sortedStocks = null
-  this.props.sector != null ? sortedStocks = this.props.sector.slice().map(o => ({ ...o })) :               sortedStocks = this.props.symbols.slice().map(o => ({ ...o }))
+  this.props.sector != null ? sortedStocks = this.props.sector.slice().map(o => ({ ...o })) : sortedStocks = this.props.symbols.slice().map(o => ({ ...o }))
   if(e.target.value === 'Z-A') {
     this.props.sortSymbols(sortedStocks.reverse())
   }

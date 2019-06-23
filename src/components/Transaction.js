@@ -3,6 +3,8 @@ import {connect} from 'react-redux'
 
 import { createTransaction, addTransaction, setBalance } from '../actions'
 
+const API_KEY = process.env.REACT_APP_IEX_API_KEY;
+
 const mapDispatchToProps = (dispatch) => {
   return {
     createTransaction: (amount) => dispatch(createTransaction(amount)),
@@ -41,7 +43,7 @@ class Transaction extends Component {
       alert('Please enter an order amount greater than 0')
     } else {
     // retrieving the current price of the selected stock to trade from iex
-    let price = await fetch(`https://cloud.iexapis.com/stable/stock/${this.props.stock.symbol}/quote?token=pk_f0958c731c62430c85edfd3a28f51053`)
+    let price = await fetch(`https://cloud.iexapis.com/stable/stock/${this.props.stock.symbol}/quote?token=${API_KEY}`)
       .then(r => r.json())
   console.log(price)
     let totalCost = (price.latestPrice * this.props.orderSize).toFixed(2)
