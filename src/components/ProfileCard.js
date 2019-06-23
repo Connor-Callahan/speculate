@@ -36,7 +36,6 @@ class ProfileCard extends Component {
   }
 
   render() {
-    console.log(this.props.chart)
     return (
         <div className="profile-card">
           <h1 className="company-name">{this.props.stock.companyName}</h1>
