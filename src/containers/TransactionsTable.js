@@ -164,67 +164,67 @@ class TransactionsTable extends Component {
         this.props.portfolio ?
         null
         :
-        <div>
-        <div >
-        <button id="bought" className="trans-btn-small" onClick={this.filterTransactions}>Bought</button>
-        <button id="sold" className="trans-btn-small" onClick={this.filterTransactions}>Sold</button>
-        <button id="all" className="trans-btn-small" onClick={this.filterTransactions}>All</button>
-        </div>
-        <TransactionChart />
+        <div id="transaction-chart">
+          <div>
+            <button id="bought" className="trans-btn-small" onClick={this.filterTransactions}>Bought</button>
+            <button id="sold" className="trans-btn-small" onClick={this.filterTransactions}>Sold</button>
+            <button id="all" className="trans-btn-small" onClick={this.filterTransactions}>All</button>
+            <TransactionChart />
+          </div>
 
         <div className="transition-arrows">
         <button id="previous" className="index-button" onClick={this.handleIndex}>&#8249;</button>
         <button id="next" className="index-button" onClick={this.handleIndex}>&#8250;</button>
         </div>
         <table className="user-portfolio">
-        <tbody>
-        <tr>
-        <th>
-        <h2 id="symbol" onClick={this.sortPortfolio}>
-        Symbol ▾
-        </h2>
-        </th>
-        <th>
-        <h2 id="price" onClick={this.sortPortfolio}>
-        Price ▾
-        </h2>
-        </th>
-        <th>
-        <h2 id="num_shares" onClick={this.sortPortfolio}>
-        # of Shares ▾
-        </h2>
-        </th>
-        <th>
-        <h2 id="cost" onClick={this.sortPortfolio}>
-        Cost ▾
-        </h2>
-        </th>
-        <th>
-        <h2 id="cost" >
-        Order Type
-        </h2>
-        </th>
-        <th>
-        <h2 id="cost" >
-        Date/Time
-        </h2>
-        </th>
-        </tr>
-        {
-          limit.map(transaction => {
-            let date = new Date(transaction.date_time)
-            return <tr key={Math.random()}>
-            <td>{transaction.stock_symbol}</td>
-            <td>${transaction.price}</td>
-            <td>{transaction.num_shares}</td>
-            <td>${transaction.cost}</td>
-            <td>{transaction.order_type}</td>
-            <td>{date.toDateString()}</td>
-            </tr>
-          })
+          <tbody>
+            <tr>
+              <th>
+                <h2 id="symbol" onClick={this.sortPortfolio}>
+                  Symbol ▾
+                </h2>
+              </th>
+              <th>
+                <h2 id="price" onClick={this.sortPortfolio}>
+                  Price ▾
+                </h2>
+              </th>
+              <th>
+                <h2 id="num_shares" onClick={this.sortPortfolio}>
+                  # of Shares ▾
+                </h2>
+              </th>
+              <th>
+                <h2 id="cost" onClick={this.sortPortfolio}>
+                  Cost ▾
+                </h2>
+              </th>
+              <th>
+                <h2 id="cost" >
+                  Order Type
+                </h2>
+              </th>
+              <th>
+                <h2 id="cost" >
+                  Date/Time
+                </h2>
+              </th>
+          </tr>
+          {
+            limit.map(transaction => {
+              let date = new Date(transaction.date_time)
+              return <tr key={Math.random()}>
+                <td>{transaction.stock_symbol}</td>
+                <td>${transaction.price}</td>
+                <td>{transaction.num_shares}</td>
+                <td>${transaction.cost}</td>
+                <td>{transaction.order_type}</td>
+                <td>{date.toDateString()}</td>
+                </tr>
+            })
 
-        }
-        </tbody>
+          }
+          </tbody>
         </table>
       </div>
       }

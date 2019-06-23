@@ -41,3 +41,14 @@ td, th {
   width: auto;
   height: 20px;
 }
+
+#table-data {
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  grid-template-rows: repeat(4, auto);
+}
+
+#transaction-chart {
+  border: 2px solid blue;
+  grid-area: 2 / 1 / 4 / 6;
+}

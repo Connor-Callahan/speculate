@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 
 import { selectStock, setProfile, setChart, setIcon } from '../actions'
 
+const API_KEY = process.env.REACT_APP_IEX_API_KEY;
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -23,11 +24,11 @@ class StockProfile extends Component {
 
 
   handleSelectStock = async ({target}) => {
-    const selectedStockProfile = await fetch(`https://cloud.iexapis.com/stable/stock/${target.id}/company?token=pk_f0958c731c62430c85edfd3a28f51053`)
+    const selectedStockProfile = await fetch(`https://cloud.iexapis.com/stable/stock/${target.id}/company?token=${API_KEY}`)
     .then(r => r.json())
-    const selectedStock = await fetch(`https://cloud.iexapis.com/stable/stock/${target.id}/quote?token=pk_f0958c731c62430c85edfd3a28f51053`)
+    const selectedStock = await fetch(`https://cloud.iexapis.com/stable/stock/${target.id}/quote?token=${API_KEY}`)
     .then(r => r.json())
-    const selectedChart = await fetch(`https://cloud.iexapis.com/stable/stock/${target.id}/chart?token=pk_f0958c731c62430c85edfd3a28f51053`)
+    const selectedChart = await fetch(`https://cloud.iexapis.com/stable/stock/${target.id}/chart?token=${API_KEY}`)
     .then(r => r.json())
     this.props.handleFilter(null)
     this.props.selectStock(selectedStock)

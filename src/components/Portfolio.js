@@ -4,6 +4,9 @@ import ReactChartkick, { PieChart } from 'react-chartkick'
 import Chart from 'chart.js'
 
 import { setPortfolio, setCurrentValue, setTotalValue } from '../actions'
+
+const API_KEY = process.env.REACT_APP_IEX_API_KEY;
+
 const mapDispatchToProps = (dispatch) => {
   return {
     setPortfolio : (portfolio) => dispatch(setPortfolio(portfolio)),
@@ -112,7 +115,7 @@ class Profile extends Component {
     let multiStock = null
 
     // retrieve current value for the price of each stock in portfolio
-    fetch(`https://cloud.iexapis.com/v1/stock/market/batch?types=quote&symbols=${curPortVal}&range=5y%20&token=pk_f0958c731c62430c85edfd3a28f51053`)
+    fetch(`https://cloud.iexapis.com/v1/stock/market/batch?types=quote&symbols=${curPortVal}&range=5y%20&token=${API_KEY}`)
     .then(r => r.json())
     .then(data => {
       curPortVal.forEach(symbol => {
@@ -140,9 +143,6 @@ class Profile extends Component {
       for(let i = 0; i < currentStockVal.length; i++) {
         this.props.portfolio[i].currentVal = (currentStockVal[i].quote.latestPrice)
       }
-      this.props.portfolio.forEach(transaction => {
-        console.log(transaction)
-      })
     }
 
     // create time associated with updated portfolio value

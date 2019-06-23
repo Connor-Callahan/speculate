@@ -18,11 +18,11 @@ class TransactionChart extends Component {
   render() {
     return (
       <div>
-        <div id="transaction-chart">
+        <div>
         {
           this.props.userChart.length > 0 ?
           <ColumnChart
-          height="200px"
+          height="175px"
           padding="20px"
           colors={["#f6ab02"]}
           // xtitle="Company"
