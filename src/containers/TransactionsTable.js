@@ -159,7 +159,7 @@ class TransactionsTable extends Component {
           <p id='value' className='balance'>Updated : {date.toString()}</p>
         </div>
       }
-      <Portfolio />
+      <Portfolio id="portfolio"/>
       {
         this.props.portfolio ?
         null

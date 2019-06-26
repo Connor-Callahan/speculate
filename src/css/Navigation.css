@@ -4,7 +4,7 @@
 }
 
 #navbar-show {
-  grid-area: 1 / 1 / 5 / 2;
+  grid-area: 1 / 1 / 7 / 2;
   background-color: royalblue;
 }
 
@@ -19,19 +19,20 @@ li {
 }
 
 #show-header {
+  margin-top: 30px;
   color: white;
   text-align: center;
 }
 
 #navbar-hide {
-  grid-area: 1 / 1 / 2 / 6;
-  height: 60%;
+  grid-area: 1 / 1 / 2 / 7;
+  height: 100px;
   color: white;
   background-color: royalblue;
 }
 
 #hide-menu {
-  margin-top: 2%;
+  margin-top: 35px;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   align-items: center;
@@ -51,6 +52,23 @@ li {
   display: flex;
   list-style: none;
   text-align: right;
+}
+
+.login-btn {
+  float: right;
+  color: white;
+  font-family: Helvetica;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 0;
+  border: 2px solid white;
+  border-radius: 22px;
+  background-color: transparent;
+}
+
+.login-btn:hover {
+  background-color: white;
+  color: royalblue;
 }
 
 #login-btns {
@@ -78,4 +96,41 @@ li {
 
 #hide-create {
   margin-right: 0.5em;
+}
+
+@media only screen and (max-width: 1200px) {
+  #hide-nav-list {
+    grid-area: 1 / 3 / 1 / 4;
+
+  }
+  #login-btns {
+    grid-area: 1 / 4 / 1 / 6;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  #navbar-hide {
+    height: 150px;
+  }
+  #hide-header {
+    grid-area: 1 / 1 / 2 / 2;
+    text-align: right;
+    margin: 0;
+  }
+  .login-btn {
+    margin-top: 5px;
+  }
+
+  .login-btn:hover {
+    background-color: white;
+    color: royalblue;
+  }
+  #login-btns {
+    grid-area: 1 / 2 / 1 / 6;
+  }
+  #hide-nav-list {
+    grid-area: 2 / 1 / 2 / 2;
+    text-align: left;
+
+  }
 }

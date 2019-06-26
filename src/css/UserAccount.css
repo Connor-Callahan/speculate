@@ -12,42 +12,28 @@
   padding: 0.3em;
 }
 
-.login-btn {
-  float: right;
-  color: white;
-  font-family: Sarala;
-  font-size: 14px;
-  font-weight: 700;
-  margin-bottom: 0;
-  border: 2px solid white;
-  border-radius: 22px;
-  background-color: transparent;
-}
-
-.login-btn:hover {
-  background-color: white;
-  color: royalblue;
-}
-
 #hide-create {
   margin-right: 0.5em;
 }
+
 
 .login-container {
   text-align: left;
   position: absolute;
   background: white;
   font-size: 18px;
-  font-family: Sarala;
+  font-family: Helvetica;
   width: 100%;
 }
 
 #close-login {
   text-align: center;
   font-size: 48px;
-  font-family: Sarala;
+  font-family: Helvetica;
   font-weight: 800;
   color: royalblue;
+  margin-top: 50px;
+  margin-bottom: 20px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -64,22 +50,23 @@
 .login-input {
   margin: 0 auto;
   border: 1px solid grey;
+  outline: none;
+  margin-top: 5px;
   border-radius: 5px;
   font-size: 18px;
-  width: 35%;
+  width: 200px;
 }
 
 #create-login-form {
   margin-left: auto;
   margin-right: auto;
   max-width: 600px;
-  /* border: 3px solid yellow; */
 }
 
 .form-button {
   color: white;
   background-color: royalblue;
-  font-family: Sarala;
+  font-family: Helvetica;
   font-size: 18px;
   font-weight: 700;
   padding: 7px;

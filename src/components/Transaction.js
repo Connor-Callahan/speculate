@@ -170,8 +170,6 @@ class Transaction extends Component {
   }
   //
   render() {
-    console.log(this.props.transDash)
-
     return (
       <div className="create-transaction">
        {

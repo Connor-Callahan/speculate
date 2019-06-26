@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import './css/App.css';
-import './css/ProfileCard.css';
-import './css/UserAccount.css';
-import './css/SearchStocks.css';
-import './css/Navigation.css';
-import './css/UserDashboard.css';
+
 import StockList from './containers/StockList'
 import LoginForm from './components/LoginForm'
 import Navbar from './containers/Navbar'

@@ -149,7 +149,7 @@ class Profile extends Component {
     let date = new Date
 
     return (
-      <div>
+      <div id="portfolio">
       {
         this.props.portfolio ?
         <div className="table-data">
@@ -221,10 +221,10 @@ class Profile extends Component {
           </div>
         :
         <button
-        className="portfolio-button"
+        className="portfolio-btn"
         onClick={this.handleValue}
         >
-        View Portfolio
+        View Holdings
         </button>
       }
       </div>
