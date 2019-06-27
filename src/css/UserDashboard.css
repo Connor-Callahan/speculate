@@ -57,6 +57,5 @@ td, th {
 
 
 #transaction-chart {
-  border: 2px solid blue;
   grid-area: 2 / 1 / 4 / 6;
 }
