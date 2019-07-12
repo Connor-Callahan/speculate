@@ -1,3 +1,5 @@
+
+
 #nav-header {
   color: white;
   text-align: center;
@@ -12,6 +14,11 @@
   color: white;
   list-style: none;
   text-align: left;
+}
+
+a {
+  text-decoration: none;
+  color: white;
 }
 
 li {

@@ -61,7 +61,7 @@ class SearchStocks extends Component {
       {
         this.props.stockSearch ?
         <div >
-        <button onClick={() => this.props.toggleSearch(false)}>X</button>
+        <button id="close-search" onClick={() => this.props.toggleSearch(false)}>X</button>
 
           <input
           id="search-input"
@@ -72,7 +72,7 @@ class SearchStocks extends Component {
           placeholder='Type to Search Stocks'
           />
           Sort By :
-          <select className="select-input"
+          <select id="sort-input"
           onChange={this.handleSort}>
               <option value="A-Z">(A-Z)</option>
               <option value="Z-A">(Z-A)</option>

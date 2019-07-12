@@ -37,7 +37,10 @@ const mapDispatchToProps = (dispatch) => {
             <li onClick={() => this.props.toggleSearch(true)}>
           Stock Search
           </li>
-          <li>Source</li>
+           <a href="https://github.com/Connor-Callahan/speculate"
+              target="_blank">
+              <li>Source</li>
+            </a>
           <li>Credits</li>
           </ul>
           </div>
@@ -46,7 +49,7 @@ const mapDispatchToProps = (dispatch) => {
           <h1 id="hide-header">Speculate.</h1>
           <ul id="hide-nav-list">
           <li>About</li>
-          <li>Source</li>
+          <a href="https://github.com/Connor-Callahan/speculate"><li>Source</li></a>
           <li>Credits</li>
           </ul>
           <Login id="hide-btns"/>
