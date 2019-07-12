@@ -39,7 +39,16 @@
   margin-top: 25px;
   outline: none;
   border: 2px solid black;
-  width: 200px;
+  border-radius: 18px;
+  width: 120px;
+  height: 40px;
+  font-size: 14px;
+}
+
+.trans-btn:hover {
+  color: white;
+  background-color: darkblue;
+  border: royalblue;
 }
 
 .user-portfolio {

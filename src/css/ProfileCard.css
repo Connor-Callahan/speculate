@@ -1,10 +1,12 @@
 .profile-card {
-  border: 2px solid blue;
-  margin-top: 20px;
+  background: lightgrey;
+  margin-top: 30px;
   padding: 15px;
+  -webkit-box-shadow: 0px 3px 15px 0px rgba(0,0,0,0.20);
 }
 
 #close-profile {
+  background: transparent;
   float: right;
   border: 2px solid black;
   font-family: helvetica;
