@@ -30,7 +30,7 @@ const mapDispatchToProps = (dispatch) => {
           <div>
           <h1 id="show-header">Speculate.</h1>
           <ul id="nav-list">
-          <li>Home</li>
+          <li>Dashboard</li>
           <li onClick={() => this.props.toggleDashboard(true)}>
             Create Transaction
           </li>
@@ -42,6 +42,7 @@ const mapDispatchToProps = (dispatch) => {
               <li>Source</li>
             </a>
           <li>Credits</li>
+          <li>Logout</li>
           </ul>
           </div>
           :
@@ -49,7 +50,10 @@ const mapDispatchToProps = (dispatch) => {
           <h1 id="hide-header">Speculate.</h1>
           <ul id="hide-nav-list">
           <li>About</li>
-          <a href="https://github.com/Connor-Callahan/speculate"><li>Source</li></a>
+            <a href="https://github.com/Connor-Callahan/speculate"
+              target="_blank">
+              <li>Source</li>
+             </a>
           <li>Credits</li>
           </ul>
           <Login id="hide-btns"/>

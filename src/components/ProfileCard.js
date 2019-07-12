@@ -48,7 +48,7 @@ class ProfileCard extends Component {
             :
             <p></p>
           }
-            <button className="close-button" onClick={this.handleClose}>𝖷</button>
+            <button id="close-profile" onClick={this.handleClose}>Close Profile</button>
             <h3 className="symbol">Ticker : {this.props.stock.symbol}</h3>
             <h3 className="symbol">Sector : {this.props.stock.sector}</h3>
             <p className="profile-description">{this.props.profile}</p>

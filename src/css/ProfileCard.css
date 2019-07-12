@@ -1,0 +1,23 @@
+.profile-card {
+  border: 2px solid blue;
+  margin-top: 20px;
+  padding: 15px;
+}
+
+#close-profile {
+  float: right;
+  border: 2px solid black;
+  font-family: helvetica;
+  border-radius: 18px;
+  outline: none;
+  width: 120px;
+  height: 40px;
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+#close-profile:hover {
+  background: darkblue;
+  border: royalblue;
+  color: white;
+}

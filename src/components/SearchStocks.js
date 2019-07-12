@@ -5,6 +5,8 @@ import Transaction from './Transaction'
 
 import { searchSymbols, sortSymbols, filterSector, stockSearch } from '../actions'
 
+const API_KEY = process.env.REACT_APP_IEX_API_KEY;
+
 const mapStateToProps = (state) => {
   return {
     symbols: state.stock.symbols,
@@ -28,7 +30,7 @@ class SearchStocks extends Component {
 
   handleStockSector = async (e) => {
     if(e.target.value !== 'All') {
-      const selectedSector = await fetch(`https://api.iextrading.com/1.0/stock/market/collection/sector?collectionName=${e.target.value}`)
+      const selectedSector = await fetch(`https://cloud.iexapis.com/stable/stock/market/collection/sector?collectionName=Technology?token=${API_KEY}`)
       .then(r => r.json())
       for(let i = 0; i < selectedSector.length; i++) {
         selectedSector[i].name = selectedSector[i].companyName
@@ -61,7 +63,7 @@ class SearchStocks extends Component {
       {
         this.props.stockSearch ?
         <div >
-        <button id="close-search" onClick={() => this.props.toggleSearch(false)}>X</button>
+        <button id="close-search" onClick={() => this.props.toggleSearch(false)}>Close Search</button>
 
           <input
           id="search-input"
