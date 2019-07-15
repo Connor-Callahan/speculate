@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import CreateForm from './CreateForm'
 
 import { setLogin, setLogout, setUsername, setPassword, setFirstname, setLastname, setUserID, setBalance} from '../actions'
 
@@ -20,7 +19,6 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
   return {
     login: state.user.login,
-    createForm: state.user.createForm,
     username: state.user.username,
     password: state.user.password,
     loggedIn: state.user.loggedIn,
@@ -31,7 +29,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-class LoginForm extends Component {
+class CreateForm extends Component {
 
   handleFormInput = (e) => {
     let input = e.target.id
@@ -104,32 +102,30 @@ class LoginForm extends Component {
     })
   }
 
-
-
   render() {
-
     return (
-      <div className="login-container">
-      {
-        this.props.createForm ?
-        <CreateForm />
-        :
-        <div>
-          <h1 id="close-login" onClick={this.handleLogin}>Speculate.</h1>
-            <form className="login-form" autoComplete="off" onChange={this.handleFormInput}>
-              <input className="login-input"  type="text" id="username" placeholder="Username"/>
-                <br></br>
-              <input className="login-input"  type="password" id="password" placeholder="Password"/>
-                <br></br>
-              <button onClick={this.submitLogin} className="form-button">Login</button>
-            </form>
-            <p id="signup">Don't have a Speculate account yet? Sign up now.</p>
-          </div>
-      }
-      </div>
+      <div>
+        <h1 id="close-login" onClick={this.handleLogin}>Speculate.</h1>
+          <form className="login-form"
+          autoComplete="off"
+          onChange={this.handleFormInput} >
+            <input className="login-input" type="text" id="firstname" placeholder="firstname"/>
+              <br></br>
+            <input className="login-input" type="text" id="lastname" placeholder="lastname"/>
+              <br></br>
+            <input className="login-input" type="text" id="username" placeholder="username"/>
+              <br></br>
+            <input className="login-input" type="password" id="password" placeholder="password"/>
+              <br></br>
+            <input className="login-input" type="number" id="balance" placeholder="balance"/>
+              <br></br>
+          <button className="form-button" onClick={this.createAccount}>Submit</button>
+          </form>
+
+        </div>
     )
   }
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm)
+export default connect(mapStateToProps, mapDispatchToProps)(CreateForm)

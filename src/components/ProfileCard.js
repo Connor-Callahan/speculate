@@ -7,6 +7,8 @@ import Chart from 'chart.js'
 
 ReactChartkick.addAdapter(Chart)
 
+const API_KEY = process.env.REACT_APP_IEX_API_KEY;
+
 const mapStateToProps = (state) => {
   return {
     stock: state.stock.stock,
@@ -30,7 +32,7 @@ class ProfileCard extends Component {
   }
 
   handleChart = async ({target}) => {
-    const selectChart = await fetch(`https://cloud.iexapis.com/stable/stock/${this.props.stock.symbol}/chart/${target.id}?token=pk_f0958c731c62430c85edfd3a28f51053`)
+    const selectChart = await fetch(`https://cloud.iexapis.com/stable/stock/${this.props.stock.symbol}/chart/${target.id}?token=${API_KEY}`)
     .then(r => r.json())
     this.props.setChart(selectChart)
   }
@@ -46,7 +48,7 @@ class ProfileCard extends Component {
             :
             <p></p>
           }
-            <button className="close-button" onClick={this.handleClose}>𝖷</button>
+            <button id="close-profile" onClick={this.handleClose}>Close Profile</button>
             <h3 className="symbol">Ticker : {this.props.stock.symbol}</h3>
             <h3 className="symbol">Sector : {this.props.stock.sector}</h3>
             <p className="profile-description">{this.props.profile}</p>

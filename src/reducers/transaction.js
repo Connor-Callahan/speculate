@@ -1,4 +1,5 @@
 const defaultState = {
+  transDash: false,
   portfolio: null,
   value: null,
   cumulative: null,
@@ -13,6 +14,8 @@ const defaultState = {
 export default(state=defaultState, action) => {
 
   switch(action.type) {
+    case 'TRANSACTION_DASHBOARD':
+    return {...state, transDash: action.payload}
     case 'CURRENT_PORTFOLIO':
     return {...state, portfolio: action.payload}
     case 'CURRENT_VALUE':

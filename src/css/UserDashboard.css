@@ -1,0 +1,70 @@
+#table-data {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  grid-template-rows: repeat(4, auto);
+}
+
+#portfolio {
+  grid-area: 1 / 5 / 1 / 6;
+}
+
+.portfolio-btn {
+  color: black;
+  background-color: white;
+  font-family: Helvetica;
+  font-size: 16px;
+  outline: none;
+  border: 2px solid black;
+  width: 100px;
+}
+
+.trans-btn-small {
+  color: black;
+  margin: 1%;
+  background-color: white;
+  font-family: Helvetica;
+  font-size: 16px;
+  margin-top: 25px;
+  outline: none;
+  border: 2px solid black;
+  width: 100px;
+}
+
+.trans-btn {
+  color: black;
+  background-color: white;
+  font-family: Helvetica;
+  font-size: 16px;
+  margin-top: 25px;
+  outline: none;
+  border: 2px solid black;
+  border-radius: 18px;
+  width: 120px;
+  height: 40px;
+  font-size: 14px;
+}
+
+.trans-btn:hover {
+  color: white;
+  background-color: darkblue;
+  border: royalblue;
+}
+
+.user-portfolio {
+  table-layout: fixed;
+  max-width: 800px;
+}
+
+td, th {
+  border: solid 1px black;
+  padding-left: 5px;
+  padding-right: 5px;
+  width: auto;
+  height: 20px;
+}
+
+
+#transaction-chart {
+  grid-area: 2 / 1 / 4 / 6;
+}

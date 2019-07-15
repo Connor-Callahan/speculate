@@ -1,169 +1,25 @@
-
-/* click listener on the ProfileList, individual stock div */
 .profile-card {
-  position: absolute;
-  -webkit-box-shadow: 0px 5px 30px 0px rgba(0,0,0,0.50);
-  width: 35%;
-  height: 85%;
-  /* border:2px solid black; */
-  overflow-y: scroll;
-  background-color: white;
-  margin-top: 5%;
-  margin-left: 56%;
-  padding: 2%;
-  z-index: 1000;
+  background: lightgrey;
+  margin-top: 30px;
+  padding: 15px;
+  -webkit-box-shadow: 0px 3px 15px 0px rgba(0,0,0,0.20);
 }
 
-.company-name {
-  position: relative;
-  margin-top: -2%;
-  margin-bottom: 5%;
-  font-size: 24px;
-  font-family: 'Sarala', sans-serif;
-  font-weight: 200;
-}
-
-.profile-icon {
-  position: relative;
-  margin-top: -3%;
-  width: 80px;
-  height: auto;
-}
-
-.symbol {
-  margin-top: 1%;
-  font-size: 12px;
-  font-family: 'Nunito Sans', sans-serif;
-}
-
-.profile-description {
-  font-size: 14px;
-  font-family: 'Sarala', sans-serif;
-  font-weight: 300;
-}
-
-.close-button {
-  position: relative;
-  border:1px solid black;
-  outline: none;
-  color: black;
-  padding: 4px 8px;
-  text-align: center;
-  margin: 2px;
-  margin-left: 60%;
-  text-decoration: none;
-  font-size: 12px;
-  transition-duration: 0.4s;
-  font-family: 'Sarala', sans-serif;
-  font-weight: 200;
-}
-
-.close-button:hover {
-  background-color: black;
-  color: white;
-}
-
-.header-container {
-  display: grid;
-  width: 95%;
-  height: auto;
-  margin-bottom: 10px;
-  margin-top: -15px;
-  grid-template-columns: auto auto;
-  padding: 5px;
-  /* border: 1px solid black; */
-}
-
-
-.profile-header {
-  font-size: 13px;
-  font-family: 'Sarala', sans-serif;
-  font-weight: 300;
-}
-
-.create-transaction {
-  position: relative;
-  /* border: 0.5px solid  black; */
-  margin-left: 30%;
-  padding-left: 5%;
-  width: 40%;
-  margin-bottom: -15%;
-}
-
-#orderSize {
-  position: relative;
-  outline: none;
-  color: black;
-  text-align: center;
-  width: 100px;
-  height: 20px;
-  margin: 2px;
-  text-decoration: none;
-  font-size: 12px;
-  font-family: 'Sarala', sans-serif;
-  font-weight: 400;
-}
-
-.purchase-button {
-  position: relative;
-  border:1px solid black;
-  outline: none;
-  color: black;
-  text-align: center;
-  width: 42px;
-  margin: 2px;
-  text-decoration: none;
-  font-size: 12px;
-  transition-duration: 0.4s;
-  font-family: 'Sarala', sans-serif;
-  font-weight: 400;
-}
-
-.purchase-button:hover {
-  background-color: black;
-  color: white;
-}
-
-.input-field {
-  outline: none;
-  position: relative;
-  border:1px solid black;
-  margin-top: 3%;
+#close-profile {
   background: transparent;
-  height: 35px;
-  width: 100px;
-  color: grey;
-  margin-left: 0.5%;
-  font-size: 12px;
-  border:none;
-}
-
-#chart-container {
-  position: relative;
-  margin-left: 50%;
-}
-
-.chart-button {
-  border:1px solid black;
-  border-radius: 12px;
+  float: right;
+  border: 2px solid black;
+  font-family: helvetica;
+  border-radius: 18px;
   outline: none;
-  color: black;
-  padding: 3px 10px;
-  text-align: center;
-  margin: 2px;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 10px;
-  transition-duration: 0.4s;
-  font-family: 'Sarala', sans-serif;
-  font-weight: 400;
+  width: 120px;
+  height: 40px;
+  font-size: 14px;
+  margin-top: 20px;
 }
 
-.chart-button:hover {
-  background-color: black;
+#close-profile:hover {
+  background: darkblue;
+  border: royalblue;
   color: white;
-}
-
-.stock-chart {
-  position: relative;
 }

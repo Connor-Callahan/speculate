@@ -1,4 +1,5 @@
 const defaultState = {
+  stockSearch: false,
   symbols: [],
   stockFilter: '',
   stock: null,
@@ -11,6 +12,8 @@ const defaultState = {
 export default(state=defaultState, action) => {
 
   switch(action.type) {
+    case 'STOCK_SEARCH':
+    return {...state, stockSearch: action.payload}
     case 'FETCH_SYMBOLS':
     return {...state, symbols: action.payload}
     case 'ALPHA_SORT':

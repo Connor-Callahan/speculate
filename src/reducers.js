@@ -8,6 +8,7 @@ const defaultState = {
   chart: null,
   icon: null,
   newsFeed: [],
+  createFrom: false,
   login: false,
   loggedIn: false,
   username: null,
@@ -47,6 +48,8 @@ export default(state=defaultState, action) => {
     return {...state, newsFeed: action.payload}
     // User login (Login.js, LoginForm.js, UserAccount.js)
     case 'HANDLE_USER_LOGIN':
+    return {...state, login: action.payload}
+    case 'HANDLE_CREATE_FORM':
     return {...state, login: action.payload}
     case 'HANDLE_USERNAME':
     return {...state, username: action.payload}

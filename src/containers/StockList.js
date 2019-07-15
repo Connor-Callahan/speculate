@@ -24,7 +24,7 @@ const StockList = (props) => {
   } else if(props.sector) {
     filtered = props.sector
   }
-  
+
   return <div>
           {
             props.stock ?

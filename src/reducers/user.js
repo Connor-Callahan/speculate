@@ -1,5 +1,6 @@
 const defaultState = {
   login: false,
+  createForm: false,
   username: null,
   password: null,
   firstname: null,
@@ -15,6 +16,8 @@ export default(state=defaultState, action) => {
     // User login ------------>
     case 'USER_LOGIN':
     return {...state, login: action.payload}
+    case 'HANDLE_CREATE_FORM':
+    return {...state, createForm: action.payload}
     case 'USERNAME':
     return {...state, username: action.payload}
     case 'PASSWORD':
@@ -31,7 +34,7 @@ export default(state=defaultState, action) => {
     return {...state, loggedIn: action.payload}
 
     default:
-    
+
     return state
   }
 }
