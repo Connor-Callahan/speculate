@@ -141,3 +141,31 @@ li {
 
   }
 }
+
+@media only screen and (max-width: 500px) {
+  #navbar-hide {
+    height: 200px;
+  }
+  #hide-header {
+    grid-area: 1 / 2 / 2 / 6;
+    text-align: center;
+    margin: 0;
+  }
+  .login-btn {
+    margin-top: 5px;
+    margin-left: 0px;
+  }
+
+  .login-btn:hover {
+    background-color: white;
+    color: royalblue;
+  }
+  #login-btns {
+    grid-area: 3 / 2 / 3 / 6;
+  }
+  #hide-nav-list {
+    grid-area: 2 / 2 / 2 / 5;
+    text-align: center;
+
+  }
+}

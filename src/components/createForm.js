@@ -105,7 +105,7 @@ class CreateForm extends Component {
   render() {
     return (
       <div>
-        <h1 id="close-login" onClick={this.handleLogin}>Speculate</h1>
+        <h1 id="close-login" onClick={this.handleLogin}>Speculate.</h1>
           <form className="login-form"
           autoComplete="off"
           onChange={this.handleFormInput} >
