@@ -144,7 +144,7 @@ li {
 
 @media only screen and (max-width: 500px) {
   #navbar-hide {
-    height: 200px;
+    height: 175px;
   }
   #hide-header {
     grid-area: 1 / 2 / 2 / 6;
@@ -162,7 +162,11 @@ li {
   }
   #login-btns {
     grid-area: 3 / 2 / 3 / 6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
+
   #hide-nav-list {
     grid-area: 2 / 2 / 2 / 5;
     text-align: center;
