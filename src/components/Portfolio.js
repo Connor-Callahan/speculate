@@ -136,7 +136,6 @@ class Profile extends Component {
 // ------render------------------------------
   render() {
     let currentStockVal = []
-    let sectorAnalysis = []
 
     if(this.props.value != null) {
       currentStockVal = Object.values(this.props.value)

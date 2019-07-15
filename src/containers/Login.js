@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import LoginForm from '../components/LoginForm'
 
 import { setLogin, createForm, setLogout, setUsername, setPassword, setFirstname, setLastname, setUserID, setBalance, fetchTransactions} from '../actions'
 

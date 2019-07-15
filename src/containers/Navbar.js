@@ -38,7 +38,8 @@ const mapDispatchToProps = (dispatch) => {
           Stock Search
           </li>
            <a href="https://github.com/Connor-Callahan/speculate"
-              target="_blank">
+              target="_blank"
+              rel="noopener noreferrer">
               <li>Source</li>
             </a>
           <li>Credits</li>
@@ -51,7 +52,8 @@ const mapDispatchToProps = (dispatch) => {
           <ul id="hide-nav-list">
           <li>About</li>
             <a href="https://github.com/Connor-Callahan/speculate"
-              target="_blank">
+              target="_blank"
+              rel="noopener noreferrer">
               <li>Source</li>
              </a>
           <li>Credits</li>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 
-import { selectStock, setProfile, setChart, setIcon } from '../actions'
+import { selectStock, setProfile, setChart } from '../actions'
 
 const API_KEY = process.env.REACT_APP_IEX_API_KEY;
 
