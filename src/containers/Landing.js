@@ -32,7 +32,7 @@ class Landing extends Component {
         :
         <div>
         <p id="landing-header">A simulation built to trade stocks.</p>
-        <p id="landing-paragraph">Use data in real time from IEX's cloud API to create a mock portfolio of shares.</p>
+        <p id="landing-paragraph">Gain data and insights into markets without risk. Create a free account now to get started.</p>
         <button id="start-btn" onClick={this.handleLogin}>Get Started</button>
         </div>
       }

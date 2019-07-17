@@ -127,7 +127,9 @@ li {
   .login-btn {
     margin-top: 5px;
   }
-
+  #landing-paragraph {
+    line-height: 1.5;
+  }
   .login-btn:hover {
     background-color: white;
     color: royalblue;
@@ -142,7 +144,7 @@ li {
   }
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 480px) {
   #navbar-hide {
     height: 175px;
   }
