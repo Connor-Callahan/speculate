@@ -6,18 +6,49 @@
 }
 
 #portfolio {
-  grid-area: 1 / 5 / 1 / 6;
+  grid-area: 1 / 3 / 1 / 4;
 }
+
+#all-button {
+  grid-area: 1 / 5 / 1 / 6;
+  color: black;
+  background-color: white;
+  font-family: Helvetica;
+  font-size: 16px;
+  margin-top: 25px;
+  outline: none;
+  border: 2px solid black;
+  width: 120px;
+  height: 40px;
+  font-size: 14px;
+}
+
+#all-button:hover {
+  color: white;
+  background-color: darkblue;
+  border: royalblue;
+}
+
 
 .portfolio-btn {
   color: black;
   background-color: white;
   font-family: Helvetica;
   font-size: 16px;
+  margin-top: 25px;
   outline: none;
   border: 2px solid black;
-  width: 100px;
+  width: 120px;
+  height: 40px;
+  font-size: 14px;
 }
+
+.portfolio-btn:hover {
+  color: white;
+  background-color: darkblue;
+  border: royalblue;
+}
+
 
 .trans-btn-small {
   color: black;
@@ -63,6 +94,7 @@ td, th {
   width: auto;
   height: 20px;
 }
+
 
 
 #transaction-chart {
