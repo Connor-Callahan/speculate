@@ -177,6 +177,9 @@ class Transaction extends Component {
        {
          this.props.transDash ?
          <form >
+         <button onClick={() => this.props.toggleDashboard(false)}>
+           Close Transaction
+         </button>
            <label htmlFor="Amount"></label>
             <input className="input-field" onChange={this.handleFormInput} type="number" id="orderSize" placeholder="# of shares"/>
               <button className="purchase-button" onClick={this.handleOrder} id="buy" >Buy</button>
